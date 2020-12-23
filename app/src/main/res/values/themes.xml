@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.GoCart" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <!-- Primary brand color. -->
@@ -9,15 +9,23 @@
         <item name="colorSecondary">@color/go_cart_sinopia</item>
         <item name="colorSecondaryVariant">@color/go_cart_sinopia_dark</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
+        <!-- System bar attributes -->
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
         <item name="android:statusBarColor">@color/go_cart_independence</item>
+        <item name="android:navigationBarColor">@color/white_70</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/work_sans</item>
+        <item name="android:fontFamily">@font/work_sans</item>
     </style>
 
     <style name="Theme.GoCart.NoActionBar">
         <!-- No action bar -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <!-- System bar attributes -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <style name="Theme.GoCart.NoActionBar.Launcher">
