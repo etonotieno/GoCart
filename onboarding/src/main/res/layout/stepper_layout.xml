@@ -6,6 +6,21 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/buttonSkipIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_button_skip_intro"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Space
+        android:id="@+id/spaceSkipIntro"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_large"
+        app:layout_constraintTop_toBottomOf="@+id/buttonSkipIntro" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/buttonStart"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
@@ -16,7 +31,7 @@
         app:iconTint="@color/dark_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/spaceSkipIntro" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabOnboardingItems"
@@ -25,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonEnd"
         app:layout_constraintStart_toEndOf="@+id/buttonStart"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spaceSkipIntro"
         app:tabBackground="@drawable/indicator"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp" />
@@ -38,7 +53,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/buttonEnd"
         app:layout_constraintStart_toEndOf="@+id/buttonStart"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spaceSkipIntro"
         app:tabBackground="@drawable/indicator"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp"
@@ -66,6 +81,12 @@
         app:iconTint="@color/dark_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tabOnboardingItems" />
+        app:layout_constraintTop_toBottomOf="@+id/spaceSkipIntro" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/groupSkipIntro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="spaceSkipIntro,buttonSkipIntro" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

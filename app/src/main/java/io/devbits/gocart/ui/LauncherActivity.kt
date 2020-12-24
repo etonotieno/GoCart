@@ -11,12 +11,12 @@ class LauncherActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setEdgeToEdge()
+        setupEdgeToEdge()
         startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 
-    private fun setEdgeToEdge() {
+    private fun setupEdgeToEdge() {
         findViewById<View>(android.R.id.content).setEdgeToEdgeSystemUiFlags()
     }
 }

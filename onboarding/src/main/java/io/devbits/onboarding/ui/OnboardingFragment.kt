@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -34,7 +35,7 @@ class OnboardingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setEdgeToEdge()
+        setupEdgeToEdge()
 
         onboardingItemAdapter.submitList(
             listOf(
@@ -55,6 +56,8 @@ class OnboardingFragment : Fragment() {
                 ),
             )
         )
+
+        binding.stepperView.showSkipButton = true
 
         binding.viewPagerOnboardingItems.adapter = onboardingItemAdapter
 
@@ -81,7 +84,7 @@ class OnboardingFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setEdgeToEdge() {
+    private fun setupEdgeToEdge() {
         binding.stepperView.applySystemWindowInsetsToPadding(bottom = true)
     }
 

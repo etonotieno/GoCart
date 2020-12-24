@@ -9,51 +9,79 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/startVerticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="@dimen/space_large" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="@dimen/space_onboarding_image" />
+
     <ImageView
         android:id="@+id/ivOnboardingImage"
         android:layout_width="@dimen/size_onboarding_image"
         android:layout_height="@dimen/size_onboarding_image"
-        android:layout_marginStart="@dimen/space_large"
-        android:layout_marginTop="@dimen/space_onboarding_image"
-        android:layout_marginEnd="@dimen/space_large"
         android:contentDescription="@string/onboarding_image_cd"
         android:src="@drawable/ic_fresh_produce"
+        app:layout_constraintEnd_toStartOf="@+id/endVerticalGuideline"
+        app:layout_constraintStart_toStartOf="@+id/startVerticalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/guideline3"
+        tools:src="@sample/onboarding_items.json/data/image" />
+
+    <Space
+        android:id="@+id/spaceTitleTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@sample/onboarding_items.json/data/image" />
+        app:layout_constraintTop_toBottomOf="@+id/ivOnboardingImage" />
 
     <TextView
         android:id="@+id/tvOnboardingTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_large"
-        android:layout_marginTop="@dimen/space_large"
-        android:layout_marginEnd="@dimen/space_large"
         android:gravity="center"
         android:text="@string/text_onboarding_fresh_produce_title"
         android:textAppearance="?attr/textAppearanceHeadline4"
         android:textColor="@color/dark_grey"
         android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/endVerticalGuideline"
+        app:layout_constraintStart_toStartOf="@+id/startVerticalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/spaceTitleTop"
+        tools:text="@sample/onboarding_items.json/data/title" />
+
+    <Space
+        android:id="@+id/spaceDescriptionTop"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/space_large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivOnboardingImage"
-        tools:text="@sample/onboarding_items.json/data/title" />
+        app:layout_constraintTop_toBottomOf="@+id/tvOnboardingTitle" />
 
     <TextView
         android:id="@+id/tvOnboardingDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/space_large"
-        android:layout_marginTop="@dimen/space_medium"
-        android:layout_marginEnd="@dimen/space_large"
         android:gravity="center"
         android:text="@string/text_onboarding_fresh_produce_description"
         android:textAppearance="?attr/textAppearanceSubtitle1"
         android:textColor="@color/dark_grey"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvOnboardingTitle"
+        app:layout_constraintEnd_toStartOf="@+id/endVerticalGuideline"
+        app:layout_constraintStart_toStartOf="@+id/startVerticalGuideline"
+        app:layout_constraintTop_toBottomOf="@+id/spaceDescriptionTop"
         tools:text="@sample/onboarding_items.json/data/description" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/endVerticalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="@dimen/space_large" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
