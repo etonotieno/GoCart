@@ -85,6 +85,7 @@ class OnboardingFragment : Fragment() {
     }
 
     private fun setupEdgeToEdge() {
+        binding.root.applySystemWindowInsetsToPadding(top = true)
         binding.stepperView.applySystemWindowInsetsToPadding(bottom = true)
     }
 

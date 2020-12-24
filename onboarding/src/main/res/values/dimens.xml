@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="size_onboarding_image">280dp</dimen>
-    <dimen name="space_onboarding_image">84dp</dimen>
+    <dimen name="space_onboarding_image">70dp</dimen>
+    <dimen name="space_onboarding_item_bottom">56dp</dimen>
 </resources>
