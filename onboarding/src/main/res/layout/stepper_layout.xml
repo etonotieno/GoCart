@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonLeft"
+        android:id="@+id/buttonStart"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -23,8 +23,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonRight"
-        app:layout_constraintStart_toEndOf="@+id/buttonLeft"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEnd"
+        app:layout_constraintStart_toEndOf="@+id/buttonStart"
         app:layout_constraintTop_toTopOf="parent"
         app:tabBackground="@drawable/indicator"
         app:tabGravity="center"
@@ -36,8 +36,8 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonRight"
-        app:layout_constraintStart_toEndOf="@+id/buttonLeft"
+        app:layout_constraintEnd_toStartOf="@+id/buttonEnd"
+        app:layout_constraintStart_toEndOf="@+id/buttonStart"
         app:layout_constraintTop_toTopOf="parent"
         app:tabBackground="@drawable/indicator"
         app:tabGravity="center"
@@ -55,11 +55,11 @@
     </com.google.android.material.tabs.TabLayout>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonRight"
+        android:id="@+id/buttonEnd"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/text_button_start"
+        android:text="@string/text_button_next"
         android:textColor="@color/dark_grey"
         app:icon="@drawable/ic_right"
         app:iconGravity="end"

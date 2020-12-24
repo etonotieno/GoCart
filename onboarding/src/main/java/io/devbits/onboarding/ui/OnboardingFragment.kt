@@ -63,7 +63,7 @@ class OnboardingFragment : Fragment() {
         })
 
         TabLayoutMediator(
-            binding.stepperView.binding.tabOnboardingItems,
+            binding.stepperView.tabLayout,
             binding.viewPagerOnboardingItems
         ) { _, _ ->
         }.attach()

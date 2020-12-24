@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
+import com.google.android.material.tabs.TabLayout
 import io.devbits.onboarding.R
 import io.devbits.onboarding.databinding.StepperLayoutBinding
 
@@ -14,30 +15,36 @@ class StepperLayout @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    val binding: StepperLayoutBinding
+    private val binding: StepperLayoutBinding
+
+    val tabLayout: TabLayout
+        get() = binding.tabOnboardingItems
 
     init {
         val layoutInflater = LayoutInflater.from(context)
         binding = StepperLayoutBinding.inflate(layoutInflater, this, true)
+
+        binding.buttonEnd.setIconResource(R.drawable.ic_right)
+        binding.buttonEnd.text = context.getString(R.string.text_button_start)
     }
 
     fun updateButtons(position: Int) {
         when (position) {
             0 -> {
-                binding.buttonLeft.isInvisible = true
-                binding.buttonRight.setIconResource(R.drawable.ic_right)
-                binding.buttonRight.text = context.getString(R.string.text_button_start)
+                binding.buttonStart.isInvisible = true
+                binding.buttonEnd.setIconResource(R.drawable.ic_right)
+                binding.buttonEnd.text = context.getString(R.string.text_button_start)
             }
             binding.tabOnboardingItems.tabCount - 1 -> {
-                binding.buttonLeft.isInvisible = false
-                binding.buttonRight.icon = null
-                binding.buttonRight.text = context.getString(R.string.text_button_done)
+                binding.buttonStart.isInvisible = false
+                binding.buttonEnd.icon = null
+                binding.buttonEnd.text = context.getString(R.string.text_button_done)
             }
             else -> {
-                binding.buttonRight.setIconResource(R.drawable.ic_right)
-                binding.buttonLeft.isInvisible = false
-                binding.buttonRight.text = context.getString(R.string.text_button_next)
-                binding.buttonLeft.text = context.getString(R.string.text_button_back)
+                binding.buttonEnd.setIconResource(R.drawable.ic_right)
+                binding.buttonStart.isInvisible = false
+                binding.buttonEnd.text = context.getString(R.string.text_button_next)
+                binding.buttonStart.text = context.getString(R.string.text_button_back)
             }
         }
     }
