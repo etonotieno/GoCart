@@ -76,18 +76,18 @@ class OnboardingFragment : Fragment() {
 
         tabLayoutMediator.attach()
 
-        binding.stepperView.skipIntroButton.setOnClickListener {
+        binding.stepperView.onSkipInto {
             launchMainFragment()
         }
 
-        binding.stepperView.startButton.setOnClickListener {
+        binding.stepperView.onStartClicked {
             var position = binding.viewPagerOnboardingItems.currentItem
             if (position > 0) {
                 binding.viewPagerOnboardingItems.currentItem = --position
             }
         }
 
-        binding.stepperView.endButton.setOnClickListener {
+        binding.stepperView.onEndClicked {
             var position = binding.viewPagerOnboardingItems.currentItem
             val tabCount = binding.stepperView.tabCount
             if (position < tabCount) {

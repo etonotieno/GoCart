@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
-import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import io.devbits.onboarding.R
 import io.devbits.onboarding.databinding.StepperLayoutBinding
@@ -24,15 +23,6 @@ class StepperLayout @JvmOverloads constructor(
 
     val tabCount: Int
         get() = tabLayout.tabCount
-
-    val skipIntroButton: MaterialButton
-        get() = binding.buttonSkipIntro
-
-    val startButton: MaterialButton
-        get() = binding.buttonStart
-
-    val endButton: MaterialButton
-        get() = binding.buttonEnd
 
     var showSkipButton: Boolean = false
         set(value) {
@@ -69,7 +59,7 @@ class StepperLayout @JvmOverloads constructor(
                 binding.buttonEnd.setIconResource(R.drawable.ic_right)
                 binding.buttonEnd.text = context.getString(R.string.text_button_start)
             }
-            binding.tabOnboardingItems.tabCount - 1 -> {
+            tabLayout.tabCount - 1 -> {
                 binding.groupSkipIntro.isVisible = false
                 binding.buttonStart.isInvisible = false
                 binding.buttonEnd.icon = null
@@ -81,6 +71,24 @@ class StepperLayout @JvmOverloads constructor(
                 binding.buttonEnd.setIconResource(R.drawable.ic_right)
                 binding.buttonEnd.text = context.getString(R.string.text_button_next)
             }
+        }
+    }
+
+    fun onSkipInto(onSkip: () -> Unit) {
+        binding.buttonSkipIntro.setOnClickListener {
+            onSkip()
+        }
+    }
+
+    fun onStartClicked(onStart: () -> Unit) {
+        binding.buttonStart.setOnClickListener {
+            onStart()
+        }
+    }
+
+    fun onEndClicked(onEnd: () -> Unit) {
+        binding.buttonEnd.setOnClickListener {
+            onEnd()
         }
     }
 
