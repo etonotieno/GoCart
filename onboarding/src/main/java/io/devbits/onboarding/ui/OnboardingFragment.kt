@@ -20,6 +20,9 @@ class OnboardingFragment : Fragment() {
 
     private val onboardingItemAdapter = OnboardingItemAdapter()
 
+    private lateinit var tabLayoutMediator: TabLayoutMediator
+    private lateinit var onPageChangeCallback: ViewPager2.OnPageChangeCallback
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -55,21 +58,25 @@ class OnboardingFragment : Fragment() {
 
         binding.viewPagerOnboardingItems.adapter = onboardingItemAdapter
 
-        binding.viewPagerOnboardingItems.registerOnPageChangeCallback(object :
-            ViewPager2.OnPageChangeCallback() {
+        onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 binding.stepperView.updateButtons(position)
             }
-        })
+        }
 
-        TabLayoutMediator(
+        tabLayoutMediator = TabLayoutMediator(
             binding.stepperView.tabLayout,
             binding.viewPagerOnboardingItems
-        ) { _, _ ->
-        }.attach()
+        ) { _, _ -> }
+
+        binding.viewPagerOnboardingItems.registerOnPageChangeCallback(onPageChangeCallback)
+
+        tabLayoutMediator.attach()
     }
 
     override fun onDestroyView() {
+        binding.viewPagerOnboardingItems.unregisterOnPageChangeCallback(onPageChangeCallback)
+        tabLayoutMediator.detach()
         _binding = null
         super.onDestroyView()
     }
