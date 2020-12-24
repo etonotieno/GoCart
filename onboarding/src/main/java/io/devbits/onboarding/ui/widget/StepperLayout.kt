@@ -31,6 +31,13 @@ class StepperLayout @JvmOverloads constructor(
             requestLayout()
         }
 
+    var indicatorsOnly: Boolean = false
+        set(value) {
+            field = value
+            invalidate()
+            requestLayout()
+        }
+
     init {
         val arr = context.obtainStyledAttributes(
             attrs,
@@ -40,6 +47,8 @@ class StepperLayout @JvmOverloads constructor(
         try {
             showSkipButton =
                 arr.getBoolean(R.styleable.StepperLayout_showSkipButton, showSkipButton)
+            indicatorsOnly =
+                arr.getBoolean(R.styleable.StepperLayout_indicatorsOnly, indicatorsOnly)
         } finally {
             arr.recycle()
         }
@@ -52,6 +61,13 @@ class StepperLayout @JvmOverloads constructor(
     }
 
     fun updateButtonSteps(position: Int) {
+        if (indicatorsOnly) {
+            binding.groupSkipIntro.isVisible = false
+            binding.buttonStart.isVisible = false
+            binding.buttonEnd.isVisible = false
+            return
+        }
+
         when (position) {
             0 -> {
                 binding.groupSkipIntro.isVisible = showSkipButton

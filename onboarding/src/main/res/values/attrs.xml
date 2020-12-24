@@ -2,5 +2,6 @@
 <resources>
     <declare-styleable name="StepperLayout">
         <attr name="showSkipButton" format="boolean" />
+        <attr name="indicatorsOnly" format="boolean" />
     </declare-styleable>
 </resources>
