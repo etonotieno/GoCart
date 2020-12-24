@@ -2,6 +2,6 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="?android:attr/colorBackground" />
     <item
-        android:drawable="@drawable/ic_go_cart_icon_horizontal"
+        android:drawable="@drawable/ic_go_cart_icon_horizontal_color"
         android:gravity="center" />
 </layer-list>

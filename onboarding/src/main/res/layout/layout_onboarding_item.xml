@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <ImageView
+        android:id="@+id/ivOnboardingImage"
+        android:layout_width="@dimen/size_onboarding_image"
+        android:layout_height="@dimen/size_onboarding_image"
+        android:layout_marginStart="@dimen/space_large"
+        android:layout_marginTop="@dimen/space_onboarding_image"
+        android:layout_marginEnd="@dimen/space_large"
+        android:contentDescription="@string/onboarding_image_cd"
+        android:src="@drawable/ic_fresh_produce"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@sample/onboarding_items.json/data/image" />
+
+    <TextView
+        android:id="@+id/tvOnboardingTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_large"
+        android:layout_marginTop="@dimen/space_large"
+        android:layout_marginEnd="@dimen/space_large"
+        android:gravity="center"
+        android:text="@string/text_onboarding_fresh_produce_title"
+        android:textAppearance="?attr/textAppearanceHeadline4"
+        android:textColor="@color/dark_grey"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivOnboardingImage"
+        tools:text="@sample/onboarding_items.json/data/title" />
+
+    <TextView
+        android:id="@+id/tvOnboardingDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/space_large"
+        android:layout_marginTop="@dimen/space_medium"
+        android:layout_marginEnd="@dimen/space_large"
+        android:gravity="center"
+        android:text="@string/text_onboarding_fresh_produce_description"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        android:textColor="@color/dark_grey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvOnboardingTitle"
+        tools:text="@sample/onboarding_items.json/data/description" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

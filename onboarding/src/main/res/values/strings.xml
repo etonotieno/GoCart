@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="onboarding_image_cd">App onboarding image</string>
+    <string name="text_onboarding_fresh_produce_title">Fresh produce</string>
+    <string name="text_onboarding_fresh_produce_description">Shop from a variety of groceries from our menu and brand on our online grocery store.</string>
+    <string name="text_onboarding_fast_delivery_title">Fast delivery</string>
+    <string name="text_onboarding_fast_delivery_description">Guaranteed fast and safe delivery to your doorstep conveniently and Hustle free!</string>
+    <string name="text_onboarding_easy_payments_title">Easy payments</string>
+    <string name="text_onboarding_easy_payments_description">We offer quick and secure payment methods which to let you shop safely and confidently.</string>
+    <string name="text_button_back">Back</string>
+    <string name="text_button_start">Start</string>
+    <string name="text_button_next">Next</string>
+    <string name="text_button_done">Done</string>
+</resources>

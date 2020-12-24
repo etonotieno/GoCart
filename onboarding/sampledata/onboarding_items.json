@@ -1,0 +1,19 @@
+{
+  "data": [
+    {
+      "image": "@drawable/ic_fresh_produce",
+      "title": "Fresh produce",
+      "description": "Shop from a variety of groceries from our menu and brand on our online grocery store."
+    },
+    {
+      "image": "@drawable/ic_fast_delivery",
+      "title": "Fast delivery",
+      "description": "Guaranteed fast and safe delivery to your doorstep conveniently and Hustle free!"
+    },
+    {
+      "image": "@drawable/ic_easy_payments",
+      "title": "Easy payments",
+      "description": "We offer quick and secure payment methods which to let you shop safely and confidently."
+    }
+  ]
+}
