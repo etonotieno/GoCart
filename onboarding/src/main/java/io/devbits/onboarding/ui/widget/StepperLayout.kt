@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import io.devbits.onboarding.R
 import io.devbits.onboarding.databinding.StepperLayoutBinding
@@ -20,6 +21,18 @@ class StepperLayout @JvmOverloads constructor(
 
     val tabLayout: TabLayout
         get() = binding.tabOnboardingItems
+
+    val tabCount: Int
+        get() = tabLayout.tabCount
+
+    val skipIntroButton: MaterialButton
+        get() = binding.buttonSkipIntro
+
+    val startButton: MaterialButton
+        get() = binding.buttonStart
+
+    val endButton: MaterialButton
+        get() = binding.buttonEnd
 
     var showSkipButton: Boolean = false
         set(value) {
@@ -48,7 +61,7 @@ class StepperLayout @JvmOverloads constructor(
         binding.buttonEnd.text = context.getString(R.string.text_button_start)
     }
 
-    fun updateButtons(position: Int) {
+    fun updateButtonSteps(position: Int) {
         when (position) {
             0 -> {
                 binding.groupSkipIntro.isVisible = showSkipButton

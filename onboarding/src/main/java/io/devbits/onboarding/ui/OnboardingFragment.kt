@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -63,7 +63,7 @@ class OnboardingFragment : Fragment() {
 
         onPageChangeCallback = object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                binding.stepperView.updateButtons(position)
+                binding.stepperView.updateButtonSteps(position)
             }
         }
 
@@ -75,6 +75,33 @@ class OnboardingFragment : Fragment() {
         binding.viewPagerOnboardingItems.registerOnPageChangeCallback(onPageChangeCallback)
 
         tabLayoutMediator.attach()
+
+        binding.stepperView.skipIntroButton.setOnClickListener {
+            launchMainFragment()
+        }
+
+        binding.stepperView.startButton.setOnClickListener {
+            var position = binding.viewPagerOnboardingItems.currentItem
+            if (position > 0) {
+                binding.viewPagerOnboardingItems.currentItem = --position
+            }
+        }
+
+        binding.stepperView.endButton.setOnClickListener {
+            var position = binding.viewPagerOnboardingItems.currentItem
+            val tabCount = binding.stepperView.tabCount
+            if (position < tabCount) {
+                binding.viewPagerOnboardingItems.currentItem = ++position
+            }
+
+            if (position == tabCount) {
+                launchMainFragment()
+            }
+        }
+    }
+
+    private fun launchMainFragment() {
+        Toast.makeText(requireContext(), "Done", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
