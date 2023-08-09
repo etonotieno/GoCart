@@ -1,4 +1,4 @@
-package io.devbits.onboarding.ui.model
+package io.devbits.gocart.onboarding.ui.model
 
 import androidx.annotation.DrawableRes
 

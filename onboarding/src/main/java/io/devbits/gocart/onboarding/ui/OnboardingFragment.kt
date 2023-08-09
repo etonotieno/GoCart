@@ -1,4 +1,4 @@
-package io.devbits.onboarding.ui
+package io.devbits.gocart.onboarding.ui
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,11 +15,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
-import io.devbits.onboarding.R
-import io.devbits.onboarding.databinding.FragmentOnboardingBinding
-import io.devbits.onboarding.ui.adapter.OnboardingItemAdapter
-import io.devbits.onboarding.ui.model.OnboardingItem
-import io.devbits.core.R as coreR
+import io.devbits.gocart.onboarding.R
+import io.devbits.gocart.onboarding.databinding.FragmentOnboardingBinding
+import io.devbits.gocart.onboarding.ui.adapter.OnboardingItemAdapter
+import io.devbits.gocart.onboarding.ui.model.OnboardingItem
+import io.devbits.gocart.core.R as coreR
 
 
 class OnboardingFragment : Fragment() {

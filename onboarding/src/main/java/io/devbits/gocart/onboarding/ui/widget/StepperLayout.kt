@@ -1,4 +1,4 @@
-package io.devbits.onboarding.ui.widget
+package io.devbits.gocart.onboarding.ui.widget
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,8 +7,8 @@ import android.widget.FrameLayout
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import com.google.android.material.tabs.TabLayout
-import io.devbits.onboarding.R
-import io.devbits.onboarding.databinding.StepperLayoutBinding
+import io.devbits.gocart.onboarding.R
+import io.devbits.gocart.onboarding.databinding.StepperLayoutBinding
 
 class StepperLayout @JvmOverloads constructor(
     context: Context,

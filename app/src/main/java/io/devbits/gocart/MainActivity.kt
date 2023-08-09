@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import dev.chrisbanes.insetter.setEdgeToEdgeSystemUiFlags
 import io.devbits.gocart.databinding.MainActivityBinding
-import io.devbits.core.R as coreR
-import io.devbits.onboarding.R as onboardingR
+import io.devbits.gocart.core.R as coreR
+import io.devbits.gocart.onboarding.R as onboardingR
 
 class MainActivity : AppCompatActivity() {
 

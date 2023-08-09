@@ -1,4 +1,4 @@
-package io.devbits.onboarding.ui.adapter
+package io.devbits.gocart.onboarding.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,8 +6,8 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.devbits.onboarding.databinding.LayoutOnboardingItemBinding
-import io.devbits.onboarding.ui.model.OnboardingItem
+import io.devbits.gocart.onboarding.databinding.LayoutOnboardingItemBinding
+import io.devbits.gocart.onboarding.ui.model.OnboardingItem
 
 class OnboardingItemAdapter :
     ListAdapter<OnboardingItem, OnboardingItemAdapter.OnboardingItemViewHolder>(ONBOARDING_ITEM_DIFF) {

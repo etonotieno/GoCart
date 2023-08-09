@@ -1,4 +1,4 @@
-package io.devbits.onboarding.data
+package io.devbits.gocart.onboarding.data
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences

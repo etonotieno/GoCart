@@ -26,7 +26,7 @@
         tools:listitem="@layout/layout_onboarding_item"
         tools:visibility="visible" />
 
-    <io.devbits.onboarding.ui.widget.StepperLayout
+    <io.devbits.gocart.onboarding.ui.widget.StepperLayout
         android:id="@+id/stepperView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

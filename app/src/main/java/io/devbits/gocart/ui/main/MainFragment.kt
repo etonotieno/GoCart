@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import io.devbits.core.R
 import io.devbits.gocart.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {

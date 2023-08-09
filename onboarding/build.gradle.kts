@@ -6,7 +6,7 @@ plugins {
 
 android {
     compileSdk = 33
-    namespace = "io.devbits.onboarding"
+    namespace = "io.devbits.gocart.onboarding"
 
     defaultConfig {
         minSdk = 23
