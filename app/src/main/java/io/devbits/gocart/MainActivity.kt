@@ -3,7 +3,6 @@ package io.devbits.gocart
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import dev.chrisbanes.insetter.setEdgeToEdgeSystemUiFlags
 import io.devbits.gocart.databinding.MainActivityBinding
 import io.devbits.gocart.core.R as coreR
 import io.devbits.gocart.onboarding.R as onboardingR
@@ -17,7 +16,6 @@ class MainActivity : AppCompatActivity() {
         binding = MainActivityBinding.inflate(layoutInflater)
         setupNavigation()
         setContentView(binding.root)
-        setupEdgeToEdge()
     }
 
     private fun setupNavigation() {
@@ -30,9 +28,5 @@ class MainActivity : AppCompatActivity() {
                 onboardingR.id.onboardingFragment -> setTheme(coreR.style.Theme_GoCart_NoActionBar)
             }
         }
-    }
-
-    private fun setupEdgeToEdge() {
-        binding.root.setEdgeToEdgeSystemUiFlags()
     }
 }
