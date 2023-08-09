@@ -1,4 +1,0 @@
-include(":onboarding")
-include(":core")
-include(":app")
-rootProject.name = "GoCart"

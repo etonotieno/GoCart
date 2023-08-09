@@ -1,11 +1,17 @@
 package io.devbits.onboarding.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.content.edit
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
@@ -13,6 +19,8 @@ import io.devbits.onboarding.R
 import io.devbits.onboarding.databinding.FragmentOnboardingBinding
 import io.devbits.onboarding.ui.adapter.OnboardingItemAdapter
 import io.devbits.onboarding.ui.model.OnboardingItem
+import io.devbits.core.R as coreR
+
 
 class OnboardingFragment : Fragment() {
 
@@ -23,6 +31,14 @@ class OnboardingFragment : Fragment() {
 
     private lateinit var tabLayoutMediator: TabLayoutMediator
     private lateinit var onPageChangeCallback: ViewPager2.OnPageChangeCallback
+
+    private val sharedPreferences: SharedPreferences
+        get() {
+            return requireContext().applicationContext.getSharedPreferences(
+                "Onboarding",
+                Context.MODE_PRIVATE
+            )
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +52,13 @@ class OnboardingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupEdgeToEdge()
+        val window = requireActivity().window
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+
+        window.statusBarColor =
+            ContextCompat.getColor(requireContext(), coreR.color.white_70)
+
+        (activity as? AppCompatActivity)?.supportActionBar?.hide()
 
         onboardingItemAdapter.submitList(
             listOf(
@@ -77,7 +100,7 @@ class OnboardingFragment : Fragment() {
         tabLayoutMediator.attach()
 
         binding.stepperView.onSkipInto {
-            launchMainFragment()
+            goToHomeScreen()
         }
 
         binding.stepperView.onStartClicked {
@@ -95,13 +118,15 @@ class OnboardingFragment : Fragment() {
             }
 
             if (position == tabCount) {
-                launchMainFragment()
+                goToHomeScreen()
             }
         }
     }
 
-    private fun launchMainFragment() {
-        Toast.makeText(requireContext(), "Done", Toast.LENGTH_SHORT).show()
+    private fun goToHomeScreen() {
+        sharedPreferences.edit { putBoolean("ONBOARDING", true) }
+        val controller = findNavController()
+        controller.navigate(OnboardingFragmentDirections.toHomeAction())
     }
 
     override fun onDestroyView() {
