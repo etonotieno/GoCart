@@ -1,4 +1,4 @@
-package io.devbits.gocart.ui.theme
+package io.devbits.gocart.composeui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

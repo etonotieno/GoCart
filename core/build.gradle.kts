@@ -10,7 +10,6 @@ android {
 
     defaultConfig {
         minSdk = 23
-        targetSdk = 33
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -31,9 +30,7 @@ android {
         jvmTarget = "17"
     }
     buildFeatures {
-        viewBinding = true
         compose = true
-        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.1"
@@ -41,16 +38,7 @@ android {
 }
 
 dependencies {
-    api(platform("androidx.compose:compose-bom:2023.06.01"))
-    api("androidx.compose.ui:ui")
-    api("androidx.compose.ui:ui-graphics")
-    api("androidx.compose.ui:ui-tooling-preview")
-    api("androidx.compose.material3:material3")
-
-    androidTestApi(platform("androidx.compose:compose-bom:2023.06.01"))
-    androidTestApi("androidx.compose.ui:ui-test-junit4")
-    debugApi("androidx.compose.ui:ui-tooling")
-    debugApi("androidx.compose.ui:ui-test-manifest")
+    implementation(project(":ui-compose"))
 
     api("androidx.datastore:datastore-preferences:1.0.0")
 

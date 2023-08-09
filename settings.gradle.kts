@@ -18,3 +18,4 @@ rootProject.name = "GoCart"
 include(":onboarding")
 include(":core")
 include(":app")
+include(":ui-compose")

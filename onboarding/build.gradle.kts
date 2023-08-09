@@ -10,7 +10,6 @@ android {
 
     defaultConfig {
         minSdk = 23
-        targetSdk = 33
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         consumerProguardFiles("consumer-rules.pro")
@@ -33,12 +32,16 @@ android {
     }
     buildFeatures {
         viewBinding = true
-        buildConfig = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.1"
     }
 }
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":ui-compose"))
 
     implementation("androidx.appcompat:appcompat:1.6.1")
 
