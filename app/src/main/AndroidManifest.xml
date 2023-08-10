@@ -6,22 +6,17 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.GoCart">
+        android:supportsRtl="true">
 
         <activity
-            android:name=".ui.LauncherActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.GoCart.NoActionBar.Launcher">
+            android:theme="@style/Theme.GoCart.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".MainActivity"
-            android:theme="@style/Theme.GoCart.NoActionBar" />
     </application>
 
 </manifest>

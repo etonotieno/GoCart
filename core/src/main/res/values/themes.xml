@@ -33,4 +33,17 @@
         <item name="android:windowBackground">@drawable/bg_launcher</item>
     </style>
 
+    <style name="Theme.GoCart.SplashScreen" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/bg_launcher</item>
+
+        <!-- Set the theme of the Activity that directly follows the splash screen. -->
+        <item name="postSplashScreenTheme">@style/Theme.GoCart</item>
+    </style>
+
+    <style name="Theme.GoCart.SplashScreen.Icon" parent="Theme.SplashScreen.IconBackground">
+        <item name="windowSplashScreenIconBackgroundColor">@color/white</item>
+    </style>
 </resources>

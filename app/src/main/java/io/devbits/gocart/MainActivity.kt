@@ -2,6 +2,7 @@ package io.devbits.gocart
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.fragment.NavHostFragment
 import io.devbits.gocart.databinding.MainActivityBinding
 import io.devbits.gocart.core.R as coreR
@@ -12,6 +13,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: MainActivityBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = MainActivityBinding.inflate(layoutInflater)
         setupNavigation()

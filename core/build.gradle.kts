@@ -44,6 +44,8 @@ dependencies {
 
     api("com.google.android.material:material:1.9.0")
 
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
     api("androidx.recyclerview:recyclerview:1.3.1")
 
     api("androidx.activity:activity-ktx:1.7.2")
