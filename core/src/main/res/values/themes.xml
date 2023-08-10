@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.GoCart" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="Theme.GoCart" parent="Theme.Material3.Light.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/go_cart_avocado</item>
         <item name="colorPrimaryVariant">@color/go_cart_avocado_dark</item>
@@ -9,41 +9,30 @@
         <item name="colorSecondary">@color/go_cart_sinopia</item>
         <item name="colorSecondaryVariant">@color/go_cart_sinopia_dark</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- System bar attributes -->
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
-        <item name="android:statusBarColor">@color/go_cart_independence</item>
-        <item name="android:navigationBarColor">@color/white_70</item>
-        <!-- Customize your theme here. -->
+
         <item name="fontFamily">@font/work_sans</item>
         <item name="android:fontFamily">@font/work_sans</item>
-    </style>
 
-    <style name="Theme.GoCart.NoActionBar">
-        <!-- No action bar -->
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
         <!-- System bar attributes -->
         <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
-    </style>
+        <item name="android:statusBarColor">@color/white</item>
 
-    <style name="Theme.GoCart.NoActionBar.Launcher">
-        <!-- Launcher window background -->
-        <item name="android:windowBackground">@drawable/bg_launcher</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
     </style>
 
     <style name="Theme.GoCart.SplashScreen" parent="Theme.SplashScreen">
+        <!-- System bar attributes -->
         <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">true</item>
+        <item name="android:navigationBarColor">@color/white</item>
 
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/bg_launcher</item>
 
         <!-- Set the theme of the Activity that directly follows the splash screen. -->
         <item name="postSplashScreenTheme">@style/Theme.GoCart</item>
-    </style>
-
-    <style name="Theme.GoCart.SplashScreen.Icon" parent="Theme.SplashScreen.IconBackground">
-        <item name="windowSplashScreenIconBackgroundColor">@color/white</item>
     </style>
 </resources>
