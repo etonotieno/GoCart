@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "io.devbits.gocart.composeui"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 23
@@ -39,7 +39,7 @@ android {
 }
 
 dependencies {
-    api(platform("androidx.compose:compose-bom:2023.06.01"))
+    api(platform("androidx.compose:compose-bom:2023.08.00"))
     api("androidx.compose.ui:ui")
     api("androidx.compose.ui:ui-graphics")
     api("androidx.compose.ui:ui-tooling-preview")

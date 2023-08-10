@@ -39,12 +39,11 @@ import kotlinx.coroutines.launch
 @Composable
 fun OnboardingHorizontalPager(
     pages: List<OnboardingItem> = onboardingPages,
-    pagerState: PagerState = rememberPagerState(),
+    pagerState: PagerState = rememberPagerState(pageCount = { pages.size }),
     onCompleteOnboarding: () -> Unit,
 ) {
     Box {
         HorizontalPager(
-            pageCount = pages.size,
             state = pagerState,
         ) { currentPage ->
             OnboardingPage(page = pages[currentPage], Modifier.fillMaxSize())
@@ -71,9 +70,9 @@ fun OnboardingHorizontalPagerPreview() {
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun OnboardingPagerIndicator(
-    pagerState: PagerState,
     pages: List<OnboardingItem>,
     modifier: Modifier = Modifier,
+    pagerState: PagerState = rememberPagerState(pageCount = { pages.size }),
     onCompleteOnboarding: () -> Unit,
 ) {
     val coroutineScope = rememberCoroutineScope()
@@ -181,9 +180,7 @@ fun OnboardingPagerIndicator(
 @Composable
 fun OnboardingPagerIndicatorPreview() {
     GoCartTheme {
-        val state = rememberPagerState()
         OnboardingPagerIndicator(
-            pagerState = state,
             pages = onboardingPages,
             onCompleteOnboarding = {}
         )
