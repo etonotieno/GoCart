@@ -1,13 +1,15 @@
 package io.devbits.gocart.onboarding.navigation
 
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import io.devbits.gocart.onboarding.ui.OnboardingScreen
+import io.devbits.gocart.onboarding.ui.OnboardingRoute
 
 const val onboardingRoute = "onboarding"
 
-fun NavGraphBuilder.onboardingScreen(onCompleteOnboarding: () -> Unit) {
+fun NavGraphBuilder.onboardingScreen(onOnboarded: () -> Unit, modifier: Modifier = Modifier) {
     composable(route = onboardingRoute) {
-        OnboardingScreen(onCompleteOnboarding = onCompleteOnboarding)
+        OnboardingRoute(modifier = modifier.safeDrawingPadding(), onOnboarded = onOnboarded)
     }
 }

@@ -53,10 +53,35 @@ fun OnboardingPage(page: OnboardingItem, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Preview(
+    showBackground = true, backgroundColor = 0xFFFFFFFF,
+    group = "Onboarding", name = "Page One"
+)
 @Composable
-fun OnboardingPagePreview() {
+fun OnboardingPageOnePreview() {
     GoCartTheme {
-        OnboardingPage(onboardingPages.first())
+        OnboardingPage(OnboardingPageOne)
+    }
+}
+
+@Preview(
+    showBackground = true, backgroundColor = 0xFFFFFFFF,
+    group = "Onboarding", name = "Page Two"
+)
+@Composable
+fun OnboardingPageTwoPreview() {
+    GoCartTheme {
+        OnboardingPage(OnboardingPageTwo)
+    }
+}
+
+@Preview(
+    showBackground = true, backgroundColor = 0xFFFFFFFF,
+    name = "Page Three", group = "Onboarding"
+)
+@Composable
+fun OnboardingPageThreePreview() {
+    GoCartTheme {
+        OnboardingPage(OnboardingPageThree)
     }
 }

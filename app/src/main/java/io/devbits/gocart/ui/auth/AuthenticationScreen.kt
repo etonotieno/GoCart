@@ -40,8 +40,10 @@ fun AuthenticationRoute(
     onFacebookSignup: () -> Unit,
     onSignup: () -> Unit,
     onLogin: () -> Unit,
+    modifier: Modifier,
 ) {
     AuthenticationScreen(
+        modifier = modifier,
         onExploreApp = onExploreApp,
         onGoogleSignup = onGoogleSignup,
         onFacebookSignup = onFacebookSignup,
@@ -53,20 +55,20 @@ fun AuthenticationRoute(
 @Composable
 fun AuthenticationScreen(
     modifier: Modifier = Modifier,
-    onExploreApp: () -> Unit = {},
-    onGoogleSignup: () -> Unit = {},
-    onFacebookSignup: () -> Unit = {},
-    onSignup: () -> Unit = {},
-    onLogin: () -> Unit = {},
+    onExploreApp: () -> Unit,
+    onGoogleSignup: () -> Unit,
+    onFacebookSignup: () -> Unit,
+    onSignup: () -> Unit,
+    onLogin: () -> Unit,
 ) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-
         Image(
             painter = painterResource(id = resourcesR.drawable.ic_signup_background),
             contentDescription = null,
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
         )
+
         Column(
             modifier = modifier
                 .fillMaxSize()
