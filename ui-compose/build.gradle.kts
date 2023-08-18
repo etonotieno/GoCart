@@ -58,6 +58,8 @@ dependencies {
 
     api("androidx.navigation:navigation-compose:2.7.0")
 
+    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.6-rc")
+
     testImplementation("junit:junit:4.13.2")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
