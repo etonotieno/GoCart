@@ -14,6 +14,9 @@ val dark_grey = Color(0xFF333335)
 val white = Color(0xFFFFFFFF)
 val white_70 = Color(0xB3FFFFFF)
 
+val google_red = Color(0xFFDB4437)
+val facebook_blue = Color(0xFF0078FF)
+
 val md_theme_light_primary = Color(0xFF206D00)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFF9EF979)

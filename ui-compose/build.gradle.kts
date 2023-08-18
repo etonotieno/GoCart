@@ -52,6 +52,8 @@ dependencies {
     debugApi("androidx.compose.ui:ui-tooling")
     debugApi("androidx.compose.ui:ui-test-manifest")
 
+    api("androidx.core:core-ktx:1.10.1")
+
     api("androidx.activity:activity-compose:1.7.2")
 
     api("androidx.navigation:navigation-compose:2.7.0")
