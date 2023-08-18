@@ -30,7 +30,6 @@ import io.devbits.gocart.composeui.components.FacebookSignupButton
 import io.devbits.gocart.composeui.components.GoogleSignupButton
 import io.devbits.gocart.composeui.theme.GoCartTheme
 import io.devbits.gocart.composeui.theme.go_cart_orange_yellow
-import io.devbits.gocart.core.R as coreR
 import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
@@ -87,7 +86,7 @@ fun AuthenticationScreen(
             Spacer(modifier = Modifier.size(24.dp))
 
             Image(
-                painter = painterResource(id = coreR.drawable.ic_go_cart_horizontal_white),
+                painter = painterResource(id = resourcesR.drawable.ic_go_cart_horizontal_white),
                 contentDescription = null,
                 modifier = Modifier.height(32.dp)
             )
