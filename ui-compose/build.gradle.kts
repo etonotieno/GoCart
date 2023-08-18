@@ -39,6 +39,8 @@ android {
 }
 
 dependencies {
+    api(project(":ui-resources"))
+
     api(platform("androidx.compose:compose-bom:2023.08.00"))
     api("androidx.compose.ui:ui")
     api("androidx.compose.ui:ui-graphics")
