@@ -10,7 +10,7 @@
         android:theme="@style/Theme.GoCart.SplashScreen">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".GoCartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
