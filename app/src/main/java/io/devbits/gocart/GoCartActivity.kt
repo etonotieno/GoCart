@@ -41,14 +41,14 @@ class GoCartActivity : ComponentActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            GoCartApp(viewModel, preferences)
+            GoCartApp(viewModel.startDestination.value, preferences)
         }
     }
 }
 
 @Composable
 fun GoCartApp(
-    viewModel: MainViewModel,
+    startDestination: String,
     preferences: UserPreferences,
 ) {
     GoCartTheme {
@@ -57,7 +57,7 @@ fun GoCartApp(
             color = MaterialTheme.colorScheme.background,
         ) {
             GoCartNavHost(
-                viewModel = viewModel,
+                startDestination = startDestination,
                 preferences = preferences,
             )
         }

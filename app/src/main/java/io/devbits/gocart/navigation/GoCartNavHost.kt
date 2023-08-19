@@ -8,18 +8,17 @@ import io.devbits.gocart.authentication.navigation.authenticationScreen
 import io.devbits.gocart.authentication.navigation.navigateToAuth
 import io.devbits.gocart.core.data.UserPreferences
 import io.devbits.gocart.onboarding.navigation.onboardingScreen
-import io.devbits.gocart.ui.MainViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun GoCartNavHost(
-    viewModel: MainViewModel,
+    startDestination: String,
     preferences: UserPreferences,
 ) {
     val navController = rememberNavController()
     val scope = rememberCoroutineScope()
 
-    NavHost(navController = navController, startDestination = viewModel.startDestination.value) {
+    NavHost(navController = navController, startDestination = startDestination) {
         onboardingScreen(
             onOnboarded = {
                 scope.launch {
