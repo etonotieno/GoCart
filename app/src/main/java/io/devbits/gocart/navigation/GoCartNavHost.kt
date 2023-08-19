@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import io.devbits.gocart.authentication.navigation.authenticationScreen
+import io.devbits.gocart.authentication.navigation.navigateToAuth
 import io.devbits.gocart.core.data.UserPreferences
 import io.devbits.gocart.onboarding.navigation.onboardingScreen
 import io.devbits.gocart.ui.MainViewModel

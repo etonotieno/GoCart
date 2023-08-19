@@ -1,4 +1,4 @@
-package io.devbits.gocart.ui.auth
+package io.devbits.gocart.authentication.ui
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable

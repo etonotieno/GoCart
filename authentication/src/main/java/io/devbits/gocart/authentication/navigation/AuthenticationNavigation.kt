@@ -1,12 +1,12 @@
-package io.devbits.gocart.navigation
+package io.devbits.gocart.authentication.navigation
 
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import io.devbits.gocart.authentication.ui.AuthenticationRoute
 import io.devbits.gocart.composeui.components.SystemBars
-import io.devbits.gocart.ui.auth.AuthenticationRoute
 
 const val authenticationRoute = "authentication"
 

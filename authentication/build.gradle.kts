@@ -1,25 +1,21 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id("com.android.library")
+    id("kotlin-android")
 }
 
 android {
     compileSdk = 34
-    namespace = "io.devbits.gocart"
+    namespace = "io.devbits.gocart.authentication"
 
     defaultConfig {
-        applicationId = "io.devbits.gocart"
         minSdk = 23
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
         release {
             isMinifyEnabled = true
-            isShrinkResources = true
-            signingConfig = signingConfigs["debug"]
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -44,12 +40,11 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":ui-compose"))
-    implementation(project(":onboarding"))
-    implementation(project(":authentication"))
-
-    implementation("androidx.core:core-splashscreen:1.0.1")
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.6-rc")
+    testImplementation("junit:junit:4.13.2")
+
+    androidTestImplementation("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
