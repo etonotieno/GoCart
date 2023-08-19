@@ -34,7 +34,7 @@ class GoCartActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         preferences = UserPreferences(dataStore = dataStore)
         installSplashScreen().apply {
-            setKeepOnScreenCondition { viewModel.splashCondition.value }
+            setKeepOnScreenCondition { viewModel.showSplashScreen.value }
         }
 
         super.onCreate(savedInstanceState)

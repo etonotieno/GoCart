@@ -17,13 +17,21 @@ class MainViewModel(
     preferences: UserPreferences
 ) : ViewModel() {
 
-    private val _splashCondition = mutableStateOf(true)
-    val splashCondition: State<Boolean> = _splashCondition
+    private val _showSplashScreen = mutableStateOf(true)
+    val showSplashScreen: State<Boolean> = _showSplashScreen
 
     private val _startDestination = mutableStateOf(onboardingRoute)
     val startDestination: State<String> = _startDestination
 
     init {
+        initializeState(preferences)
+    }
+
+    /**
+     * Combine the onboarded and authenticated Flows to determine the correct start destination
+     *  for the NavHost
+     */
+    private fun initializeState(preferences: UserPreferences) {
         combine(
             preferences.isOnboarded(),
             preferences.isAuthenticated()
@@ -39,9 +47,9 @@ class MainViewModel(
             }
         }.onEach { startDestination ->
             _startDestination.value = startDestination
-            // Without this delay, the onboarding &/or the authentication screens will show for a momentum.
+            // Without this delay, the onboarding &/or the authentication screens will flicker
             delay(300)
-            _splashCondition.value = false
+            _showSplashScreen.value = false
         }.launchIn(viewModelScope)
     }
 
