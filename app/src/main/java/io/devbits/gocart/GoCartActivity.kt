@@ -13,6 +13,8 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import io.devbits.gocart.composeui.theme.GoCartTheme
 import io.devbits.gocart.core.data.UserPreferences
 import io.devbits.gocart.core.data.dataStore
@@ -41,13 +43,20 @@ class GoCartActivity : ComponentActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
-            GoCartApp(viewModel.startDestination.value, preferences)
+            val navController = rememberNavController()
+
+            GoCartApp(
+                navController = navController,
+                startDestination = viewModel.startDestination.value,
+                preferences = preferences
+            )
         }
     }
 }
 
 @Composable
 fun GoCartApp(
+    navController: NavHostController,
     startDestination: String,
     preferences: UserPreferences,
 ) {
@@ -57,6 +66,7 @@ fun GoCartApp(
             color = MaterialTheme.colorScheme.background,
         ) {
             GoCartNavHost(
+                navController = navController,
                 startDestination = startDestination,
                 preferences = preferences,
             )
