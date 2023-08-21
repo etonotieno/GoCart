@@ -46,8 +46,6 @@ dependencies {
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
-    api("com.google.android.material:material:1.9.0")
-
     api("io.coil-kt:coil:2.4.0")
 
     api("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")

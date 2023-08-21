@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Allows us to override night specific attributes in the values-night folder. -->
+    <style name="NightAdjusted.Theme.GoCart" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- The final app theme -->
+    <style name="Theme.GoCart" parent="NightAdjusted.Theme.GoCart" />
+
+    <style name="NightAdjusted.Theme.Splash" parent="Theme.SplashScreen">
+        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+    </style>
+
+    <style name="Theme.GoCart.SplashScreen" parent="NightAdjusted.Theme.Splash">
+        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/bg_launcher</item>
+
+        <!-- Set the theme of the Activity that directly follows the splash screen. -->
+        <item name="postSplashScreenTheme">@style/Theme.GoCart</item>
+    </style>
+</resources>
