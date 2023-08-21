@@ -1,5 +1,7 @@
 package io.devbits.gocart.onboarding.ui.components
 
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -28,6 +30,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -69,6 +72,7 @@ fun OnboardingHorizontalPagerPreview() {
 fun OnboardingPagerIndicator(
     pages: List<OnboardingItem>,
     modifier: Modifier = Modifier,
+    skipIntro: Boolean = false,
     pagerState: PagerState,
     onOnboarded: () -> Unit,
 ) {
@@ -107,8 +111,10 @@ fun OnboardingPagerIndicator(
     ) {
         Spacer(modifier = Modifier.size(8.dp))
 
-        Button(onClick = onOnboarded) {
-            Text(stringResource(R.string.text_button_skip_intro).uppercase())
+        if (skipIntro) {
+            Button(onClick = onOnboarded) {
+                Text(stringResource(R.string.text_button_skip_intro).uppercase())
+            }
         }
 
         Row(
@@ -159,15 +165,29 @@ private fun Indicator(
     currentPage: Int,
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
+        val animationDurationInMillis = 400
+
         repeat(pageSize) { page ->
-            val color =
-                if (currentPage == page) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.onSurfaceVariant
+            val isSelected = currentPage == page
+
+            val indicatorColor: Color by animateColorAsState(
+                targetValue = if (isSelected) {
+                    MaterialTheme.colorScheme.secondary
+                } else {
+                    MaterialTheme.colorScheme.onSurfaceVariant
+                },
+                animationSpec = tween(
+                    durationMillis = animationDurationInMillis,
+                ),
+                label = "anim:indicatorColor"
+            )
+
             Box(
                 modifier = modifier
                     .padding(2.dp)
                     .size(8.dp)
                     .clip(CircleShape)
-                    .background(color)
+                    .background(indicatorColor)
             )
         }
     }
@@ -184,6 +204,7 @@ fun OnboardingPagerIndicatorPreview() {
         val pages = onboardingPages
         OnboardingPagerIndicator(
             pages = pages,
+            skipIntro = true,
             pagerState = rememberPagerState { pages.size },
             onOnboarded = {}
         )
