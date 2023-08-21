@@ -8,7 +8,7 @@ android {
     namespace = "io.devbits.gocart.authentication"
 
     defaultConfig {
-        minSdk = 23
+        minSdk = 21
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         consumerProguardFiles("consumer-rules.pro")
