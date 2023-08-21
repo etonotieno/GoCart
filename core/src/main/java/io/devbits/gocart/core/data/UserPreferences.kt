@@ -20,14 +20,22 @@ class UserPreferences(
     fun isOnboarded(): Flow<Boolean> =
         dataStore.data.map { it[onboardingKey] ?: false }
 
-    suspend fun setAuthenticated(): Preferences =
-        dataStore.edit { it[authKey] = true }
+    suspend fun setAuthenticated(status: Boolean): Preferences =
+        dataStore.edit { it[authKey] = status }
 
     fun isAuthenticated(): Flow<Boolean> =
         dataStore.data.map { it[authKey] ?: false }
 
+    // TODO Represent this is a User state object
+    fun isGuestUser(): Flow<Boolean> =
+        dataStore.data.map { it[guestUserKey] ?: false }
+
+    suspend fun setIsGuestUser() =
+        dataStore.edit { it[guestUserKey] = true }
+
     companion object {
         private val onboardingKey = booleanPreferencesKey("onboarding")
         private val authKey = booleanPreferencesKey("authentication")
+        private val guestUserKey = booleanPreferencesKey("user:guest")
     }
 }

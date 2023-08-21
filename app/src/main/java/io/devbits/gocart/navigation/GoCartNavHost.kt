@@ -15,6 +15,7 @@ fun GoCartNavHost(
     navController: NavHostController,
     startDestination: String,
     preferences: UserPreferences,
+    isLoggedIn: Boolean,
 ) {
     val scope = rememberCoroutineScope()
 
@@ -32,7 +33,7 @@ fun GoCartNavHost(
         authenticationScreen(
             onExploreApp = {
                 scope.launch {
-                    preferences.setAuthenticated()
+                    preferences.setIsGuestUser()
                     navController.popBackStack()
                     navController.navigateToHome()
                 }

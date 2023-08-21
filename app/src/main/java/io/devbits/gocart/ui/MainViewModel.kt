@@ -34,10 +34,11 @@ class MainViewModel(
     private fun initializeState(preferences: UserPreferences) {
         combine(
             preferences.isOnboarded(),
-            preferences.isAuthenticated()
-        ) { isOnboarded: Boolean, isAuthenticated ->
+            preferences.isAuthenticated(),
+            preferences.isGuestUser(),
+        ) { isOnboarded: Boolean, isAuthenticated, isGuestUser ->
             if (isOnboarded) {
-                if (isAuthenticated) {
+                if (isAuthenticated || isGuestUser) {
                     homeRoute
                 } else {
                     authenticationRoute
