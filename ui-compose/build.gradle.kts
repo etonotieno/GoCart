@@ -46,11 +46,7 @@ dependencies {
     api("androidx.compose.ui:ui-graphics")
     api("androidx.compose.ui:ui-tooling-preview")
     api("androidx.compose.material3:material3")
-
-    androidTestApi(platform("androidx.compose:compose-bom:2023.06.01"))
-    androidTestApi("androidx.compose.ui:ui-test-junit4")
-    debugApi("androidx.compose.ui:ui-tooling")
-    debugApi("androidx.compose.ui:ui-test-manifest")
+    api("androidx.compose.material:material-icons-extended")
 
     api("androidx.core:core-ktx:1.10.1")
 
@@ -61,6 +57,11 @@ dependencies {
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.31.6-rc")
 
     testImplementation("junit:junit:4.13.2")
+
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.06.01"))
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
+    debugImplementation("androidx.compose.ui:ui-tooling")
+    debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
