@@ -6,16 +6,17 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.FavoriteBorder
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.MailOutline
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.Chat
+import androidx.compose.material.icons.outlined.FavoriteBorder
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Shop
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
@@ -52,6 +53,7 @@ fun GoCartTopAppBar(
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
         },
@@ -76,7 +78,7 @@ fun GoCartTopAppBar(
 }
 
 @Composable
-fun GoCartBottomAppBar(
+fun GoCartNavBar(
     selectedRoute: String,
     navigationRoutes: List<Pair<String, ImageVector>>,
     onNavigationSelected: (String) -> Unit,
@@ -111,9 +113,9 @@ fun GoCartTopAppBarPreview() {
 
 @Preview
 @Composable
-fun GoCartBottomAppBarPreview() {
+fun GoCartNavBarPreview() {
     GoCartTheme {
-        GoCartBottomAppBar(
+        GoCartNavBar(
             selectedRoute = "Home",
             navigationRoutes = navigationItems,
             onNavigationSelected = { _ -> },
@@ -122,8 +124,8 @@ fun GoCartBottomAppBarPreview() {
 }
 
 val navigationItems = listOf(
-    "Home" to Icons.Filled.Home,
-    "Services" to Icons.Filled.MailOutline,
-    "Orders" to Icons.Filled.AccountCircle,
-    "Favourites" to Icons.Filled.FavoriteBorder
+    "Home" to Icons.Outlined.Home,
+    "Services" to Icons.Outlined.Chat,
+    "Orders" to Icons.Outlined.Shop,
+    "Favourites" to Icons.Outlined.FavoriteBorder
 )

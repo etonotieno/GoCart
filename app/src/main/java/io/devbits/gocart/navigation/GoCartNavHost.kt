@@ -38,12 +38,55 @@ fun GoCartNavHost(
                     navController.navigateToHome()
                 }
             },
-            onGoogleSignup = {},
-            onFacebookSignup = {},
-            onSignup = {},
-            onLogin = {},
+            onGoogleSignup = {
+                scope.launch {
+                    preferences.setAuthenticated(true)
+                    navController.popBackStack()
+                    navController.navigateToHome()
+                }
+            },
+            onFacebookSignup = {
+                scope.launch {
+                    preferences.setAuthenticated(true)
+                    navController.popBackStack()
+                    navController.navigateToHome()
+                }
+            },
+            onSignup = {
+                scope.launch {
+                    preferences.setAuthenticated(true)
+                    navController.popBackStack()
+                    navController.navigateToHome()
+                }
+            },
+            onLogin = {
+                scope.launch {
+                    preferences.setAuthenticated(true)
+                    navController.popBackStack()
+                    navController.navigateToHome()
+                }
+            },
         )
 
-        homeScreen()
+        homeScreen(
+            isLoggedIn = isLoggedIn,
+            onProfileClick = {},
+            onSignUp = {
+                navController.popBackStack()
+                navController.navigateToAuth()
+            },
+            onLogout = {
+                scope.launch {
+                    preferences.setAuthenticated(false)
+                    navController.popBackStack()
+                    navController.navigateToAuth()
+                }
+            },
+            onClickMyAddresses = {},
+            onClickPayments = {},
+            onClickSpecialOffers = {},
+            onClickSettings = {},
+            onClickHelp = {},
+        )
     }
 }
