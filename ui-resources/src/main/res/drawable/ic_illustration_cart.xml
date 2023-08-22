@@ -28,18 +28,18 @@
         android:fillColor="#00000000"
         android:pathData="M78,80V68C78,66.9 78.8,66 79.79,66L146.21,66C147.2,66 148,66.9 148,68V80"
         android:strokeWidth="2.5"
-        android:strokeColor="@color/go_cart_avocado" />
+        android:strokeColor="#257A00" />
     <path
         android:fillColor="#00000000"
         android:pathData="M79.06,67L86.17,74.01C86.64,74.48 86.53,75.28 85.95,75.6L78,80"
         android:strokeWidth="2.5"
-        android:strokeColor="@color/go_cart_avocado"
+        android:strokeColor="#257A00"
         android:strokeLineCap="round" />
     <path
         android:fillColor="#00000000"
         android:pathData="M147.11,67.07L140.31,74.01C139.84,74.48 139.96,75.27 140.54,75.58L148.64,80"
         android:strokeWidth="2.5"
-        android:strokeColor="@color/go_cart_avocado"
+        android:strokeColor="#257A00"
         android:strokeLineCap="round" />
     <path
         android:fillColor="#C24E2E"

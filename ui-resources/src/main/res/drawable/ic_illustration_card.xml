@@ -24,7 +24,7 @@
         android:fillColor="#ffffff"
         android:pathData="M44,31.25L125,31.25A2.75,2.75 0,0 1,127.75 34L127.75,85A2.75,2.75 0,0 1,125 87.75L44,87.75A2.75,2.75 0,0 1,41.25 85L41.25,34A2.75,2.75 0,0 1,44 31.25z"
         android:strokeWidth="2.5"
-        android:strokeColor="@color/go_cart_avocado" />
+        android:strokeColor="#257A00" />
     <path
         android:fillColor="#E8F0FE"
         android:pathData="M42.5,43h84v14h-84z" />
