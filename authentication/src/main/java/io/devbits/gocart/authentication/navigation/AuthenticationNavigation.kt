@@ -1,11 +1,11 @@
 package io.devbits.gocart.authentication.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.authentication.ui.AuthenticationRoute
+import androidx.navigation.navigation
+import io.devbits.gocart.authentication.ui.AuthenticationScreen
 import io.devbits.gocart.composeui.components.SystemBars
 
 const val authenticationRoute = "authentication"
@@ -14,25 +14,48 @@ fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
     this.navigate(authenticationRoute, navOptions)
 }
 
-fun NavGraphBuilder.authenticationScreen(
-    modifier: Modifier = Modifier,
+fun NavController.navigateToAuthGraph(navOptions: NavOptions? = null) {
+    this.navigate("authentication_graph", navOptions)
+}
+
+fun NavGraphBuilder.authHomeScreen(
     onExploreApp: () -> Unit,
     onGoogleSignup: () -> Unit,
     onFacebookSignup: () -> Unit,
     onSignup: () -> Unit,
     onLogin: () -> Unit,
 ) {
-    composable(
-        route = authenticationRoute,
-    ) {
+    composable(route = authenticationRoute) {
         SystemBars(themed = false)
-        AuthenticationRoute(
-            modifier = modifier,
+        AuthenticationScreen(
             onExploreApp = onExploreApp,
             onGoogleSignup = onGoogleSignup,
             onFacebookSignup = onFacebookSignup,
             onSignup = onSignup,
             onLogin = onLogin,
         )
+    }
+}
+
+fun NavGraphBuilder.authGraph(
+    onExploreApp: () -> Unit,
+    onGoogleSignup: () -> Unit,
+    onFacebookSignup: () -> Unit,
+    onSignup: () -> Unit,
+    onLogin: () -> Unit,
+    nestedGraphs: NavGraphBuilder.() -> Unit,
+) {
+    navigation(
+        startDestination = authenticationRoute,
+        route = "authentication_graph"
+    ) {
+        authHomeScreen(
+            onExploreApp = onExploreApp,
+            onGoogleSignup = onGoogleSignup,
+            onFacebookSignup = onFacebookSignup,
+            onSignup = onSignup,
+            onLogin = onLogin,
+        )
+        nestedGraphs()
     }
 }

@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -113,27 +114,14 @@ fun AuthenticationScreen(
 
             Spacer(modifier = Modifier.size(40.dp))
 
-            Row {
-                Text(
-                    text = "Already heave an account, ",
-                    color = MaterialTheme.colorScheme.inverseOnSurface,
+            HaveAccountText(
+                onLogin = onLogin,
+                textColor = MaterialTheme.colorScheme.inverseOnSurface,
+                loginStyle = SpanStyle(
+                    color = go_cart_orange_yellow,
+                    fontWeight = FontWeight.Bold
                 )
-
-                val login = buildAnnotatedString {
-                    withStyle(
-                        SpanStyle(
-                            color = go_cart_orange_yellow,
-                            fontWeight = FontWeight.Bold
-                        )
-                    ) {
-                        append("Login")
-                    }
-                }
-                Text(
-                    text = login,
-                    modifier = Modifier.clickable { onLogin() },
-                )
-            }
+            )
 
             Spacer(modifier = Modifier.size(16.dp))
 
@@ -158,6 +146,32 @@ fun AuthenticationScreen(
                 )
             }
         }
+    }
+}
+
+@Composable
+fun HaveAccountText(
+    modifier: Modifier = Modifier,
+    onLogin: () -> Unit,
+    textColor: Color,
+    loginStyle: SpanStyle
+) {
+    Row(modifier = modifier) {
+        Text(
+            text = "Already heave an account, ",
+            color = textColor,
+        )
+
+        val login = buildAnnotatedString {
+            withStyle(loginStyle) {
+                append("Login")
+            }
+        }
+
+        Text(
+            text = login,
+            modifier = Modifier.clickable { onLogin() },
+        )
     }
 }
 

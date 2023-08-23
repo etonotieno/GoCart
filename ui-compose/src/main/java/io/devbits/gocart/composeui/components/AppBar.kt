@@ -8,10 +8,6 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.outlined.Chat
-import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Shop
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -22,11 +18,15 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.devbits.gocart.composeui.model.DestinationRoutes
 import io.devbits.gocart.composeui.theme.GoCartTheme
 import io.devbits.gocart.composeui.theme.go_cart_independence
 import io.devbits.gocart.resources.R as resourcesR
@@ -79,22 +79,35 @@ fun GoCartTopAppBar(
 
 @Composable
 fun GoCartNavBar(
-    selectedRoute: String,
-    navigationRoutes: List<Pair<String, ImageVector>>,
-    onNavigationSelected: (String) -> Unit,
+    navigationRoutes: List<DestinationRoutes>,
+    onNavigationSelected: (DestinationRoutes) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var selectedItem by remember { mutableIntStateOf(0) }
+
     NavigationBar(
         modifier = modifier,
         windowInsets = WindowInsets.navigationBars,
     ) {
-        for (route in navigationRoutes) {
+        navigationRoutes.forEachIndexed { index, route ->
+            val selected = index == selectedItem
             NavigationBarItem(
-                icon = { Icon(imageVector = route.second, contentDescription = null) },
-                label = { Text(text = route.first) },
-                selected = selectedRoute == route.first,
-                onClick = { onNavigationSelected(route.first) },
+                icon = {
+                    Icon(
+                        imageVector = if (selected) route.selectedIcon else route.unselectedIcon,
+                        contentDescription = null
+                    )
+                },
+                label = {
+                    Text(text = route.titleText)
+                },
+                selected = selected,
+                onClick = {
+                    selectedItem = index
+                    onNavigationSelected(route)
+                },
             )
+
         }
     }
 }
@@ -116,16 +129,8 @@ fun GoCartTopAppBarPreview() {
 fun GoCartNavBarPreview() {
     GoCartTheme {
         GoCartNavBar(
-            selectedRoute = "Home",
-            navigationRoutes = navigationItems,
+            navigationRoutes = DestinationRoutes.values().asList(),
             onNavigationSelected = { _ -> },
         )
     }
 }
-
-val navigationItems = listOf(
-    "Home" to Icons.Outlined.Home,
-    "Services" to Icons.Outlined.Chat,
-    "Orders" to Icons.Outlined.Shop,
-    "Favourites" to Icons.Outlined.FavoriteBorder
-)

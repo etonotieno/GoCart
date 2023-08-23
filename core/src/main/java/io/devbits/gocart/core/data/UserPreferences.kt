@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
  * Interface that tracks user preferences
  */
 class UserPreferences(
-    private val dataStore: DataStore<Preferences>
+    private val dataStore: DataStore<Preferences>,
 ) {
 
     suspend fun setOnboarded(): Preferences =

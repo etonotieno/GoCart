@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
@@ -16,6 +15,7 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import io.devbits.gocart.composeui.theme.GoCartTheme
 import io.devbits.gocart.core.data.UserPreferences
@@ -46,13 +46,12 @@ class GoCartActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             val navController = rememberNavController()
-            val isLoggedIn by preferences.isAuthenticated().collectAsState(false)
+            val backStack by navController.currentBackStackEntryAsState()
 
             GoCartApp(
                 navController = navController,
                 startDestination = viewModel.startDestination.value,
                 preferences = preferences,
-                isLoggedIn = isLoggedIn,
             )
         }
     }
@@ -63,7 +62,6 @@ fun GoCartApp(
     navController: NavHostController,
     startDestination: String,
     preferences: UserPreferences,
-    isLoggedIn: Boolean,
 ) {
     GoCartTheme {
         Surface(
@@ -74,7 +72,6 @@ fun GoCartApp(
                 navController = navController,
                 startDestination = startDestination,
                 preferences = preferences,
-                isLoggedIn = isLoggedIn,
             )
         }
     }

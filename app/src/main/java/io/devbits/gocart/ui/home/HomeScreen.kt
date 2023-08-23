@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
@@ -15,41 +14,41 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import io.devbits.gocart.composeui.components.GoCartNavBar
-import io.devbits.gocart.composeui.components.GoCartNavDrawer
+import io.devbits.gocart.composeui.components.GoCartNavDrawerContent
 import io.devbits.gocart.composeui.components.GoCartTopAppBar
-import io.devbits.gocart.composeui.components.navigationItems
+import io.devbits.gocart.composeui.model.DestinationRoutes
+import io.devbits.gocart.composeui.model.NavDrawerItem
 import io.devbits.gocart.composeui.theme.GoCartTheme
+import io.devbits.gocart.core.data.UserPreferences
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeRoute(
-    modifier: Modifier,
-    isLoggedIn: Boolean,
-    onProfileClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    onClickHeader: () -> Unit,
     onSignUp: () -> Unit,
-    onLogout: () -> Unit,
-    onClickMyAddresses: () -> Unit,
-    onClickPayments: () -> Unit,
-    onClickSpecialOffers: () -> Unit,
-    onClickSettings: () -> Unit,
-    onClickHelp: () -> Unit,
+    onNavigationSelected: (DestinationRoutes) -> Unit,
+    onDrawerItemClick: (NavDrawerItem) -> Unit,
+    preferences: UserPreferences,
+    viewModel: HomeViewModel = viewModel(initializer = { HomeViewModel(preferences) }),
 ) {
+    val isLoggedIn by viewModel.isLoggedIn.collectAsState(false)
+
     HomeScreen(
         modifier = modifier,
         isLoggedIn = isLoggedIn,
-        onProfileClick = onProfileClick,
+        onClickHeader = onClickHeader,
         onSignUp = onSignUp,
-        onLogout = onLogout,
-        onClickMyAddresses = onClickMyAddresses,
-        onClickPayments = onClickPayments,
-        onClickSpecialOffers = onClickSpecialOffers,
-        onClickSettings = onClickSettings,
-        onClickHelp = onClickHelp,
+        onNavigationSelected = onNavigationSelected,
+        onDrawerItemClick = onDrawerItemClick,
     )
 }
 
@@ -57,31 +56,29 @@ fun HomeRoute(
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    drawerState: DrawerState = rememberDrawerState(DrawerValue.Closed),
     isLoggedIn: Boolean,
-    onProfileClick: () -> Unit,
+    onClickHeader: () -> Unit,
     onSignUp: () -> Unit,
-    onLogout: () -> Unit,
-    onClickMyAddresses: () -> Unit,
-    onClickPayments: () -> Unit,
-    onClickSpecialOffers: () -> Unit,
-    onClickSettings: () -> Unit,
-    onClickHelp: () -> Unit,
+    onNavigationSelected: (DestinationRoutes) -> Unit,
+    onDrawerItemClick: (NavDrawerItem) -> Unit,
 ) {
+    val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
 
     ModalNavigationDrawer(
         drawerContent = {
-            GoCartNavDrawer(
+            GoCartNavDrawerContent(
                 isLoggedIn = isLoggedIn,
-                onProfileClick = onProfileClick,
-                onSignUp = onSignUp,
-                onLogout = onLogout,
-                onClickMyAddresses = onClickMyAddresses,
-                onClickPayments = onClickPayments,
-                onClickSpecialOffers = onClickSpecialOffers,
-                onClickSettings = onClickSettings,
-                onClickHelp = onClickHelp,
+                onClickHeader = {
+                    scope.launch { drawerState.close() }
+                    onClickHeader()
+                },
+                onSignUp = {
+                    scope.launch { drawerState.close() }
+                    onSignUp()
+                },
+                items = NavDrawerItem.values().asList(),
+                onClick = onDrawerItemClick,
             )
         },
         drawerState = drawerState,
@@ -89,12 +86,11 @@ fun HomeScreen(
         Scaffold(
             modifier = modifier,
             topBar = {
+                // Hide during onboarding and authentication flows
                 GoCartTopAppBar(
                     onClickNavigation = {
                         scope.launch {
-                            drawerState.apply {
-                                if (isClosed) open() else close()
-                            }
+                            if (drawerState.isClosed) drawerState.open() else drawerState.close()
                         }
                     },
                     onSearch = {},
@@ -102,10 +98,10 @@ fun HomeScreen(
                 )
             },
             bottomBar = {
+                // Hide during onboarding and authentication flows
                 GoCartNavBar(
-                    selectedRoute = "Home",
-                    navigationRoutes = navigationItems,
-                    onNavigationSelected = { _ -> },
+                    navigationRoutes = DestinationRoutes.values().asList(),
+                    onNavigationSelected = onNavigationSelected,
                 )
             },
         ) { innerPadding ->
@@ -134,14 +130,10 @@ fun HomeScreenPreview() {
     GoCartTheme {
         HomeScreen(
             isLoggedIn = true,
-            onProfileClick = {},
+            onClickHeader = {},
             onSignUp = {},
-            onLogout = {},
-            onClickMyAddresses = {},
-            onClickPayments = {},
-            onClickSpecialOffers = {},
-            onClickSettings = {},
-            onClickHelp = {},
+            onNavigationSelected = {},
+            onDrawerItemClick = {},
         )
     }
 }

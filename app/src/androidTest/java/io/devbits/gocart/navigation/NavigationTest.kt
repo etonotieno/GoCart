@@ -27,7 +27,6 @@ class NavigationTest {
                 navController = navController,
                 startDestination = "Home",
                 preferences = UserPreferences(LocalContext.current.dataStore),
-                isLoggedIn = false,
             )
         }
     }
