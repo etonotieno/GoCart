@@ -14,7 +14,7 @@
 
     <style name="Theme.GoCart.SplashScreen" parent="NightAdjusted.Theme.Splash">
         <item name="windowSplashScreenBackground">@color/white</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/bg_launcher</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_go_cart_logo</item>
 
         <!-- Set the theme of the Activity that directly follows the splash screen. -->
         <item name="postSplashScreenTheme">@style/Theme.GoCart</item>
