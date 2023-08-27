@@ -30,8 +30,8 @@ class UserPreferences(
     fun isGuestUser(): Flow<Boolean> =
         dataStore.data.map { it[guestUserKey] ?: false }
 
-    suspend fun setIsGuestUser() =
-        dataStore.edit { it[guestUserKey] = true }
+    suspend fun setGuestUser(guest: Boolean) =
+        dataStore.edit { it[guestUserKey] = guest }
 
     companion object {
         private val onboardingKey = booleanPreferencesKey("onboarding")

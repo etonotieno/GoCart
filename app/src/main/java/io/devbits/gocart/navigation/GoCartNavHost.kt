@@ -54,7 +54,7 @@ fun GoCartNavHost(
         authHomeScreen(
             onExploreApp = {
                 // TODO: Move authentication logic to a ViewModel
-                scope.launch { preferences.setIsGuestUser() }
+                scope.launch { preferences.setGuestUser(true) }
                 navController.popBackStack()
                 navController.navigateToHome(
                     navOptions = navOptions {
@@ -114,7 +114,10 @@ fun GoCartNavHost(
                     NavDrawerItem.HELP -> {}
                     NavDrawerItem.LOGOUT -> {
                         // TODO: Move authentication logic to a ViewModel
-                        scope.launch { preferences.setAuthenticated(false) }
+                        scope.launch {
+                            preferences.setGuestUser(false)
+                            preferences.setAuthenticated(false)
+                        }
                         navController.popBackStack()
                         navController.navigateToAuth()
                     }
