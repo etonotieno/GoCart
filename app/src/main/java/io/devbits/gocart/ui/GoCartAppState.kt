@@ -99,7 +99,7 @@ class GoCartAppState(
             }
             // Only one copy of the Route is saved on the backstack during re-selection
             launchSingleTop = true
-            // Restore state when reselecting a previously selected item
+            // Restore state when re-selecting a previously selected item
             restoreState = true
         }
     }
