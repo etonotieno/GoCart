@@ -18,14 +18,12 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination
+import androidx.navigation.NavDestination.Companion.hierarchy
 import io.devbits.gocart.composeui.model.DestinationRoutes
 import io.devbits.gocart.composeui.theme.GoCartTheme
 import io.devbits.gocart.composeui.theme.go_cart_independence
@@ -77,20 +75,25 @@ fun GoCartTopAppBar(
     )
 }
 
+private fun NavDestination?.isRouteDestination(destination: DestinationRoutes) =
+    this?.hierarchy?.any {
+        it.route?.contains(destination.name, true) ?: false
+    } ?: false
+
+// TODO: Refactor to component
 @Composable
 fun GoCartNavBar(
     navigationRoutes: List<DestinationRoutes>,
     onNavigationSelected: (DestinationRoutes) -> Unit,
+    currentDestination: NavDestination?,
     modifier: Modifier = Modifier,
 ) {
-    var selectedItem by remember { mutableIntStateOf(0) }
-
     NavigationBar(
         modifier = modifier,
         windowInsets = WindowInsets.navigationBars,
     ) {
-        navigationRoutes.forEachIndexed { index, route ->
-            val selected = index == selectedItem
+        navigationRoutes.forEach { route ->
+            val selected = currentDestination.isRouteDestination(route)
             NavigationBarItem(
                 icon = {
                     Icon(
@@ -102,12 +105,8 @@ fun GoCartNavBar(
                     Text(text = route.titleText)
                 },
                 selected = selected,
-                onClick = {
-                    selectedItem = index
-                    onNavigationSelected(route)
-                },
+                onClick = { onNavigationSelected(route) },
             )
-
         }
     }
 }
@@ -131,6 +130,7 @@ fun GoCartNavBarPreview() {
         GoCartNavBar(
             navigationRoutes = DestinationRoutes.values().asList(),
             onNavigationSelected = { _ -> },
+            currentDestination = null,
         )
     }
 }
