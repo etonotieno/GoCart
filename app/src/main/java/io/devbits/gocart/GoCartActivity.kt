@@ -8,20 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import io.devbits.gocart.composeui.theme.GoCartTheme
 import io.devbits.gocart.core.data.UserPreferences
 import io.devbits.gocart.core.data.dataStore
 import io.devbits.gocart.navigation.GoCartNavHost
-import io.devbits.gocart.ui.MainViewModel
 
 class GoCartActivity : ComponentActivity() {
 
@@ -46,7 +43,6 @@ class GoCartActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             val navController = rememberNavController()
-            val backStack by navController.currentBackStackEntryAsState()
 
             GoCartApp(
                 navController = navController,

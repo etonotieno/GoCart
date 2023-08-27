@@ -46,6 +46,14 @@ dependencies {
     implementation(project(":ui-compose"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:authentication"))
+    implementation(project(":feature:homefeed"))
+    implementation(project(":feature:address"))
+    implementation(project(":feature:favorites"))
+    implementation(project(":feature:offers"))
+    implementation(project(":feature:payments"))
+    implementation(project(":feature:orders"))
+    implementation(project(":feature:services"))
+    implementation(project(":feature:settings"))
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 

@@ -8,6 +8,7 @@ import androidx.navigation.navigation
 import io.devbits.gocart.authentication.ui.AuthenticationScreen
 import io.devbits.gocart.composeui.components.SystemBars
 
+private const val AUTH_GRAPH = "authentication_graph"
 const val authenticationRoute = "authentication"
 
 fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
@@ -15,7 +16,7 @@ fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
 }
 
 fun NavController.navigateToAuthGraph(navOptions: NavOptions? = null) {
-    this.navigate("authentication_graph", navOptions)
+    this.navigate(AUTH_GRAPH, navOptions)
 }
 
 fun NavGraphBuilder.authHomeScreen(
@@ -47,7 +48,7 @@ fun NavGraphBuilder.authGraph(
 ) {
     navigation(
         startDestination = authenticationRoute,
-        route = "authentication_graph"
+        route = AUTH_GRAPH
     ) {
         authHomeScreen(
             onExploreApp = onExploreApp,

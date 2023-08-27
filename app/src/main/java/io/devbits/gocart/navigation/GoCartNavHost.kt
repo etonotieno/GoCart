@@ -5,6 +5,10 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.navOptions
+import io.devbit.gocart.orders.navigation.navigateToOrders
+import io.devbit.gocart.orders.navigation.ordersScreen
+import io.devbits.gocart.address.navigation.addressScreen
+import io.devbits.gocart.address.navigation.navigateToAddress
 import io.devbits.gocart.authentication.navigation.authHomeScreen
 import io.devbits.gocart.authentication.navigation.loginScreen
 import io.devbits.gocart.authentication.navigation.navigateToAuth
@@ -14,7 +18,19 @@ import io.devbits.gocart.authentication.navigation.signUpScreen
 import io.devbits.gocart.composeui.model.DestinationRoutes
 import io.devbits.gocart.composeui.model.NavDrawerItem
 import io.devbits.gocart.core.data.UserPreferences
+import io.devbits.gocart.favorites.navigation.favoritesScreen
+import io.devbits.gocart.favorites.navigation.navigateToFavorites
+import io.devbits.gocart.homefeed.navigation.homeScreen
+import io.devbits.gocart.homefeed.navigation.navigateToHome
+import io.devbits.gocart.offers.navigation.navigateToOffers
+import io.devbits.gocart.offers.navigation.offersScreen
 import io.devbits.gocart.onboarding.navigation.onboardingScreen
+import io.devbits.gocart.payments.navigation.navigateToPayments
+import io.devbits.gocart.payments.navigation.paymentsScreen
+import io.devbits.gocart.services.navigation.navigateToServices
+import io.devbits.gocart.services.navigation.servicesScreen
+import io.devbits.gocart.settings.navigation.navigateToSettings
+import io.devbits.gocart.settings.navigation.settingsScreen
 import kotlinx.coroutines.launch
 
 @Composable
