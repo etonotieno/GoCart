@@ -17,7 +17,7 @@ import io.devbits.gocart.authentication.navigation.navigateToSignUp
 import io.devbits.gocart.authentication.navigation.signUpScreen
 import io.devbits.gocart.composeui.model.DestinationRoutes
 import io.devbits.gocart.composeui.model.NavDrawerItem
-import io.devbits.gocart.core.data.UserPreferences
+import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.favorites.navigation.favoritesScreen
 import io.devbits.gocart.favorites.navigation.navigateToFavorites
 import io.devbits.gocart.homefeed.navigation.homeScreen

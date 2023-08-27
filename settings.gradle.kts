@@ -15,7 +15,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "GoCart"
 
-include(":core")
+include(":core:datastore")
 include(":ui-compose")
 include(":ui-resources")
 include(":app")

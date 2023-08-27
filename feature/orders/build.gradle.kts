@@ -38,7 +38,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
     implementation(project(":ui-compose"))
 
     testImplementation("junit:junit:4.13.2")

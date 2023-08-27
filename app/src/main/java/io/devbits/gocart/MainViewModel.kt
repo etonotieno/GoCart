@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.devbits.gocart.authentication.navigation.authenticationRoute
-import io.devbits.gocart.core.data.UserPreferences
+import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.homefeed.navigation.homeRoute
 import io.devbits.gocart.onboarding.navigation.onboardingRoute
 import kotlinx.coroutines.delay

@@ -4,8 +4,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
-import io.devbits.gocart.core.data.UserPreferences
-import io.devbits.gocart.core.data.dataStore
 import org.junit.Before
 import org.junit.Rule
 
@@ -26,7 +24,6 @@ class NavigationTest {
             GoCartNavHost(
                 navController = navController,
                 startDestination = "Home",
-                preferences = UserPreferences(LocalContext.current.dataStore),
             )
         }
     }

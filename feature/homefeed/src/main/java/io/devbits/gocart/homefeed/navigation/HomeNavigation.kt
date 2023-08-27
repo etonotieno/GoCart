@@ -7,8 +7,8 @@ import androidx.navigation.compose.composable
 import io.devbits.gocart.composeui.components.SystemBars
 import io.devbits.gocart.composeui.model.DestinationRoutes
 import io.devbits.gocart.composeui.model.NavDrawerItem
-import io.devbits.gocart.core.data.UserPreferences
-import io.devbits.gocart.homefeed.ui.HomeRoute
+import io.devbits.gocart.core.datastore.UserPreferences
+import io.devbits.gocart.homefeed.ui.HomeScreen
 
 const val homeRoute = "home"
 
@@ -25,7 +25,7 @@ fun NavGraphBuilder.homeScreen(
 ) {
     composable(route = homeRoute) {
         SystemBars(themed = true)
-        HomeRoute(
+        HomeScreen(
             onClickHeader = onClickHeader,
             onSignUp = onSignUp,
             onNavigationSelected = onNavigationSelected,

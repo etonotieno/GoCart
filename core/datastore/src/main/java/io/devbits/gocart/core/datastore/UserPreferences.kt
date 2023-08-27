@@ -1,4 +1,4 @@
-package io.devbits.gocart.core.data
+package io.devbits.gocart.core.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,9 +7,6 @@ import androidx.datastore.preferences.core.edit
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-/**
- * Interface that tracks user preferences
- */
 class UserPreferences(
     private val dataStore: DataStore<Preferences>,
 ) {

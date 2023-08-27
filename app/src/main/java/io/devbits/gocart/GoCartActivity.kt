@@ -16,8 +16,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import io.devbits.gocart.composeui.theme.GoCartTheme
-import io.devbits.gocart.core.data.UserPreferences
-import io.devbits.gocart.core.data.dataStore
+import io.devbits.gocart.core.datastore.UserPreferences
+import io.devbits.gocart.data.dataStore
 import io.devbits.gocart.navigation.GoCartNavHost
 
 class GoCartActivity : ComponentActivity() {

@@ -27,11 +27,12 @@ import io.devbits.gocart.composeui.components.GoCartTopAppBar
 import io.devbits.gocart.composeui.model.DestinationRoutes
 import io.devbits.gocart.composeui.model.NavDrawerItem
 import io.devbits.gocart.composeui.theme.GoCartTheme
-import io.devbits.gocart.core.data.UserPreferences
+import io.devbits.gocart.core.datastore.UserPreferences
 import kotlinx.coroutines.launch
 
+
 @Composable
-fun HomeRoute(
+fun HomeScreen(
     modifier: Modifier = Modifier,
     onClickHeader: () -> Unit,
     onSignUp: () -> Unit,

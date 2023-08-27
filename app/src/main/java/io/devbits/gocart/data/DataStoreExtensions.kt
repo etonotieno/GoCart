@@ -1,4 +1,4 @@
-package io.devbits.gocart.core.data
+package io.devbits.gocart.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

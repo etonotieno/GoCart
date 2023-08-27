@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
+    implementation(project(":core:datastore"))
     implementation(project(":ui-compose"))
 
     testImplementation("junit:junit:4.13.2")

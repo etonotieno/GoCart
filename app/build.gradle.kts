@@ -42,8 +42,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
     implementation(project(":ui-compose"))
+    implementation(project(":core:datastore"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:authentication"))
     implementation(project(":feature:homefeed"))
