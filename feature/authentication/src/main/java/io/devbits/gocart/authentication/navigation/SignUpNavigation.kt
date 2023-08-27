@@ -5,7 +5,6 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import io.devbits.gocart.authentication.ui.signup.SignUpScreen
-import io.devbits.gocart.composeui.components.SystemBars
 
 const val signUpRoute = "authentication/signup"
 
@@ -19,7 +18,6 @@ fun NavGraphBuilder.signUpScreen(
     onBack: () -> Unit,
 ) {
     composable(route = signUpRoute) {
-        SystemBars(themed = true)
         SignUpScreen(
             onLogin = onLogin,
             onSignUp = onSignup,

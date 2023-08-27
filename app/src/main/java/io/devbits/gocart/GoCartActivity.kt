@@ -2,7 +2,9 @@ package io.devbits.gocart
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,14 +18,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.core.view.WindowCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.navigation.compose.currentBackStackEntryAsState
 import io.devbits.gocart.authentication.navigation.navigateToAuth
 import io.devbits.gocart.composeui.components.GoCartNavBar
 import io.devbits.gocart.composeui.components.GoCartNavDrawerContent
@@ -58,22 +61,71 @@ class GoCartActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
+        enableEdgeToEdge()
+
         setContent {
+            val appState = rememberGoCartAppState(preferences = preferences)
+
+            val statusBarStyle = if (appState.isAuthenticationScreen) {
+                SystemBarStyle.auto(
+                    lightScrim = android.graphics.Color.TRANSPARENT,
+                    darkScrim = android.graphics.Color.TRANSPARENT,
+                ) { true }
+            } else {
+                SystemBarStyle.auto(
+                    lightScrim = android.graphics.Color.TRANSPARENT,
+                    darkScrim = android.graphics.Color.TRANSPARENT,
+                ) { false }
+            }
+
+            val navBarStyle = if (appState.isAuthenticationScreen) {
+                SystemBarStyle.auto(
+                    lightScrim = android.graphics.Color.TRANSPARENT,
+                    darkScrim = android.graphics.Color.TRANSPARENT,
+                ) { true }
+            } else {
+                SystemBarStyle.auto(
+                    lightScrim = lightScrim,
+                    darkScrim = lightScrim,
+                ) { false }
+            }
+
+            val backStack by appState.navController.currentBackStackEntryAsState()
+
+            DisposableEffect(backStack) {
+                enableEdgeToEdge(
+                    statusBarStyle = statusBarStyle,
+                    navigationBarStyle = navBarStyle,
+                )
+                onDispose {}
+            }
+
             GoCartApp(
                 startDestination = viewModel.startDestination.value,
-                preferences = preferences,
+                appState = appState,
             )
         }
     }
 }
 
+
+/**
+ * The default light scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=35-38;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val lightScrim = android.graphics.Color.argb(0xe6, 0xFF, 0xFF, 0xFF)
+
+/**
+ * The default dark scrim, as defined by androidx and the platform:
+ * https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:activity/activity/src/main/java/androidx/activity/EdgeToEdge.kt;l=40-44;drc=27e7d52e8604a080133e8b842db10c89b4482598
+ */
+private val darkScrim = android.graphics.Color.argb(0x80, 0x1b, 0x1b, 0x1b)
+
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun GoCartApp(
     startDestination: String,
-    preferences: UserPreferences,
-    appState: GoCartAppState = rememberGoCartAppState(preferences = preferences),
+    appState: GoCartAppState,
 ) {
     val isLoggedIn by appState.isLoggedIn.collectAsStateWithLifecycle()
     val drawerState = rememberDrawerState(DrawerValue.Closed)

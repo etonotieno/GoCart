@@ -40,7 +40,7 @@ fun AuthenticationRoute(
     onFacebookSignup: () -> Unit,
     onSignup: () -> Unit,
     onLogin: () -> Unit,
-    modifier: Modifier,
+    modifier: Modifier = Modifier,
 ) {
     AuthenticationScreen(
         modifier = modifier,
@@ -154,7 +154,7 @@ fun HaveAccountText(
     modifier: Modifier = Modifier,
     onLogin: () -> Unit,
     textColor: Color,
-    loginStyle: SpanStyle
+    loginStyle: SpanStyle,
 ) {
     Row(modifier = modifier) {
         Text(

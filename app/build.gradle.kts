@@ -61,8 +61,6 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
-
     androidTestImplementation(platform("androidx.compose:compose-bom:2023.08.00"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")

@@ -50,11 +50,9 @@ dependencies {
 
     api("androidx.core:core-ktx:1.10.1")
 
-    api("androidx.activity:activity-compose:1.7.2")
+    api("androidx.activity:activity-compose:1.8.0-alpha07")
 
     api("androidx.navigation:navigation-compose:2.7.0")
-
-    implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 
     testImplementation("junit:junit:4.13.2")
 

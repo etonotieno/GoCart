@@ -5,8 +5,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import io.devbits.gocart.authentication.ui.AuthenticationScreen
-import io.devbits.gocart.composeui.components.SystemBars
+import io.devbits.gocart.authentication.ui.AuthenticationRoute
 
 private const val AUTH_GRAPH = "authentication_graph"
 const val authenticationRoute = "authentication"
@@ -27,8 +26,7 @@ fun NavGraphBuilder.authHomeScreen(
     onLogin: () -> Unit,
 ) {
     composable(route = authenticationRoute) {
-        SystemBars(themed = false)
-        AuthenticationScreen(
+        AuthenticationRoute(
             onExploreApp = onExploreApp,
             onGoogleSignup = onGoogleSignup,
             onFacebookSignup = onFacebookSignup,
