@@ -44,8 +44,8 @@ android {
 dependencies {
     implementation(project(":core"))
     implementation(project(":ui-compose"))
-    implementation(project(":onboarding"))
-    implementation(project(":authentication"))
+    implementation(project(":feature:onboarding"))
+    implementation(project(":feature:authentication"))
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 

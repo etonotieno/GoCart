@@ -15,9 +15,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "GoCart"
 
-include(":onboarding")
 include(":core")
-include(":app")
 include(":ui-compose")
 include(":ui-resources")
-include(":authentication")
+include(":app")
+include(":feature:onboarding")
+include(":feature:authentication")

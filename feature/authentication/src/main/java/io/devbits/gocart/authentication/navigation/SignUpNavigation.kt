@@ -16,7 +16,7 @@ fun NavController.navigateToSignUp(navOptions: NavOptions? = null) {
 fun NavGraphBuilder.signUpScreen(
     onSignup: () -> Unit,
     onLogin: () -> Unit,
-    onBack: () -> Unit
+    onBack: () -> Unit,
 ) {
     composable(route = signUpRoute) {
         SystemBars(themed = true)

@@ -17,7 +17,7 @@ fun NavGraphBuilder.loginScreen(
     onBack: () -> Unit,
     onLogin: () -> Unit,
     onForgotPassword: () -> Unit,
-    navigateToSignUp: () -> Unit
+    navigateToSignUp: () -> Unit,
 ) {
     composable(route = loginRoute) {
         SystemBars(themed = true)
