@@ -1,4 +1,4 @@
-package io.devbits.gocart.onboarding.ui.components
+package io.devbits.gocart.onboarding.ui.component
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -35,7 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.devbits.gocart.composeui.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.onboarding.R
 import io.devbits.gocart.onboarding.ui.model.OnboardingItem
 import kotlinx.coroutines.launch

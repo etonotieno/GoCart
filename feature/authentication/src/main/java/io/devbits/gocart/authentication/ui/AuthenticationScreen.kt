@@ -26,11 +26,11 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import io.devbits.gocart.composeui.components.AuthButton
-import io.devbits.gocart.composeui.components.FacebookSignupButton
-import io.devbits.gocart.composeui.components.GoogleSignupButton
-import io.devbits.gocart.composeui.theme.GoCartTheme
-import io.devbits.gocart.composeui.theme.go_cart_orange_yellow
+import io.devbits.gocart.designsystem.component.AuthButton
+import io.devbits.gocart.designsystem.component.FacebookSignupButton
+import io.devbits.gocart.designsystem.component.GoogleSignupButton
+import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.go_cart_orange_yellow
 import io.devbits.gocart.resources.R as resourcesR
 
 @Composable

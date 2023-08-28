@@ -1,4 +1,4 @@
-package io.devbits.gocart.composeui.model
+package io.devbits.gocart.designsystem.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Chat

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "io.devbits.gocart.composeui"
+    namespace = "io.devbits.gocart.designsystem"
     compileSdk = 34
 
     defaultConfig {

@@ -1,4 +1,4 @@
-package io.devbits.gocart.composeui.model
+package io.devbits.gocart.designsystem.model
 
 import androidx.annotation.IntRange
 import androidx.compose.material.icons.Icons

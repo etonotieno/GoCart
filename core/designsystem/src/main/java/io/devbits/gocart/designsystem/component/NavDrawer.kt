@@ -1,4 +1,4 @@
-package io.devbits.gocart.composeui.components
+package io.devbits.gocart.designsystem.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -31,8 +31,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.devbits.gocart.composeui.model.NavDrawerItem
-import io.devbits.gocart.composeui.theme.GoCartTheme
+import io.devbits.gocart.designsystem.model.NavDrawerItem
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
 
 @Composable

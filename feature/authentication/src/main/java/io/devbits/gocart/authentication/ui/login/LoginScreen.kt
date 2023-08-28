@@ -40,7 +40,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.authentication.R
-import io.devbits.gocart.composeui.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 import java.util.regex.Pattern
 
 @OptIn(ExperimentalMaterial3Api::class)

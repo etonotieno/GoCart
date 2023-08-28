@@ -38,7 +38,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui-compose"))
+    implementation(project(":core:designsystem"))
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 

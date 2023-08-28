@@ -16,8 +16,8 @@ import io.devbit.gocart.orders.navigation.ordersRoute
 import io.devbits.gocart.address.navigation.navigateToAddress
 import io.devbits.gocart.authentication.navigation.authenticationRoute
 import io.devbits.gocart.authentication.navigation.navigateToAuth
-import io.devbits.gocart.composeui.model.DestinationRoutes
-import io.devbits.gocart.composeui.model.NavDrawerItem
+import io.devbits.gocart.designsystem.model.DestinationRoutes
+import io.devbits.gocart.designsystem.model.NavDrawerItem
 import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.favorites.navigation.favoritesRoute
 import io.devbits.gocart.favorites.navigation.navigateToFavorites

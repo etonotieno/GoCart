@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-    implementation(project(":ui-compose"))
+    implementation(project(":core:designsystem"))
     implementation(project(":core:datastore"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:authentication"))

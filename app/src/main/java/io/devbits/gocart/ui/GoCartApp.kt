@@ -17,12 +17,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.navigation.navigateToAuth
-import io.devbits.gocart.composeui.components.GoCartNavBar
-import io.devbits.gocart.composeui.components.GoCartNavDrawerContent
-import io.devbits.gocart.composeui.components.GoCartTopAppBar
-import io.devbits.gocart.composeui.model.DestinationRoutes
-import io.devbits.gocart.composeui.model.NavDrawerItem
-import io.devbits.gocart.composeui.theme.GoCartTheme
+import io.devbits.gocart.designsystem.component.GoCartNavBar
+import io.devbits.gocart.designsystem.component.GoCartNavDrawerContent
+import io.devbits.gocart.designsystem.component.GoCartTopAppBar
+import io.devbits.gocart.designsystem.model.DestinationRoutes
+import io.devbits.gocart.designsystem.model.NavDrawerItem
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.navigation.GoCartNavHost
 import kotlinx.coroutines.launch
 

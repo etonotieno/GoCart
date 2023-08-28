@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.devbits.gocart.composeui.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
 fun HomeRoute(modifier: Modifier = Modifier) {

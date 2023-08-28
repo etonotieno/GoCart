@@ -3,8 +3,8 @@ package io.devbits.gocart.onboarding.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import io.devbits.gocart.composeui.theme.GoCartTheme
-import io.devbits.gocart.onboarding.ui.components.OnboardingHorizontalPager
+import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.onboarding.ui.component.OnboardingHorizontalPager
 
 @Composable
 fun OnboardingRoute(onOnboarded: () -> Unit, modifier: Modifier) {

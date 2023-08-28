@@ -39,7 +39,7 @@ android {
 
 dependencies {
     implementation(project(":core:datastore"))
-    implementation(project(":ui-compose"))
+    implementation(project(":core:designsystem"))
 
     testImplementation("junit:junit:4.13.2")
 

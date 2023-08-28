@@ -1,4 +1,4 @@
-package io.devbits.gocart.composeui.components
+package io.devbits.gocart.designsystem.component
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Column
@@ -17,9 +17,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.devbits.gocart.composeui.theme.GoCartTheme
-import io.devbits.gocart.composeui.theme.facebook_blue
-import io.devbits.gocart.composeui.theme.google_red
+import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.facebook_blue
+import io.devbits.gocart.designsystem.theme.google_red
 import io.devbits.gocart.resources.R as resourcesR
 
 @Composable

@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.util.PatternsCompat
 import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.HaveAccountText
-import io.devbits.gocart.composeui.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 import java.util.regex.Pattern
 import io.devbits.gocart.resources.R as ResourcesR
 
