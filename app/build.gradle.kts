@@ -14,8 +14,15 @@ android {
         versionCode = 1
         versionName = "1.0.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
+        manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_round"
     }
     buildTypes {
+        debug {
+            applicationIdSuffix = ".debug"
+            manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher_debug"
+            manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_debug_round"
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
