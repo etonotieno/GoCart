@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -46,21 +47,23 @@ fun GoCartApp(
             ModalNavigationDrawer(
                 drawerContent = {
                     if (appState.currentDestinationRoute != null) {
-                        GoCartNavDrawerContent(
-                            isLoggedIn = isLoggedIn,
-                            onClickHeader = { },
-                            onSignUp = {
-                                appState.scope.launch { drawerState.close() }
-                                appState.navController.popBackStack()
-                                appState.navController.navigateToAuth()
-                            },
-                            items = NavDrawerItem.values().asList(),
-                            onClick = {
-                                if (it == NavDrawerItem.LOGOUT) appState.logOut()
-                                appState.scope.launch { drawerState.close() }
-                                appState.navigateToRoute(it)
-                            },
-                        )
+                        ModalDrawerSheet {
+                            GoCartNavDrawerContent(
+                                isLoggedIn = isLoggedIn,
+                                onClickHeader = { },
+                                onSignUp = {
+                                    appState.scope.launch { drawerState.close() }
+                                    appState.navController.popBackStack()
+                                    appState.navController.navigateToAuth()
+                                },
+                                items = NavDrawerItem.values().asList(),
+                                onClick = {
+                                    if (it == NavDrawerItem.LOGOUT) appState.logOut()
+                                    appState.scope.launch { drawerState.close() }
+                                    appState.navigateToRoute(it)
+                                },
+                            )
+                        }
                     }
                 },
                 drawerState = drawerState,
