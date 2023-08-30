@@ -1,7 +1,6 @@
 package io.devbits.gocart.designsystem.component
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -41,6 +40,7 @@ import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
 fun GoCartNavDrawerContent(
+    modifier: Modifier = Modifier,
     items: List<NavDrawerItem>,
     isLoggedIn: Boolean,
     onClickHeader: () -> Unit,
@@ -50,11 +50,7 @@ fun GoCartNavDrawerContent(
     // No item is selected by default (the initial value is -1)
     var selectedItem by remember { mutableIntStateOf(-1) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
-    ) {
+    Column(modifier = modifier.fillMaxSize()) {
         Spacer(Modifier.windowInsetsTopHeight(WindowInsets.statusBars))
 
         NavHeader(
