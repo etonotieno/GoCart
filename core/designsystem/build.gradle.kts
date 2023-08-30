@@ -51,6 +51,8 @@ dependencies {
 
     api("androidx.activity:activity-compose:1.8.0-alpha07")
 
+    api("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
+
     api("androidx.navigation:navigation-compose:2.7.0")
 
     testImplementation("junit:junit:4.13.2")

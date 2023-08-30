@@ -14,12 +14,14 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.compose.currentBackStackEntryAsState
+import dagger.hilt.android.AndroidEntryPoint
 import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.data.dataStore
 import io.devbits.gocart.ui.GoCartApp
 import io.devbits.gocart.ui.GoCartAppState
 import io.devbits.gocart.ui.rememberGoCartAppState
 
+@AndroidEntryPoint
 class GoCartActivity : ComponentActivity() {
 
     private lateinit var preferences: UserPreferences

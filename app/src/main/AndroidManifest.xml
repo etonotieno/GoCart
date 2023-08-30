@@ -3,6 +3,7 @@
     package="io.devbits.gocart">
 
     <application
+        android:name=".GoCartApplication"
         android:icon="${appIcon}"
         android:label="@string/app_name"
         android:roundIcon="${appIconRound}"
