@@ -26,6 +26,7 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import io.devbits.gocart.designsystem.component.AuthButton
 import io.devbits.gocart.designsystem.component.FacebookSignupButton
 import io.devbits.gocart.designsystem.component.GoogleSignupButton
@@ -41,6 +42,7 @@ fun AuthenticationRoute(
     onSignup: () -> Unit,
     onLogin: () -> Unit,
     modifier: Modifier = Modifier,
+    viewModel: AuthenticationViewModel = hiltViewModel(),
 ) {
     AuthenticationScreen(
         modifier = modifier,

@@ -1,6 +1,5 @@
 package io.devbits.gocart.offers.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -13,8 +12,9 @@ fun NavController.navigateToOffers(navOptions: NavOptions? = null) {
     this.navigate(offersRoute, navOptions)
 }
 
+
 fun NavGraphBuilder.offersScreen() {
     composable(route = offersRoute) {
-        OffersScreen(modifier = Modifier)
+        OffersScreen()
     }
 }

@@ -1,6 +1,5 @@
 package io.devbits.gocart.services.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -15,6 +14,6 @@ fun NavController.navigateToServices(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.servicesScreen() {
     composable(route = servicesRoute) {
-        ServicesScreen(modifier = Modifier)
+        ServicesScreen()
     }
 }

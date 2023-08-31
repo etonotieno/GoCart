@@ -1,6 +1,5 @@
 package io.devbits.gocart.settings.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -15,6 +14,6 @@ fun NavController.navigateToSettings(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.settingsScreen() {
     composable(route = settingsRoute) {
-        SettingsScreen(modifier = Modifier)
+        SettingsScreen()
     }
 }

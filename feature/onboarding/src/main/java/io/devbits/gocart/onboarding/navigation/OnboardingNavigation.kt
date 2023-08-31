@@ -1,14 +1,13 @@
 package io.devbits.gocart.onboarding.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import io.devbits.gocart.onboarding.ui.OnboardingRoute
+import io.devbits.gocart.onboarding.ui.OnboardingScreen
 
 const val onboardingRoute = "onboarding"
 
-fun NavGraphBuilder.onboardingScreen(onOnboarded: () -> Unit, modifier: Modifier = Modifier) {
+fun NavGraphBuilder.onboardingScreen(onOnboarded: () -> Unit) {
     composable(route = onboardingRoute) {
-        OnboardingRoute(modifier = Modifier, onOnboarded = onOnboarded)
+        OnboardingScreen(onOnboarded = onOnboarded)
     }
 }

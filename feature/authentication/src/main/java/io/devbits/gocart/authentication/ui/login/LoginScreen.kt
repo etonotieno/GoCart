@@ -39,14 +39,38 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.R
+import io.devbits.gocart.authentication.ui.AuthenticationViewModel
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import java.util.regex.Pattern
+
+@Composable
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    onBack: () -> Unit,
+    onLogin: () -> Unit,
+    navigateToSignUp: () -> Unit,
+    onForgotPassword: () -> Unit,
+    viewModel: AuthenticationViewModel = hiltViewModel(),
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    LoginScreen(
+        modifier = modifier,
+        state = state,
+        onBack = onBack,
+        onLogin = onLogin,
+        navigateToSignUp = navigateToSignUp,
+        onForgotPassword = onForgotPassword,
+    )
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
     modifier: Modifier = Modifier,
+    state: String,
     onBack: () -> Unit,
     onLogin: () -> Unit,
     navigateToSignUp: () -> Unit,
@@ -206,6 +230,7 @@ fun LoginScreen(
 fun LoginScreenPreview() {
     GoCartTheme {
         LoginScreen(
+            state = "",
             onBack = {},
             onLogin = {},
             navigateToSignUp = {},

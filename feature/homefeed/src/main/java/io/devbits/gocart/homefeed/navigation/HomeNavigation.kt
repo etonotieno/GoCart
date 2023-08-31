@@ -4,7 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.homefeed.ui.HomeRoute
+import io.devbits.gocart.homefeed.ui.HomeScreen
 
 const val homeRoute = "home"
 
@@ -14,6 +14,6 @@ fun NavController.navigateToHome(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.homeScreen() {
     composable(route = homeRoute) {
-        HomeRoute()
+        HomeScreen()
     }
 }

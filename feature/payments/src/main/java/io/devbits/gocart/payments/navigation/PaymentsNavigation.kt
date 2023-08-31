@@ -1,6 +1,5 @@
 package io.devbits.gocart.payments.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -15,6 +14,6 @@ fun NavController.navigateToPayments(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.paymentsScreen() {
     composable(route = paymentsRoute) {
-        PaymentsScreen(modifier = Modifier)
+        PaymentsScreen()
     }
 }

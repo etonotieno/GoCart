@@ -39,19 +39,41 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.util.PatternsCompat
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.R
+import io.devbits.gocart.authentication.ui.AuthenticationViewModel
 import io.devbits.gocart.authentication.ui.HaveAccountText
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import java.util.regex.Pattern
 import io.devbits.gocart.resources.R as ResourcesR
 
+@Composable
+fun SignUpScreen(
+    modifier: Modifier = Modifier,
+    viewModel: AuthenticationViewModel = hiltViewModel(),
+    onLogin: () -> Unit,
+    onSignUp: () -> Unit,
+    onBack: () -> Unit,
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    SignUpScreen(
+        modifier = modifier,
+        state = state,
+        onLogin = onLogin,
+        onSignUp = onSignUp,
+        onBack = onBack,
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(
     modifier: Modifier = Modifier,
+    state: String,
     onLogin: () -> Unit,
     onSignUp: () -> Unit,
-    onBack: ()-> Unit,
+    onBack: () -> Unit,
 ) {
     var fullName by remember { mutableStateOf("") }
     var fullNameError by remember { mutableStateOf(false) }
@@ -259,6 +281,7 @@ fun SignUpScreen(
 fun SignUpScreenPreview() {
     GoCartTheme {
         SignUpScreen(
+            state = "",
             onLogin = {},
             onSignUp = {},
             onBack = {},

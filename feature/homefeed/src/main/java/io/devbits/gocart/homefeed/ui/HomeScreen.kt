@@ -9,21 +9,28 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
-fun HomeRoute(modifier: Modifier = Modifier) {
-    HomeScreen(modifier = modifier)
+fun HomeScreen(
+    modifier: Modifier = Modifier,
+    viewModel: HomeViewModel = hiltViewModel(),
+) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    HomeScreen(modifier = modifier, state = state)
 }
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(modifier: Modifier = Modifier, state: String) {
     Column(modifier = modifier.fillMaxSize()) {
         Text(
-            text = "Free delivery within Nairobi",
+            text = state,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(40.dp)
@@ -35,8 +42,8 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
 @Preview
 @Composable
-fun HomeScreenPreview() {
+private fun HomeScreenPreview() {
     GoCartTheme {
-        HomeScreen()
+        HomeScreen(state = "Free delivery within Nairobi")
     }
 }

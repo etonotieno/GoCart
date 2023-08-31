@@ -4,11 +4,30 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
-fun PaymentsScreen(modifier: Modifier) {
+fun PaymentsScreen(modifier: Modifier = Modifier, viewModel: PaymentsViewModel = hiltViewModel()) {
+    val state by viewModel.uiState.collectAsStateWithLifecycle()
+    PaymentsScreen(modifier = modifier, state = state)
+}
+
+@Composable
+fun PaymentsScreen(modifier: Modifier = Modifier, state: String) {
     Column(modifier = modifier.fillMaxSize()) {
-        Text(text = "Digital Payments")
+        Text(text = state)
+    }
+}
+
+@Preview
+@Composable
+fun PaymentsScreenPreview() {
+    GoCartTheme {
+        PaymentsScreen(state = "")
     }
 }

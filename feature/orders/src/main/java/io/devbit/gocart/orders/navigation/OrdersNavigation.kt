@@ -1,6 +1,5 @@
 package io.devbit.gocart.orders.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -15,6 +14,6 @@ fun NavController.navigateToOrders(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.ordersScreen() {
     composable(route = ordersRoute) {
-        OrdersScreen(modifier = Modifier)
+        OrdersScreen()
     }
 }
