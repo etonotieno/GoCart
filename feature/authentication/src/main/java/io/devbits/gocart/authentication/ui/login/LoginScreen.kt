@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.devbits.gocart.authentication.ui.login
 
 import android.util.Patterns
@@ -45,14 +60,15 @@ import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.AuthenticationViewModel
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import java.util.regex.Pattern
+import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
     onBack: () -> Unit,
     onLogin: () -> Unit,
     navigateToSignUp: () -> Unit,
     onForgotPassword: () -> Unit,
+    modifier: Modifier = Modifier,
     viewModel: AuthenticationViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -69,12 +85,12 @@ fun LoginScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
     state: String,
     onBack: () -> Unit,
     onLogin: () -> Unit,
     navigateToSignUp: () -> Unit,
     onForgotPassword: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var phone by remember { mutableStateOf("") }
     var phoneError by remember { mutableStateOf(false) }
@@ -94,10 +110,10 @@ fun LoginScreen(
                         Icon(
                             Icons.Default.ArrowBack,
                             contentDescription = stringResource(R.string.cd_navigate_back),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primary,
                         )
                     }
-                }
+                },
             )
         },
     ) { innerPadding ->
@@ -106,7 +122,7 @@ fun LoginScreen(
                 .fillMaxWidth()
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Text(text = "Proceed to login")
 
@@ -123,10 +139,10 @@ fun LoginScreen(
                 leadingIcon = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = Modifier.padding(start = 16.dp),
                     ) {
                         Image(
-                            painter = painterResource(id = io.devbits.gocart.resources.R.drawable.ic_outlined_kenyaflag),
+                            painter = painterResource(resourcesR.drawable.ic_outlined_kenyaflag),
                             contentDescription = null,
                         )
                         Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
@@ -172,7 +188,7 @@ fun LoginScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .clickable(onClick = { rememberMe = !rememberMe })
+                        .clickable(onClick = { rememberMe = !rememberMe }),
                 ) {
                     Checkbox(checked = rememberMe, onCheckedChange = { rememberMe = it })
 
@@ -181,12 +197,12 @@ fun LoginScreen(
 
                 Text(
                     text = "Forgot Password",
-                    modifier = Modifier.clickable(onClick = onForgotPassword)
+                    modifier = Modifier.clickable(onClick = onForgotPassword),
                 )
             }
 
             Row(
-                modifier = Modifier.align(Alignment.CenterHorizontally)
+                modifier = Modifier.align(Alignment.CenterHorizontally),
             ) {
                 Text(text = "Don't have an account, ")
 
@@ -196,7 +212,7 @@ fun LoginScreen(
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.Bold,
                             textDecoration = TextDecoration.Underline,
-                        )
+                        ),
                     ) {
                         append("Sign Up")
                     }
@@ -227,14 +243,14 @@ fun LoginScreen(
 
 @Preview
 @Composable
-fun LoginScreenPreview() {
+private fun LoginScreenPreview() {
     GoCartTheme {
         LoginScreen(
             state = "",
             onBack = {},
             onLogin = {},
             navigateToSignUp = {},
-            onForgotPassword = {}
+            onForgotPassword = {},
         )
     }
 }

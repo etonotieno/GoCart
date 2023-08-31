@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.devbits.gocart.authentication.ui.signup
 
 import android.util.Patterns
@@ -50,11 +65,11 @@ import io.devbits.gocart.resources.R as ResourcesR
 
 @Composable
 fun SignUpScreen(
-    modifier: Modifier = Modifier,
-    viewModel: AuthenticationViewModel = hiltViewModel(),
     onLogin: () -> Unit,
     onSignUp: () -> Unit,
     onBack: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: AuthenticationViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     SignUpScreen(
@@ -69,11 +84,11 @@ fun SignUpScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignUpScreen(
-    modifier: Modifier = Modifier,
     state: String,
     onLogin: () -> Unit,
     onSignUp: () -> Unit,
     onBack: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     var fullName by remember { mutableStateOf("") }
     var fullNameError by remember { mutableStateOf(false) }
@@ -102,10 +117,10 @@ fun SignUpScreen(
                         Icon(
                             Icons.Default.ArrowBack,
                             contentDescription = stringResource(R.string.cd_navigate_back),
-                            tint = MaterialTheme.colorScheme.primary
+                            tint = MaterialTheme.colorScheme.primary,
                         )
                     }
-                }
+                },
             )
         },
     ) { innerPadding ->
@@ -114,7 +129,7 @@ fun SignUpScreen(
                 .fillMaxWidth()
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             TextField(
                 value = fullName,
@@ -154,7 +169,7 @@ fun SignUpScreen(
                 leadingIcon = {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(start = 16.dp)
+                        modifier = Modifier.padding(start = 16.dp),
                     ) {
                         Image(
                             painter = painterResource(id = ResourcesR.drawable.ic_outlined_kenyaflag),
@@ -278,7 +293,7 @@ fun SignUpScreen(
 
 @Preview
 @Composable
-fun SignUpScreenPreview() {
+private fun SignUpScreenPreview() {
     GoCartTheme {
         SignUpScreen(
             state = "",

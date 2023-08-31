@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.devbits.gocart.ui
 
 import androidx.compose.runtime.Composable
@@ -16,9 +31,9 @@ import io.devbit.gocart.orders.navigation.ordersRoute
 import io.devbits.gocart.address.navigation.navigateToAddress
 import io.devbits.gocart.authentication.navigation.authenticationRoute
 import io.devbits.gocart.authentication.navigation.navigateToAuth
+import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.model.NavDrawerItem
-import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.favorites.navigation.favoritesRoute
 import io.devbits.gocart.favorites.navigation.navigateToFavorites
 import io.devbits.gocart.homefeed.navigation.homeRoute
@@ -76,7 +91,7 @@ class GoCartAppState(
         }
     }
 
-    // TODO: Represent Drawer Items as top level navigation routes
+    // Represent Drawer Items as top level navigation routes
     fun navigateToRoute(route: NavDrawerItem) {
         when (route) {
             NavDrawerItem.ADDRESS -> navController.navigateToAddress()
@@ -105,7 +120,7 @@ class GoCartAppState(
     }
 
     fun logOut() {
-        // TODO: Move authentication logic to a ViewModel
+        // Move authentication logic to a ViewModel
         scope.launch {
             preferences.setGuestUser(false)
             preferences.setAuthenticated(false)

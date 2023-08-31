@@ -35,7 +35,7 @@ fun GoCartNavHost(
     ) {
         onboardingScreen(
             onOnboarded = {
-                // TODO: Move authentication logic to a ViewModel
+                // Move authentication logic to a ViewModel
                 appState.scope.launch { appState.preferences.setOnboarded() }
                 appState.navController.popBackStack()
                 appState.navController.navigateToAuth()
@@ -44,7 +44,7 @@ fun GoCartNavHost(
 
         authHomeScreen(
             onExploreApp = {
-                // TODO: Move authentication logic to a ViewModel
+                // Move authentication logic to a ViewModel
                 appState.scope.launch { appState.preferences.setGuestUser(true) }
                 appState.navController.popBackStack()
                 appState.navController.navigateToHome()
@@ -57,7 +57,7 @@ fun GoCartNavHost(
 
         signUpScreen(
             onSignup = {
-                // TODO: Move authentication logic to a ViewModel
+                // Move authentication logic to a ViewModel
                 appState.scope.launch { appState.preferences.setAuthenticated(true) }
                 appState.navController.popBackStack()
                 appState.navController.navigateToHome()
@@ -69,7 +69,7 @@ fun GoCartNavHost(
         loginScreen(
             onBack = appState.navController::popBackStack,
             onLogin = {
-                // TODO: Move authentication logic to a ViewModel
+                // Move authentication logic to a ViewModel
                 appState.scope.launch { appState.preferences.setAuthenticated(true) }
                 appState.navController.popBackStack()
                 appState.navController.navigateToHome()

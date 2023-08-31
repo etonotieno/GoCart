@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.devbits.gocart.authentication.ui
 
 import androidx.compose.foundation.Image
@@ -56,12 +71,12 @@ fun AuthenticationRoute(
 
 @Composable
 fun AuthenticationScreen(
-    modifier: Modifier = Modifier,
     onExploreApp: () -> Unit,
     onGoogleSignup: () -> Unit,
     onFacebookSignup: () -> Unit,
     onSignup: () -> Unit,
     onLogin: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         Image(
@@ -72,7 +87,7 @@ fun AuthenticationScreen(
         )
 
         Column(
-            modifier = modifier
+            modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 32.dp)
                 .padding(top = 72.dp),
@@ -91,7 +106,7 @@ fun AuthenticationScreen(
             Image(
                 painter = painterResource(id = resourcesR.drawable.ic_go_cart_horizontal_white),
                 contentDescription = null,
-                modifier = Modifier.height(32.dp)
+                modifier = Modifier.height(32.dp),
             )
 
             Spacer(modifier = Modifier.size(56.dp))
@@ -121,8 +136,8 @@ fun AuthenticationScreen(
                 textColor = MaterialTheme.colorScheme.inverseOnSurface,
                 loginStyle = SpanStyle(
                     color = go_cart_orange_yellow,
-                    fontWeight = FontWeight.Bold
-                )
+                    fontWeight = FontWeight.Bold,
+                ),
             )
 
             Spacer(modifier = Modifier.size(16.dp))
@@ -136,8 +151,8 @@ fun AuthenticationScreen(
                     withStyle(
                         SpanStyle(
                             color = go_cart_orange_yellow,
-                            fontWeight = FontWeight.Bold
-                        )
+                            fontWeight = FontWeight.Bold,
+                        ),
                     ) {
                         append("Explore app")
                     }
@@ -153,10 +168,10 @@ fun AuthenticationScreen(
 
 @Composable
 fun HaveAccountText(
-    modifier: Modifier = Modifier,
     onLogin: () -> Unit,
     textColor: Color,
     loginStyle: SpanStyle,
+    modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier) {
         Text(
@@ -179,7 +194,7 @@ fun HaveAccountText(
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
-fun AuthenticationScreenPreview() {
+private fun AuthenticationScreenPreview() {
     GoCartTheme {
         AuthenticationScreen(
             onExploreApp = {},

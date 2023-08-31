@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.devbits.gocart.designsystem.model
 
 import androidx.annotation.IntRange
@@ -26,36 +41,36 @@ enum class NavDrawerItem(
         selectedIcon = Icons.Default.LocationOn,
         unselectedIcon = Icons.Outlined.LocationOn,
         titleText = "My Addresses",
-        section = 1
+        section = 1,
     ),
     PAYMENTS(
         selectedIcon = Icons.Default.CreditCard,
         unselectedIcon = Icons.Outlined.CreditCard,
         titleText = "Digital Payments",
-        section = 1
+        section = 1,
     ),
     OFFERS(
         selectedIcon = Icons.Default.LocalOffer,
         unselectedIcon = Icons.Outlined.LocalOffer,
         titleText = "Special Offers",
-        section = 1
+        section = 1,
     ),
     SETTINGS(
         selectedIcon = Icons.Default.Settings,
         unselectedIcon = Icons.Outlined.Settings,
         titleText = "Settings",
-        section = 2
+        section = 2,
     ),
     HELP(
         selectedIcon = Icons.Default.Help,
         unselectedIcon = Icons.Outlined.HelpOutline,
         titleText = "Help & FAQ",
-        section = 2
+        section = 2,
     ),
     LOGOUT(
         selectedIcon = Icons.Default.Logout,
         unselectedIcon = Icons.Outlined.Logout,
         titleText = "Logout",
-        section = 2
-    );
+        section = 2,
+    ),
 }

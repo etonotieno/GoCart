@@ -1,4 +1,19 @@
-package io.devbits.gocart.onboarding.ui.component
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.devbits.gocart.onboarding.ui.components
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -61,7 +76,7 @@ fun OnboardingHorizontalPager(onOnboarded: () -> Unit, modifier: Modifier = Modi
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, showSystemUi = true)
 @Composable
-fun OnboardingHorizontalPagerPreview() {
+private fun OnboardingHorizontalPagerPreview() {
     GoCartTheme {
         OnboardingHorizontalPager(onOnboarded = {})
     }
@@ -71,10 +86,10 @@ fun OnboardingHorizontalPagerPreview() {
 @Composable
 fun OnboardingPagerIndicator(
     pages: List<OnboardingItem>,
-    modifier: Modifier = Modifier,
-    skipIntro: Boolean = false,
     pagerState: PagerState,
     onOnboarded: () -> Unit,
+    modifier: Modifier = Modifier,
+    skipIntro: Boolean = false,
 ) {
     val coroutineScope = rememberCoroutineScope()
 
@@ -89,15 +104,15 @@ fun OnboardingPagerIndicator(
                 0 -> OnboardingButtonState() to OnboardingButtonState(text = start)
                 1 -> OnboardingButtonState(
                     text = back,
-                    startIcon = R.drawable.ic_left
+                    startIcon = R.drawable.ic_left,
                 ) to OnboardingButtonState(
                     text = next,
-                    endIcon = R.drawable.ic_right
+                    endIcon = R.drawable.ic_right,
                 )
 
                 2 -> OnboardingButtonState(
                     text = back,
-                    startIcon = R.drawable.ic_left
+                    startIcon = R.drawable.ic_left,
                 ) to OnboardingButtonState(text = done)
 
                 else -> OnboardingButtonState() to OnboardingButtonState()
@@ -107,7 +122,7 @@ fun OnboardingPagerIndicator(
 
     Column(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Spacer(modifier = Modifier.size(8.dp))
 
@@ -158,15 +173,15 @@ fun OnboardingPagerIndicator(
     }
 }
 
+private const val ANIMATION_DURATION = 400
+
 @Composable
 private fun Indicator(
-    modifier: Modifier = Modifier,
     pageSize: Int,
     currentPage: Int,
+    modifier: Modifier = Modifier,
 ) {
     Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
-        val animationDurationInMillis = 400
-
         repeat(pageSize) { page ->
             val isSelected = currentPage == page
 
@@ -177,17 +192,17 @@ private fun Indicator(
                     MaterialTheme.colorScheme.onSurfaceVariant
                 },
                 animationSpec = tween(
-                    durationMillis = animationDurationInMillis,
+                    durationMillis = ANIMATION_DURATION,
                 ),
-                label = "anim:indicatorColor"
+                label = "anim:indicatorColor",
             )
 
             Box(
-                modifier = modifier
+                modifier = Modifier
                     .padding(2.dp)
                     .size(8.dp)
                     .clip(CircleShape)
-                    .background(indicatorColor)
+                    .background(indicatorColor),
             )
         }
     }
@@ -196,17 +211,17 @@ private fun Indicator(
 @OptIn(ExperimentalFoundationApi::class)
 @Preview(
     showBackground = true,
-    backgroundColor = 0xFFFFFFFF
+    backgroundColor = 0xFFFFFFFF,
 )
 @Composable
-fun OnboardingPagerIndicatorPreview() {
+private fun OnboardingPagerIndicatorPreview() {
     GoCartTheme {
         val pages = onboardingPages
         OnboardingPagerIndicator(
             pages = pages,
             skipIntro = true,
             pagerState = rememberPagerState { pages.size },
-            onOnboarded = {}
+            onOnboarded = {},
         )
     }
 }
@@ -221,9 +236,9 @@ data class OnboardingButtonState(
 
 @Composable
 fun OnboardingButton(
-    modifier: Modifier = Modifier,
     state: OnboardingButtonState,
     onClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     TextButton(onClick = onClick, modifier = modifier) {
         if (state.startIcon != null) {
@@ -247,19 +262,19 @@ val OnboardingPageOne
     @Composable get() = OnboardingItem(
         R.drawable.ic_fresh_produce,
         stringResource(R.string.text_onboarding_fresh_produce_title),
-        stringResource(R.string.text_onboarding_fresh_produce_description)
+        stringResource(R.string.text_onboarding_fresh_produce_description),
     )
 
 val OnboardingPageTwo
     @Composable get() = OnboardingItem(
         R.drawable.ic_fast_delivery,
         stringResource(R.string.text_onboarding_fast_delivery_title),
-        stringResource(R.string.text_onboarding_fast_delivery_description)
+        stringResource(R.string.text_onboarding_fast_delivery_description),
     )
 
 val OnboardingPageThree
     @Composable get() = OnboardingItem(
         R.drawable.ic_easy_payments,
         stringResource(R.string.text_onboarding_easy_payments_title),
-        stringResource(R.string.text_onboarding_easy_payments_description)
+        stringResource(R.string.text_onboarding_easy_payments_description),
     )

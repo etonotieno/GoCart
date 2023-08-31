@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.devbits.gocart.designsystem.component
 
 import androidx.compose.foundation.Image
@@ -40,12 +55,12 @@ import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
 fun GoCartNavDrawerContent(
-    modifier: Modifier = Modifier,
     items: List<NavDrawerItem>,
     isLoggedIn: Boolean,
     onClickHeader: () -> Unit,
     onClick: (NavDrawerItem) -> Unit,
     onSignUp: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     // No item is selected by default (the initial value is -1)
     var selectedItem by remember { mutableIntStateOf(-1) }
@@ -57,11 +72,11 @@ fun GoCartNavDrawerContent(
             isLoggedIn = isLoggedIn,
             onSignUp = onSignUp,
             onClickHeader = onClickHeader,
-            modifier = Modifier.padding(horizontal = 12.dp)
+            modifier = Modifier.padding(horizontal = 12.dp),
         )
 
         items
-            // TODO: Move logic to a ViewModel
+            // Move logic to a ViewModel
             .asSequence()
             .sortedBy(NavDrawerItem::section)
             .filter { item ->
@@ -81,7 +96,7 @@ fun GoCartNavDrawerContent(
                     Divider(
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = 16.dp),
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -106,7 +121,7 @@ fun GoCartNavDrawerContent(
                         selectedIconColor = MaterialTheme.colorScheme.onPrimary,
                         unselectedIconColor = MaterialTheme.colorScheme.primary,
                         selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    )
+                    ),
                 )
 
                 if (index == 2) {
@@ -115,7 +130,7 @@ fun GoCartNavDrawerContent(
                     Divider(
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
-                            .padding(horizontal = 16.dp)
+                            .padding(horizontal = 16.dp),
                     )
 
                     Spacer(modifier = Modifier.height(16.dp))
@@ -139,7 +154,7 @@ private fun NavHeader(
         Column(
             modifier = modifier
                 .clip(RoundedCornerShape(16.dp))
-                .clickable(onClick = onClickHeader)
+                .clickable(onClick = onClickHeader),
         ) {
             Spacer(modifier = Modifier.height(40.dp))
 
@@ -150,7 +165,7 @@ private fun NavHeader(
                     .padding(start = 16.dp)
                     .size(64.dp)
                     .clip(CircleShape),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -193,14 +208,14 @@ private fun NavHeader(
                 selectedIconColor = MaterialTheme.colorScheme.onPrimary,
                 unselectedIconColor = MaterialTheme.colorScheme.primary,
                 selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-            )
+            ),
         )
     }
 }
 
 @Preview
 @Composable
-fun NavDrawerAuthenticatedPreview() {
+private fun NavDrawerAuthenticatedPreview() {
     GoCartTheme {
         GoCartNavDrawerContent(
             isLoggedIn = true,
@@ -214,7 +229,7 @@ fun NavDrawerAuthenticatedPreview() {
 
 @Preview
 @Composable
-fun NavDrawerGuestPreview() {
+private fun NavDrawerGuestPreview() {
     GoCartTheme {
         GoCartNavDrawerContent(
             isLoggedIn = false,

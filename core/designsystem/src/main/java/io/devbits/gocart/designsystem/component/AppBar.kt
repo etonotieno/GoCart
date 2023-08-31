@@ -1,3 +1,18 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.devbits.gocart.designsystem.component
 
 import androidx.compose.foundation.Image
@@ -43,7 +58,7 @@ fun GoCartTopAppBar(
             Image(
                 painter = painterResource(id = resourcesR.drawable.ic_go_cart_horizontal_color),
                 contentDescription = null,
-                modifier = Modifier.height(24.dp)
+                modifier = Modifier.height(24.dp),
             )
         },
         navigationIcon = {
@@ -51,7 +66,7 @@ fun GoCartTopAppBar(
                 Icon(
                     imageVector = Icons.Filled.Menu,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary
+                    tint = MaterialTheme.colorScheme.primary,
                 )
             }
         },
@@ -60,7 +75,7 @@ fun GoCartTopAppBar(
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = null,
-                    tint = go_cart_independence
+                    tint = go_cart_independence,
                 )
             }
 
@@ -68,10 +83,10 @@ fun GoCartTopAppBar(
                 Icon(
                     imageVector = Icons.Outlined.ShoppingCart,
                     contentDescription = null,
-                    tint = go_cart_independence
+                    tint = go_cart_independence,
                 )
             }
-        }
+        },
     )
 }
 
@@ -80,7 +95,6 @@ private fun NavDestination?.isRouteDestination(destination: DestinationRoutes) =
         it.route?.contains(destination.name, true) ?: false
     } ?: false
 
-// TODO: Refactor to component
 @Composable
 fun GoCartNavBar(
     navigationRoutes: List<DestinationRoutes>,
@@ -98,7 +112,7 @@ fun GoCartNavBar(
                 icon = {
                     Icon(
                         imageVector = if (selected) route.selectedIcon else route.unselectedIcon,
-                        contentDescription = null
+                        contentDescription = null,
                     )
                 },
                 label = {
@@ -113,7 +127,7 @@ fun GoCartNavBar(
 
 @Preview
 @Composable
-fun GoCartTopAppBarPreview() {
+private fun GoCartTopAppBarPreview() {
     GoCartTheme {
         GoCartTopAppBar(
             onClickNavigation = {},
@@ -125,7 +139,7 @@ fun GoCartTopAppBarPreview() {
 
 @Preview
 @Composable
-fun GoCartNavBarPreview() {
+private fun GoCartNavBarPreview() {
     GoCartTheme {
         GoCartNavBar(
             navigationRoutes = DestinationRoutes.values().asList(),
