@@ -16,14 +16,31 @@
 package io.devbits.gocart.authentication.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.devbits.gocart.core.datastore.UserPreferences
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthenticationViewModel @Inject constructor() : ViewModel() {
+class AuthenticationViewModel @Inject constructor(
+    private val preferences: UserPreferences,
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow("Auth Screen")
     val uiState: StateFlow<String> get() = _uiState
+
+    fun setGuestUser(guest: Boolean) {
+        viewModelScope.launch {
+            preferences.setGuestUser(guest)
+        }
+    }
+
+    fun setAuthenticated(authenticated: Boolean) {
+        viewModelScope.launch {
+            preferences.setAuthenticated(authenticated)
+        }
+    }
 }

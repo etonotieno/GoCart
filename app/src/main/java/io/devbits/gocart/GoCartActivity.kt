@@ -26,12 +26,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.lifecycle.viewmodel.initializer
-import androidx.lifecycle.viewmodel.viewModelFactory
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.currentBackStackEntryAsState
 import dagger.hilt.android.AndroidEntryPoint
-import io.devbits.gocart.core.datastore.UserPreferences
-import io.devbits.gocart.data.dataStore
 import io.devbits.gocart.ui.GoCartApp
 import io.devbits.gocart.ui.GoCartAppState
 import io.devbits.gocart.ui.rememberGoCartAppState
@@ -39,18 +36,9 @@ import io.devbits.gocart.ui.rememberGoCartAppState
 @AndroidEntryPoint
 class GoCartActivity : ComponentActivity() {
 
-    private lateinit var preferences: UserPreferences
-
-    private val viewModel: MainViewModel by viewModels {
-        viewModelFactory {
-            initializer {
-                MainViewModel(preferences = preferences)
-            }
-        }
-    }
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        preferences = UserPreferences(dataStore = dataStore)
         installSplashScreen().apply {
             setKeepOnScreenCondition { viewModel.showSplashScreen.value }
         }
@@ -60,7 +48,8 @@ class GoCartActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val appState = rememberGoCartAppState(preferences = preferences)
+            val isLoggedIn by viewModel.isLoggedIn.collectAsStateWithLifecycle()
+            val appState = rememberGoCartAppState()
 
             val statusBarStyle = statusBarStyle(appState)
             val navBarStyle = navBarStyle(appState)
@@ -77,6 +66,8 @@ class GoCartActivity : ComponentActivity() {
             GoCartApp(
                 startDestination = viewModel.startDestination.value,
                 appState = appState,
+                isLoggedIn = isLoggedIn,
+                onLogout = viewModel::logOut,
             )
         }
     }

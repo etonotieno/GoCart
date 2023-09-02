@@ -61,7 +61,10 @@ fun AuthenticationRoute(
 ) {
     AuthenticationScreen(
         modifier = modifier,
-        onExploreApp = onExploreApp,
+        onExploreApp = {
+            viewModel.setGuestUser(true)
+            onExploreApp()
+        },
         onGoogleSignup = onGoogleSignup,
         onFacebookSignup = onFacebookSignup,
         onSignup = onSignup,

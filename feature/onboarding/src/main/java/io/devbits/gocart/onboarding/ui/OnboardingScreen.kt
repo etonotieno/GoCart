@@ -31,7 +31,14 @@ fun OnboardingScreen(
     viewModel: OnboardingViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    OnboardingScreen(modifier = modifier, onOnboarded = onOnboarded, state = state)
+    OnboardingScreen(
+        modifier = modifier,
+        onOnboarded = {
+            viewModel.setOnboarded()
+            onOnboarded()
+        },
+        state = state,
+    )
 }
 
 @Composable

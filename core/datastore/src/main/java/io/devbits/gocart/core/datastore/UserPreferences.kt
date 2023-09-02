@@ -19,10 +19,11 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class UserPreferences(
+class UserPreferences @Inject constructor(
     private val dataStore: DataStore<Preferences>,
 ) {
 
@@ -38,7 +39,6 @@ class UserPreferences(
     fun isAuthenticated(): Flow<Boolean> =
         dataStore.data.map { it[authKey] ?: false }
 
-    // TODO Represent this is a User state object
     fun isGuestUser(): Flow<Boolean> =
         dataStore.data.map { it[guestUserKey] ?: false }
 

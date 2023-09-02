@@ -76,7 +76,10 @@ fun LoginScreen(
         modifier = modifier,
         state = state,
         onBack = onBack,
-        onLogin = onLogin,
+        onLogin = {
+            viewModel.setAuthenticated(true)
+            onLogin()
+        },
         navigateToSignUp = navigateToSignUp,
         onForgotPassword = onForgotPassword,
     )

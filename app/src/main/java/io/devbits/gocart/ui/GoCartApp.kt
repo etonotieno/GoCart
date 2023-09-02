@@ -28,10 +28,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.navigation.navigateToAuth
 import io.devbits.gocart.designsystem.component.GoCartNavBar
 import io.devbits.gocart.designsystem.component.GoCartNavDrawerContent
@@ -47,9 +45,10 @@ import kotlinx.coroutines.launch
 fun GoCartApp(
     startDestination: String,
     appState: GoCartAppState,
+    isLoggedIn: Boolean,
+    onLogout: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val isLoggedIn by appState.isLoggedIn.collectAsStateWithLifecycle()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
     GoCartTheme {
@@ -74,7 +73,7 @@ fun GoCartApp(
                                 },
                                 items = NavDrawerItem.values().asList(),
                                 onClick = {
-                                    if (it == NavDrawerItem.LOGOUT) appState.logOut()
+                                    if (it == NavDrawerItem.LOGOUT) onLogout()
                                     appState.scope.launch { drawerState.close() }
                                     appState.navigateToRoute(it)
                                 },

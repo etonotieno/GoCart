@@ -21,15 +21,10 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import io.devbits.gocart.authentication.ui.AuthenticationRoute
 
-private const val AUTH_GRAPH = "authentication_graph"
 const val authenticationRoute = "authentication"
 
 fun NavController.navigateToAuth(navOptions: NavOptions? = null) {
     this.navigate(authenticationRoute, navOptions)
-}
-
-fun NavController.navigateToAuthGraph(navOptions: NavOptions? = null) {
-    this.navigate(AUTH_GRAPH, navOptions)
 }
 
 fun NavGraphBuilder.authHomeScreen(

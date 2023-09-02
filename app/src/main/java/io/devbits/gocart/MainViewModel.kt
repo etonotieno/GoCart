@@ -19,17 +19,24 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.devbits.gocart.authentication.navigation.authenticationRoute
 import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.homefeed.navigation.homeRoute
 import io.devbits.gocart.onboarding.navigation.onboardingRoute
+import javax.inject.Inject
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
-class MainViewModel(
-    preferences: UserPreferences,
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val preferences: UserPreferences,
 ) : ViewModel() {
 
     private val _showSplashScreen = mutableStateOf(true)
@@ -41,6 +48,14 @@ class MainViewModel(
     init {
         initializeState(preferences)
     }
+
+    val isLoggedIn: StateFlow<Boolean>
+        get() = preferences.isAuthenticated()
+            .stateIn(
+                scope = viewModelScope,
+                started = SharingStarted.WhileSubscribed(5_000),
+                initialValue = false,
+            )
 
     /**
      * Combine the onboarded and authenticated Flows to determine the correct start destination
@@ -67,6 +82,13 @@ class MainViewModel(
             delay(DELAY)
             _showSplashScreen.value = false
         }.launchIn(viewModelScope)
+    }
+
+    fun logOut() {
+        viewModelScope.launch {
+            preferences.setGuestUser(false)
+            preferences.setAuthenticated(false)
+        }
     }
 
     companion object {

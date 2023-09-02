@@ -76,7 +76,10 @@ fun SignUpScreen(
         modifier = modifier,
         state = state,
         onLogin = onLogin,
-        onSignUp = onSignUp,
+        onSignUp = {
+            viewModel.setAuthenticated(true)
+            onSignUp()
+        },
         onBack = onBack,
     )
 }

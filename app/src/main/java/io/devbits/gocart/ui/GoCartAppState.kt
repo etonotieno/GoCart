@@ -31,7 +31,6 @@ import io.devbit.gocart.orders.navigation.ordersRoute
 import io.devbits.gocart.address.navigation.navigateToAddress
 import io.devbits.gocart.authentication.navigation.authenticationRoute
 import io.devbits.gocart.authentication.navigation.navigateToAuth
-import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.model.NavDrawerItem
 import io.devbits.gocart.favorites.navigation.favoritesRoute
@@ -44,25 +43,12 @@ import io.devbits.gocart.services.navigation.navigateToServices
 import io.devbits.gocart.services.navigation.servicesRoute
 import io.devbits.gocart.settings.navigation.navigateToSettings
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 
 @Stable
 class GoCartAppState(
     val navController: NavHostController,
-    val preferences: UserPreferences,
     val scope: CoroutineScope,
 ) {
-
-    val isLoggedIn: StateFlow<Boolean>
-        get() = preferences.isAuthenticated()
-            .stateIn(
-                scope = scope,
-                started = SharingStarted.WhileSubscribed(5_000),
-                initialValue = false,
-            )
 
     val currentDestination: NavDestination?
         @Composable get() = navController.currentBackStackEntryAsState().value?.destination
@@ -118,30 +104,16 @@ class GoCartAppState(
             restoreState = true
         }
     }
-
-    fun logOut() {
-        // Move authentication logic to a ViewModel
-        scope.launch {
-            preferences.setGuestUser(false)
-            preferences.setAuthenticated(false)
-        }
-    }
 }
 
 @Composable
 fun rememberGoCartAppState(
-    preferences: UserPreferences,
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
 ): GoCartAppState {
-    return remember(
-        navController,
-        preferences,
-        coroutineScope,
-    ) {
+    return remember(navController, coroutineScope) {
         GoCartAppState(
             navController = navController,
-            preferences = preferences,
             scope = coroutineScope,
         )
     }
