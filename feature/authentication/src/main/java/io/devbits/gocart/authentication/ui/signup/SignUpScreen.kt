@@ -157,6 +157,7 @@ fun SignUpScreen(
                     }
                 },
                 isError = fullNameError,
+                singleLine = true,
             )
 
             TextField(
@@ -181,6 +182,7 @@ fun SignUpScreen(
                         Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
                     }
                 },
+                singleLine = true,
                 supportingText = {
                     if (phoneError) {
                         Text(text = "Invalid phone number, try again")
@@ -211,6 +213,7 @@ fun SignUpScreen(
                     }
                 },
                 isError = emailError,
+                singleLine = true,
             )
 
             TextField(
@@ -235,6 +238,7 @@ fun SignUpScreen(
                     }
                 },
                 isError = passwordError,
+                singleLine = true,
             )
 
             TextField(
@@ -259,6 +263,7 @@ fun SignUpScreen(
                     }
                 },
                 isError = confirmPasswordError,
+                singleLine = true,
             )
 
             Row(verticalAlignment = Alignment.CenterVertically) {

@@ -157,6 +157,7 @@ fun LoginScreen(
                     }
                 },
                 isError = phoneError,
+                singleLine = true,
             )
 
             TextField(
@@ -181,6 +182,7 @@ fun LoginScreen(
                     }
                 },
                 isError = passwordError,
+                singleLine = true,
             )
 
             Row(
