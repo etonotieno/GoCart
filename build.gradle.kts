@@ -7,6 +7,8 @@ plugins {
     id("com.diffplug.spotless") version "6.21.0"
 }
 
+apply(from = "scripts/git-hooks.gradle")
+
 subprojects {
     apply(plugin = "io.gitlab.arturbosch.detekt")
     detekt {
