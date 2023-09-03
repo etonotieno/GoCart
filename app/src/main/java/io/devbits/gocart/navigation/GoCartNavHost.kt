@@ -18,7 +18,6 @@ package io.devbits.gocart.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
-import androidx.navigation.navOptions
 import io.devbit.gocart.orders.navigation.ordersScreen
 import io.devbits.gocart.address.navigation.addressScreen
 import io.devbits.gocart.authentication.navigation.authHomeScreen
@@ -43,57 +42,56 @@ fun GoCartNavHost(
     startDestination: String,
     modifier: Modifier = Modifier,
 ) {
+    val navController = appState.navController
     NavHost(
-        navController = appState.navController,
+        navController = navController,
         startDestination = startDestination,
         modifier = modifier,
     ) {
         onboardingScreen(
             onOnboarded = {
-                appState.navController.popBackStack()
-                appState.navController.navigateToAuth()
+                navController.popBackStack()
+                navController.navigateToAuth()
             },
         )
 
         authHomeScreen(
             onExploreApp = {
-                appState.navController.popBackStack()
-                appState.navController.navigateToHome()
+                navController.popBackStack()
+                navController.navigateToHome()
             },
-            onGoogleSignup = appState.navController::navigateToSignUp,
-            onFacebookSignup = appState.navController::navigateToSignUp,
+            onGoogleSignup = navController::navigateToSignUp,
+            onFacebookSignup = navController::navigateToSignUp,
             onSignup = {
-                appState.navController.navigateToSignUp(
-                    navOptions {
-                        launchSingleTop = true
-                    },
-                )
+                navController.navigateToSignUp()
             },
             onLogin = {
-                appState.navController.navigateToLogin(
-                    navOptions {
-                        launchSingleTop = true
-                    },
-                )
+                navController.navigateToLogin()
             },
         )
 
         signUpScreen(
             onSignup = {
-                appState.navController.popBackStack()
-                appState.navController.navigateToHome()
+                navController.popBackStack()
+                navController.navigateToHome()
             },
-            onLogin = appState.navController::navigateToLogin,
-            onBack = appState.navController::popBackStack,
+            onLogin = {
+                navController.popBackStack()
+                navController.navigateToLogin()
+            },
+            onBack = navController::popBackStack,
         )
 
         loginScreen(
-            onBack = appState.navController::popBackStack,
+            onBack = navController::popBackStack,
             onLogin = {
-                appState.navController.popBackStack()
-                appState.navController.navigateToHome()
+                navController.popBackStack()
+                navController.navigateToHome()
             },
-            navigateToSignUp = appState.navController::navigateToSignUp,
+            navigateToSignUp = {
+                navController.popBackStack()
+                navController.navigateToSignUp()
+            },
             onForgotPassword = {},
         )
 
