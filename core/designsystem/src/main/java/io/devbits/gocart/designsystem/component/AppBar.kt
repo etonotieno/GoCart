@@ -15,6 +15,7 @@
  */
 package io.devbits.gocart.designsystem.component
 
+import io.devbits.gocart.resources.R as resourcesR
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,7 +43,6 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.designsystem.theme.go_cart_independence
-import io.devbits.gocart.resources.R as resourcesR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -105,6 +105,7 @@ fun GoCartNavBar(
     NavigationBar(
         modifier = modifier,
         windowInsets = WindowInsets.navigationBars,
+        containerColor = MaterialTheme.colorScheme.surface,
     ) {
         navigationRoutes.forEach { route ->
             val selected = currentDestination.isRouteDestination(route)
