@@ -19,9 +19,13 @@ import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.imeNestedScroll
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
@@ -46,10 +50,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusDirection
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -84,7 +93,7 @@ fun SignUpScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
 fun SignUpScreen(
     state: String,
@@ -93,6 +102,9 @@ fun SignUpScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focusManager = LocalFocusManager.current
+//    val kc = LocalSoftwareKeyboardController.current
+
     var fullName by remember { mutableStateOf("") }
     var fullNameError by remember { mutableStateOf(false) }
 
@@ -130,6 +142,7 @@ fun SignUpScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .imeNestedScroll()
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -141,6 +154,12 @@ fun SignUpScreen(
                     val name = fullName.split(" ")
                     fullNameError = name.size <= 1
                 },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    },
+                ),
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = {
                     Text(text = "Kevin Kaur")
@@ -166,6 +185,15 @@ fun SignUpScreen(
                     phone = it
                     phoneError = !Pattern.matches(Patterns.PHONE.pattern(), it)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next,
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    },
+                ),
                 modifier = Modifier.fillMaxWidth(),
                 label = {
                     Text(text = "Phone Number")
@@ -197,6 +225,15 @@ fun SignUpScreen(
                     email = it
                     emailError = !Pattern.matches(PatternsCompat.EMAIL_ADDRESS.pattern(), it)
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email,
+                    imeAction = ImeAction.Next,
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    },
+                ),
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = {
                     Text(text = "kevinkaur60@gmail.com")
@@ -222,6 +259,16 @@ fun SignUpScreen(
                     password = it
                     passwordError = it.length < 8
                 },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Next,
+                ),
+                keyboardActions = KeyboardActions(
+                    onNext = {
+                        focusManager.moveFocus(FocusDirection.Down)
+                    },
+                ),
+                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = {
                     Text(text = "Enter your password")
@@ -247,6 +294,8 @@ fun SignUpScreen(
                     confirmPassword = it
                     confirmPasswordError = password != confirmPassword
                 },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = {
                     Text(text = "Confirm your password")

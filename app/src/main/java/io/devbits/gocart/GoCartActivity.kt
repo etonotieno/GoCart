@@ -45,8 +45,6 @@ class GoCartActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
 
-        enableEdgeToEdge()
-
         setContent {
             val isLoggedIn by viewModel.isLoggedIn.collectAsStateWithLifecycle()
             val appState = rememberGoCartAppState()
