@@ -69,8 +69,8 @@ import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.AuthenticationViewModel
 import io.devbits.gocart.authentication.ui.HaveAccountText
 import io.devbits.gocart.designsystem.theme.GoCartTheme
-import java.util.regex.Pattern
 import io.devbits.gocart.resources.R as ResourcesR
+import java.util.regex.Pattern
 
 @Composable
 fun SignUpScreen(

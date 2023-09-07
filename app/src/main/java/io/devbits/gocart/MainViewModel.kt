@@ -24,6 +24,7 @@ import io.devbits.gocart.authentication.navigation.authenticationRoute
 import io.devbits.gocart.core.datastore.UserPreferences
 import io.devbits.gocart.homefeed.navigation.homeRoute
 import io.devbits.gocart.onboarding.navigation.onboardingRoute
+import javax.inject.Inject
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -32,7 +33,6 @@ import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
