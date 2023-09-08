@@ -16,14 +16,30 @@
 package io.devbits.gocart.settings.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.devbits.gocart.core.datastore.UserPreferences
+import io.devbits.gocart.core.datastore.model.AppTheme
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 @HiltViewModel
-class SettingsViewModel @Inject constructor() : ViewModel() {
+class SettingsViewModel @Inject constructor(
+    private val preferences: UserPreferences,
+) : ViewModel() {
 
-    private val _uiState = MutableStateFlow("Settings")
-    val uiState: StateFlow<String> get() = _uiState
+    val theme = preferences.getAppTheme()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = AppTheme.SYSTEM,
+        )
+
+    fun setAppTheme(appTheme: AppTheme) {
+        viewModelScope.launch {
+            preferences.setAppTheme(appTheme)
+        }
+    }
 }

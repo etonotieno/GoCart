@@ -109,6 +109,8 @@ fun GoCartNavHost(
 
         offersScreen()
 
-        settingsScreen()
+        settingsScreen(
+            onBack = navController::popBackStack,
+        )
     }
 }

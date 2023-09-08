@@ -15,30 +15,150 @@
  */
 package io.devbits.gocart.settings.ui
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.AutoMode
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material3.Divider
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledIconToggleButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.devbits.gocart.core.datastore.model.AppTheme
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
 fun SettingsScreen(
+    onBack: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
-    SettingsScreen(modifier = modifier, state = state)
+    val theme by viewModel.theme.collectAsStateWithLifecycle()
+    SettingsScreen(
+        theme = theme,
+        onSetTheme = viewModel::setAppTheme,
+        onBack = onBack,
+        modifier = modifier,
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SettingsScreen(
+    theme: AppTheme,
+    onSetTheme: (AppTheme) -> Unit,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text("Settings") },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = null,
+                        )
+                    }
+                },
+            )
+        },
+        modifier = modifier,
+    ) { contentPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding)
+                .padding(horizontal = 16.dp),
+        ) {
+            ThemePreference(
+                title = "Theme",
+                selected = theme,
+                onThemeSelected = onSetTheme,
+            )
+            Divider(Modifier.padding(horizontal = 16.dp))
+        }
+    }
 }
 
 @Composable
-fun SettingsScreen(state: String, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxSize()) {
-        Text(text = state)
+private fun ThemePreference(
+    selected: AppTheme,
+    onThemeSelected: (AppTheme) -> Unit,
+    title: String,
+    modifier: Modifier = Modifier,
+) {
+    Surface(modifier = modifier) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+            }
+
+            Row(Modifier.selectableGroup()) {
+                AppThemeButton(
+                    icon = Icons.Default.AutoMode,
+                    onClick = { onThemeSelected(AppTheme.SYSTEM) },
+                    isSelected = selected == AppTheme.SYSTEM,
+                )
+
+                AppThemeButton(
+                    icon = Icons.Default.LightMode,
+                    onClick = { onThemeSelected(AppTheme.LIGHT) },
+                    isSelected = selected == AppTheme.LIGHT,
+                )
+
+                AppThemeButton(
+                    icon = Icons.Default.DarkMode,
+                    onClick = { onThemeSelected(AppTheme.DARK) },
+                    isSelected = selected == AppTheme.DARK,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun AppThemeButton(
+    isSelected: Boolean,
+    icon: ImageVector,
+    onClick: () -> Unit,
+) {
+    FilledIconToggleButton(
+        checked = isSelected,
+        onCheckedChange = { onClick() },
+    ) {
+        Icon(imageVector = icon, contentDescription = null)
     }
 }
 
@@ -46,6 +166,6 @@ fun SettingsScreen(state: String, modifier: Modifier = Modifier) {
 @Composable
 private fun SettingsScreenPreview() {
     GoCartTheme {
-        SettingsScreen(state = "")
+        SettingsScreen(theme = AppTheme.SYSTEM, onSetTheme = {}, onBack = {})
     }
 }
