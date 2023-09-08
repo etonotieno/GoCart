@@ -41,7 +41,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.theme.GoCartTheme
-import io.devbits.gocart.designsystem.theme.go_cart_independence
 import io.devbits.gocart.resources.R as resourcesR
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -75,7 +74,6 @@ fun GoCartTopAppBar(
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = null,
-                    tint = go_cart_independence,
                 )
             }
 
@@ -83,7 +81,6 @@ fun GoCartTopAppBar(
                 Icon(
                     imageVector = Icons.Outlined.ShoppingCart,
                     contentDescription = null,
-                    tint = go_cart_independence,
                 )
             }
         },

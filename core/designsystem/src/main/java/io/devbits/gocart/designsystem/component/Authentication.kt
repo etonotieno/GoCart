@@ -25,15 +25,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.designsystem.theme.facebook_blue
+import io.devbits.gocart.designsystem.theme.go_cart_eggshell
 import io.devbits.gocart.designsystem.theme.google_red
 import io.devbits.gocart.resources.R as resourcesR
 
@@ -43,13 +44,13 @@ fun AuthButton(
     modifier: Modifier = Modifier,
     @DrawableRes icon: Int? = null,
     containerColor: Color? = null,
+    contentColor: Color? = null,
     onClick: () -> Unit,
 ) {
-    val colors = if (containerColor != null) {
-        ButtonDefaults.buttonColors(containerColor = containerColor)
-    } else {
-        ButtonDefaults.buttonColors()
-    }
+    val colors = ButtonDefaults.buttonColors(
+        containerColor = containerColor ?: MaterialTheme.colorScheme.primary,
+        contentColor = contentColor ?: MaterialTheme.colorScheme.onPrimary,
+    )
 
     Button(
         modifier = modifier
@@ -78,6 +79,7 @@ fun GoogleSignupButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
         text = "SIGN UP WITH GOOGLE",
         icon = resourcesR.drawable.ic_google_white,
         containerColor = google_red,
+        contentColor = go_cart_eggshell,
         onClick = onClick,
         modifier = modifier,
     )
@@ -89,12 +91,13 @@ fun FacebookSignupButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
         text = "SIGN UP WITH FACEBOOK",
         icon = resourcesR.drawable.ic_outline_facebook,
         containerColor = facebook_blue,
+        contentColor = go_cart_eggshell,
         onClick = onClick,
         modifier = modifier,
     )
 }
 
-@Preview
+@ThemePreviews
 @Composable
 private fun AuthButtonsPreview() {
     GoCartTheme {
@@ -102,6 +105,8 @@ private fun AuthButtonsPreview() {
             GoogleSignupButton(onClick = {})
             Spacer(modifier = Modifier.size(24.dp))
             FacebookSignupButton(onClick = {})
+            Spacer(modifier = Modifier.size(24.dp))
+            AuthButton(text = "Sign Up", onClick = {})
         }
     }
 }

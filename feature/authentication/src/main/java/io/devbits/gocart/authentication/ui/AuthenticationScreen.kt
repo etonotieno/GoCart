@@ -38,14 +38,16 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.devbits.gocart.designsystem.component.AuthButton
 import io.devbits.gocart.designsystem.component.FacebookSignupButton
 import io.devbits.gocart.designsystem.component.GoogleSignupButton
+import io.devbits.gocart.designsystem.component.ThemePreviews
 import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.go_cart_avocado
+import io.devbits.gocart.designsystem.theme.go_cart_eggshell
 import io.devbits.gocart.designsystem.theme.go_cart_orange_yellow
 import io.devbits.gocart.resources.R as resourcesR
 
@@ -99,7 +101,7 @@ fun AuthenticationScreen(
         ) {
             Text(
                 text = "Welcome to",
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = go_cart_eggshell,
                 fontSize = 34.sp,
                 fontWeight = FontWeight.Bold,
             )
@@ -124,19 +126,24 @@ fun AuthenticationScreen(
 
             Text(
                 text = "OR",
-                color = MaterialTheme.colorScheme.inverseOnSurface,
+                color = go_cart_eggshell,
                 style = MaterialTheme.typography.headlineSmall,
             )
 
             Spacer(modifier = Modifier.size(16.dp))
 
-            AuthButton(text = "Sign Up", onClick = onSignup)
+            AuthButton(
+                text = "Sign Up",
+                onClick = onSignup,
+                containerColor = go_cart_avocado,
+                contentColor = go_cart_eggshell,
+            )
 
             Spacer(modifier = Modifier.size(40.dp))
 
             HaveAccountText(
                 onLogin = onLogin,
-                textColor = MaterialTheme.colorScheme.inverseOnSurface,
+                textColor = go_cart_eggshell,
                 loginStyle = SpanStyle(
                     color = go_cart_orange_yellow,
                     fontWeight = FontWeight.Bold,
@@ -148,8 +155,9 @@ fun AuthenticationScreen(
             Row {
                 Text(
                     text = "Or simply, ",
-                    color = MaterialTheme.colorScheme.inverseOnSurface,
+                    color = go_cart_eggshell,
                 )
+
                 val explore = buildAnnotatedString {
                     withStyle(
                         SpanStyle(
@@ -195,7 +203,7 @@ fun HaveAccountText(
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@ThemePreviews
 @Composable
 private fun AuthenticationScreenPreview() {
     GoCartTheme {
