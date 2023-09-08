@@ -19,6 +19,9 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
+import io.devbits.gocart.core.datastore.model.AppTheme
+import io.devbits.gocart.core.datastore.model.getThemeFromKey
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -45,9 +48,18 @@ class UserPreferences @Inject constructor(
     suspend fun setGuestUser(guest: Boolean) =
         dataStore.edit { it[guestUserKey] = guest }
 
+    fun getAppTheme(): Flow<AppTheme> = dataStore.data.map {
+        getThemeFromKey(it[appThemeKey])
+    }
+
+    suspend fun setAppTheme(theme: AppTheme) {
+        dataStore.edit { it[appThemeKey] = theme.name.lowercase() }
+    }
+
     companion object {
         private val onboardingKey = booleanPreferencesKey("onboarding")
         private val authKey = booleanPreferencesKey("authentication")
         private val guestUserKey = booleanPreferencesKey("user:guest")
+        private val appThemeKey = stringPreferencesKey("app_theme")
     }
 }
