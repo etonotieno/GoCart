@@ -123,6 +123,10 @@ private fun ThemePreference(
                     text = title,
                     style = MaterialTheme.typography.bodyLarge,
                 )
+                Text(
+                    text = selected.name,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
             }
 
             Row(Modifier.selectableGroup()) {
