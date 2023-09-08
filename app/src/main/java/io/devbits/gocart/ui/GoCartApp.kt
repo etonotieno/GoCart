@@ -36,7 +36,6 @@ import io.devbits.gocart.designsystem.component.GoCartNavDrawerContent
 import io.devbits.gocart.designsystem.component.GoCartTopAppBar
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.model.NavDrawerItem
-import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.navigation.GoCartNavHost
 import kotlinx.coroutines.launch
 
@@ -51,77 +50,75 @@ fun GoCartApp(
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
-    GoCartTheme {
-        Surface(
-            modifier = modifier.fillMaxSize(),
-            color = MaterialTheme.colorScheme.background,
+    Surface(
+        modifier = modifier.fillMaxSize(),
+        color = MaterialTheme.colorScheme.background,
+    ) {
+        // Hide during onboarding and authentication flows
+        //  Only draw the content if the current route is a DestinationRoute.
+        //  Disable gestures on non DestinationRoutes
+        ModalNavigationDrawer(
+            drawerContent = {
+                if (appState.currentDestinationRoute != null) {
+                    ModalDrawerSheet {
+                        GoCartNavDrawerContent(
+                            isLoggedIn = isLoggedIn,
+                            onClickHeader = { },
+                            onSignUp = {
+                                appState.scope.launch { drawerState.close() }
+                                appState.navController.popBackStack()
+                                appState.navController.navigateToAuth()
+                            },
+                            items = NavDrawerItem.values().asList(),
+                            onClick = {
+                                if (it == NavDrawerItem.LOGOUT) onLogout()
+                                appState.scope.launch { drawerState.close() }
+                                appState.navigateToRoute(it)
+                            },
+                        )
+                    }
+                }
+            },
+            drawerState = drawerState,
+            // Disable gestures in onboarding and authentication flows
+            gesturesEnabled = appState.currentDestinationRoute != null,
         ) {
-            // Hide during onboarding and authentication flows
-            //  Only draw the content if the current route is a DestinationRoute.
-            //  Disable gestures on non DestinationRoutes
-            ModalNavigationDrawer(
-                drawerContent = {
+            Scaffold(
+                topBar = {
+                    // Hide during onboarding and authentication flows
                     if (appState.currentDestinationRoute != null) {
-                        ModalDrawerSheet {
-                            GoCartNavDrawerContent(
-                                isLoggedIn = isLoggedIn,
-                                onClickHeader = { },
-                                onSignUp = {
-                                    appState.scope.launch { drawerState.close() }
-                                    appState.navController.popBackStack()
-                                    appState.navController.navigateToAuth()
-                                },
-                                items = NavDrawerItem.values().asList(),
-                                onClick = {
-                                    if (it == NavDrawerItem.LOGOUT) onLogout()
-                                    appState.scope.launch { drawerState.close() }
-                                    appState.navigateToRoute(it)
-                                },
-                            )
-                        }
+                        GoCartTopAppBar(
+                            onClickNavigation = {
+                                appState.scope.launch {
+                                    drawerState.apply { if (isClosed) open() else close() }
+                                }
+                            },
+                            onSearch = {},
+                            onCheckout = {},
+                        )
                     }
                 },
-                drawerState = drawerState,
-                // Disable gestures in onboarding and authentication flows
-                gesturesEnabled = appState.currentDestinationRoute != null,
-            ) {
-                Scaffold(
-                    topBar = {
-                        // Hide during onboarding and authentication flows
-                        if (appState.currentDestinationRoute != null) {
-                            GoCartTopAppBar(
-                                onClickNavigation = {
-                                    appState.scope.launch {
-                                        drawerState.apply { if (isClosed) open() else close() }
-                                    }
-                                },
-                                onSearch = {},
-                                onCheckout = {},
-                            )
-                        }
-                    },
-                    bottomBar = {
-                        // Hide during onboarding and authentication flows
-                        if (appState.currentDestinationRoute != null) {
-                            GoCartNavBar(
-                                navigationRoutes = DestinationRoutes.values().asList(),
-                                onNavigationSelected = appState::navigateToRoute,
-                                currentDestination = appState.currentDestination,
-                            )
-                        }
-                    },
-                ) { innerPadding ->
-                    // Fill the screen edge-to-edge in the AuthenticationScreen
-                    val padding =
-                        if (appState.isAuthenticationScreen) PaddingValues(0.dp) else innerPadding
-                    GoCartNavHost(
-                        modifier = Modifier
-                            .padding(padding)
-                            .consumeWindowInsets(innerPadding),
-                        appState = appState,
-                        startDestination = startDestination,
-                    )
-                }
+                bottomBar = {
+                    // Hide during onboarding and authentication flows
+                    if (appState.currentDestinationRoute != null) {
+                        GoCartNavBar(
+                            navigationRoutes = DestinationRoutes.values().asList(),
+                            onNavigationSelected = appState::navigateToRoute,
+                            currentDestination = appState.currentDestination,
+                        )
+                    }
+                },
+            ) { innerPadding ->
+                // Fill the screen edge-to-edge in the AuthenticationScreen
+                val padding =
+                    if (appState.isAuthenticationScreen) PaddingValues(0.dp) else innerPadding
+                GoCartNavHost(
+                    appState = appState,
+                    startDestination = startDestination,
+                    modifier = Modifier
+                        .padding(padding)
+                        .consumeWindowInsets(innerPadding),
+                )
             }
         }
     }

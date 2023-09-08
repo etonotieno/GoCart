@@ -22,13 +22,14 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.compose.currentBackStackEntryAsState
 import dagger.hilt.android.AndroidEntryPoint
+import io.devbits.gocart.core.datastore.model.AppTheme
+import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.ui.GoCartApp
 import io.devbits.gocart.ui.GoCartAppState
 import io.devbits.gocart.ui.rememberGoCartAppState
@@ -46,32 +47,33 @@ class GoCartActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val appTheme by viewModel.theme.collectAsStateWithLifecycle()
+            val darkTheme = shouldUseDarkTheme(theme = appTheme)
+
             val isLoggedIn by viewModel.isLoggedIn.collectAsStateWithLifecycle()
             val appState = rememberGoCartAppState()
 
-            val statusBarStyle = statusBarStyle(appState)
-            val navBarStyle = navBarStyle(appState)
+            val statusBarStyle = statusBarStyle(appState, darkTheme)
+            val navBarStyle = navBarStyle(appState, darkTheme)
 
-            val backStack by appState.navController.currentBackStackEntryAsState()
-            DisposableEffect(backStack) {
-                enableEdgeToEdge(
-                    statusBarStyle = statusBarStyle,
-                    navigationBarStyle = navBarStyle,
-                )
-                onDispose {}
-            }
-
-            GoCartApp(
-                startDestination = viewModel.startDestination.value,
-                appState = appState,
-                isLoggedIn = isLoggedIn,
-                onLogout = viewModel::logOut,
+            enableEdgeToEdge(
+                statusBarStyle = statusBarStyle,
+                navigationBarStyle = navBarStyle,
             )
+
+            GoCartTheme(darkTheme = darkTheme) {
+                GoCartApp(
+                    startDestination = viewModel.startDestination.value,
+                    appState = appState,
+                    isLoggedIn = isLoggedIn,
+                    onLogout = viewModel::logOut,
+                )
+            }
         }
     }
 
     @Composable
-    private fun navBarStyle(appState: GoCartAppState) =
+    private fun navBarStyle(appState: GoCartAppState, darkTheme: Boolean) =
         if (appState.isAuthenticationScreen) {
             SystemBarStyle.auto(
                 lightScrim = Color.TRANSPARENT,
@@ -81,11 +83,11 @@ class GoCartActivity : ComponentActivity() {
             SystemBarStyle.auto(
                 lightScrim = lightScrim,
                 darkScrim = lightScrim,
-            ) { false }
+            ) { darkTheme }
         }
 
     @Composable
-    private fun statusBarStyle(appState: GoCartAppState) =
+    private fun statusBarStyle(appState: GoCartAppState, darkTheme: Boolean) =
         if (appState.isAuthenticationScreen) {
             SystemBarStyle.auto(
                 lightScrim = Color.TRANSPARENT,
@@ -95,8 +97,17 @@ class GoCartActivity : ComponentActivity() {
             SystemBarStyle.auto(
                 lightScrim = Color.TRANSPARENT,
                 darkScrim = Color.TRANSPARENT,
-            ) { false }
+            ) { darkTheme }
         }
+}
+
+@Composable
+fun shouldUseDarkTheme(theme: AppTheme): Boolean {
+    return when (theme) {
+        AppTheme.LIGHT -> false
+        AppTheme.DARK -> true
+        AppTheme.SYSTEM -> isSystemInDarkTheme()
+    }
 }
 
 /**

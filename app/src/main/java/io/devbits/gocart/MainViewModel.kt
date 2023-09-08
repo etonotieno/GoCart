@@ -22,6 +22,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.devbits.gocart.authentication.navigation.authenticationRoute
 import io.devbits.gocart.core.datastore.UserPreferences
+import io.devbits.gocart.core.datastore.model.AppTheme
 import io.devbits.gocart.homefeed.navigation.homeRoute
 import io.devbits.gocart.onboarding.navigation.onboardingRoute
 import javax.inject.Inject
@@ -48,6 +49,13 @@ class MainViewModel @Inject constructor(
     init {
         initializeState(preferences)
     }
+
+    val theme = preferences.getAppTheme()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = AppTheme.SYSTEM,
+        )
 
     val isLoggedIn: StateFlow<Boolean>
         get() = preferences.isAuthenticated()
