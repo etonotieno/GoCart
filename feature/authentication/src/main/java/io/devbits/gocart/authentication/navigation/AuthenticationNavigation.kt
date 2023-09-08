@@ -15,6 +15,9 @@
  */
 package io.devbits.gocart.authentication.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.tween
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -34,7 +37,21 @@ fun NavGraphBuilder.authHomeScreen(
     onSignup: () -> Unit,
     onLogin: () -> Unit,
 ) {
-    composable(route = authenticationRoute) {
+    composable(
+        route = authenticationRoute,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(easing = EaseIn),
+                towards = AnimatedContentTransitionScope.SlideDirection.End,
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(easing = EaseIn),
+                towards = AnimatedContentTransitionScope.SlideDirection.Start,
+            )
+        },
+    ) {
         AuthenticationRoute(
             onExploreApp = onExploreApp,
             onGoogleSignup = onGoogleSignup,

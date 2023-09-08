@@ -15,6 +15,9 @@
  */
 package io.devbits.gocart.authentication.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.EaseIn
+import androidx.compose.animation.core.tween
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -32,7 +35,21 @@ fun NavGraphBuilder.signUpScreen(
     onLogin: () -> Unit,
     onBack: () -> Unit,
 ) {
-    composable(route = signUpRoute) {
+    composable(
+        route = signUpRoute,
+        enterTransition = {
+            slideIntoContainer(
+                animationSpec = tween(easing = EaseIn),
+                towards = AnimatedContentTransitionScope.SlideDirection.Start,
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                animationSpec = tween(easing = EaseIn),
+                towards = AnimatedContentTransitionScope.SlideDirection.End,
+            )
+        },
+    ) {
         SignUpScreen(
             onLogin = onLogin,
             onSignUp = onSignup,
