@@ -21,10 +21,14 @@ import androidx.navigation.compose.NavHost
 import io.devbit.gocart.orders.navigation.ordersScreen
 import io.devbits.gocart.address.navigation.addressScreen
 import io.devbits.gocart.authentication.navigation.authHomeScreen
+import io.devbits.gocart.authentication.navigation.locationPermissionScreen
 import io.devbits.gocart.authentication.navigation.loginScreen
 import io.devbits.gocart.authentication.navigation.navigateToAuth
+import io.devbits.gocart.authentication.navigation.navigateToLocationPermission
 import io.devbits.gocart.authentication.navigation.navigateToLogin
+import io.devbits.gocart.authentication.navigation.navigateToPhoneVerification
 import io.devbits.gocart.authentication.navigation.navigateToSignUp
+import io.devbits.gocart.authentication.navigation.phoneVerificationScreen
 import io.devbits.gocart.authentication.navigation.signUpScreen
 import io.devbits.gocart.favorites.navigation.favoritesScreen
 import io.devbits.gocart.homefeed.navigation.homeScreen
@@ -73,13 +77,28 @@ fun GoCartNavHost(
         signUpScreen(
             onSignup = {
                 navController.popBackStack()
-                navController.navigateToHome()
+                navController.navigateToPhoneVerification()
             },
             onLogin = {
                 navController.popBackStack()
                 navController.navigateToLogin()
             },
             onBack = navController::popBackStack,
+        )
+
+        phoneVerificationScreen(
+            onBack = navController::popBackStack,
+            onVerify = {
+                navController.popBackStack()
+                navController.navigateToLocationPermission()
+            },
+        )
+
+        locationPermissionScreen(
+            onSkip = {
+                navController.popBackStack()
+                navController.navigateToHome()
+            },
         )
 
         loginScreen(
