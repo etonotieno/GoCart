@@ -15,6 +15,7 @@
  */
 package io.devbits.gocart.authentication.ui.signup
 
+import io.devbits.gocart.resources.R as ResourcesR
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -32,6 +33,7 @@ import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.PersonOutline
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -42,6 +44,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -66,10 +69,8 @@ import androidx.core.util.PatternsCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.R
-import io.devbits.gocart.authentication.ui.AuthenticationViewModel
 import io.devbits.gocart.authentication.ui.HaveAccountText
 import io.devbits.gocart.designsystem.theme.GoCartTheme
-import io.devbits.gocart.resources.R as ResourcesR
 import java.util.regex.Pattern
 
 @Composable
@@ -78,7 +79,7 @@ fun SignUpScreen(
     onSignUp: () -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
-    viewModel: AuthenticationViewModel = hiltViewModel(),
+    viewModel: SignUpViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     SignUpScreen(
@@ -86,7 +87,6 @@ fun SignUpScreen(
         state = state,
         onLogin = onLogin,
         onSignUp = {
-            viewModel.setAuthenticated(true)
             onSignUp()
         },
         onBack = onBack,
@@ -102,8 +102,9 @@ fun SignUpScreen(
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var showSignUpDialog by remember { mutableStateOf(false) }
+
     val focusManager = LocalFocusManager.current
-//    val kc = LocalSoftwareKeyboardController.current
 
     var fullName by remember { mutableStateOf("") }
     var fullNameError by remember { mutableStateOf(false) }
@@ -333,7 +334,9 @@ fun SignUpScreen(
             )
 
             Button(
-                onClick = onSignUp,
+                onClick = {
+                    showSignUpDialog = true
+                },
                 modifier = Modifier
                     .align(Alignment.CenterHorizontally)
                     .padding(horizontal = 16.dp),
@@ -345,6 +348,54 @@ fun SignUpScreen(
                 Text(text = "SIGN UP")
             }
         }
+    }
+
+    if (showSignUpDialog) {
+        CreateAccountDialog(
+            onConfirm = {
+                showSignUpDialog = false
+                onSignUp()
+            },
+            onCancel = {
+                showSignUpDialog = false
+            },
+        )
+    }
+}
+
+@Composable
+fun CreateAccountDialog(
+    onConfirm: () -> Unit,
+    onCancel: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    AlertDialog(
+        onDismissRequest = onCancel,
+        confirmButton = {
+            Button(onClick = onConfirm) {
+                Text(text = "Create")
+            }
+        },
+        dismissButton = {
+            TextButton(onClick = onCancel) {
+                Text(text = "Cancel")
+            }
+        },
+        title = {
+            Text(text = "Create Account")
+        },
+        text = {
+            Text(text = "Confirm that you want to create an account with GoCart")
+        },
+        modifier = modifier,
+    )
+}
+
+@Preview
+@Composable
+private fun CreateAccountDialogPreview() {
+    GoCartTheme {
+        CreateAccountDialog(onConfirm = {}, onCancel = {})
     }
 }
 
