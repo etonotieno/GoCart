@@ -20,68 +20,126 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.AlertDialogDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
+@Composable
+fun GCAlertDialog(
+    modifier: Modifier = Modifier,
+    title: @Composable (() -> Unit)?,
+    text: @Composable (() -> Unit)?,
+    onDismiss: () -> Unit = {},
+    dismissButton: @Composable (() -> Unit)?,
+    confirmButton: @Composable () -> Unit,
+) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        confirmButton = confirmButton,
+        dismissButton = dismissButton,
+        title = title,
+        text = text,
+        modifier = modifier,
+    )
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun GCAlertDialog(
+    modifier: Modifier = Modifier,
+    onDismiss: () -> Unit = {},
+    content: @Composable () -> Unit,
+) {
+    AlertDialog(onDismissRequest = onDismiss, modifier = modifier) {
+        Surface(
+            shape = MaterialTheme.shapes.extraLarge,
+            color = AlertDialogDefaults.containerColor,
+            tonalElevation = AlertDialogDefaults.TonalElevation,
+            content = content,
+        )
+    }
+}
+
 @Composable
 fun SuccessDialog(
     text: String,
-    confirmButton: @Composable (() -> Unit)? = null,
     onConfirm: () -> Unit,
     modifier: Modifier = Modifier,
+    confirmButton: @Composable (() -> Unit)? = null,
 ) {
-    AlertDialog(onDismissRequest = {}, modifier = modifier) {
-        Surface(
-            shape = MaterialTheme.shapes.extraLarge,
-            color = MaterialTheme.colorScheme.surfaceVariant,
+    GCAlertDialog(modifier = modifier) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+            modifier = Modifier.padding(16.dp),
         ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center,
-                modifier = Modifier.padding(16.dp),
-            ) {
-                Icon(
-                    imageVector = Icons.Default.CheckCircle,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.inversePrimary,
-                )
+            Icon(
+                imageVector = Icons.Default.CheckCircle,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.inversePrimary,
+                modifier = Modifier.size(48.dp),
+            )
 
-                Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
-                Text(text = text)
+            Text(text = text)
 
-                Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(40.dp))
 
-                if (confirmButton != null) {
-                    confirmButton()
-                } else {
-                    Button(onClick = onConfirm) {
-                        Text(text = "OK")
-                    }
+            if (confirmButton != null) {
+                confirmButton()
+            } else {
+                Button(onClick = onConfirm) {
+                    Text(text = "OK")
                 }
             }
         }
     }
 }
 
-@Preview
+@ThemePreviews
 @Composable
-private fun LoginDialogPreview() {
+private fun SuccessDialogPreview() {
     GoCartTheme {
         SuccessDialog(text = "Login Successful", onConfirm = {})
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun GCAlertDialogPreview() {
+    GoCartTheme {
+        GCAlertDialog(
+            confirmButton = {
+                Button(onClick = {}) {
+                    Text(text = "Create")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = {}) {
+                    Text(text = "Cancel")
+                }
+            },
+            title = {
+                Text(text = "Create Account")
+            },
+            text = {
+                Text(text = "Confirm that you want to create an account with GoCart")
+            },
+        )
     }
 }
