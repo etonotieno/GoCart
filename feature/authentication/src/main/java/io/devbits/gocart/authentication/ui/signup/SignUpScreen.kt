@@ -15,7 +15,6 @@
  */
 package io.devbits.gocart.authentication.ui.signup
 
-import io.devbits.gocart.resources.R as ResourcesR
 import android.util.Patterns
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -71,6 +70,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.HaveAccountText
 import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.resources.R as ResourcesR
 import java.util.regex.Pattern
 
 @Composable

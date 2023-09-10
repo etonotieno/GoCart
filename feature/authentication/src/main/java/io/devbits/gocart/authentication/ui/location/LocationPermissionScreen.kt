@@ -15,7 +15,6 @@
  */
 package io.devbits.gocart.authentication.ui.location
 
-import io.devbits.gocart.resources.R as resourcesR
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -46,6 +45,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import io.devbits.gocart.designsystem.component.BackgroundWhitePreview
 import io.devbits.gocart.designsystem.component.ThemePreviews
 import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
 fun LocationPermissionRoute(
