@@ -39,6 +39,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.devbits.gocart.designsystem.component.BackgroundWhitePreview
@@ -101,13 +103,15 @@ fun LocationPermissionScreen(
             Text(
                 text = "Enable Location",
                 style = MaterialTheme.typography.displaySmall,
+                fontWeight = FontWeight.Bold,
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
                 text = "Sharing your location with us will help us display your local delivery options providing your with the best delivery experience.",
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center,
             )
 
             Spacer(modifier = Modifier.height(32.dp))
