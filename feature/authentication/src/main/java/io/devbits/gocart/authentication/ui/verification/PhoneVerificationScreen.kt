@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.devbits.gocart.authentication.ui.signup
+package io.devbits.gocart.authentication.ui.verification
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.authentication.ui.signup.PhoneVerificationScreen
+import io.devbits.gocart.authentication.ui.verification.PhoneVerificationScreen
 
 const val phoneVerificationRoute = "authentication/verify_phone"
 
