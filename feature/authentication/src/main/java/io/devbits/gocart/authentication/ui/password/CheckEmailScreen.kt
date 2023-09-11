@@ -1,0 +1,138 @@
+package io.devbits.gocart.authentication.ui.password
+
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.outlined.Email
+import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
+import androidx.compose.material3.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import io.devbits.gocart.authentication.R
+import io.devbits.gocart.designsystem.component.GCIconBackground
+import io.devbits.gocart.designsystem.component.GCStyledTextPair
+import io.devbits.gocart.designsystem.theme.GoCartTheme
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CheckEmailScreen(
+    onBack: () -> Unit,
+    onSkip: () -> Unit,
+    onTryAgain: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Scaffold(
+        modifier = modifier,
+        topBar = {
+            TopAppBar(
+                title = { },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = stringResource(R.string.cd_navigate_back),
+                            tint = MaterialTheme.colorScheme.primary,
+                        )
+                    }
+                },
+            )
+        },
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Spacer(modifier = Modifier.height(32.dp))
+
+            GCIconBackground(
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
+                modifier = Modifier
+                    .size(100.dp)
+                    .clip(CircleShape),
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Email,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier.size(36.dp),
+                )
+            }
+
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Text(
+                text = "Check your email",
+                style = MaterialTheme.typography.displaySmall,
+                fontWeight = FontWeight.Bold,
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(
+                text = "We have sent a password recovery instructions to your email.",
+                textAlign = TextAlign.Center,
+            )
+
+            Spacer(modifier = Modifier.height(56.dp))
+
+            Button(onClick = {}, modifier = Modifier.fillMaxWidth()) {
+                Text(text = "Open email app")
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            TextButton(onClick = onSkip, modifier = Modifier.fillMaxWidth()) {
+                Text(text = "Skip, I'll confirm later")
+            }
+
+            Spacer(modifier = Modifier.height(50.dp))
+
+            GCStyledTextPair(
+                pair = Pair(
+                    first = "Did not receive the email? Check your spam filter, or ",
+                    second = "try another email address",
+                ),
+                style = SpanStyle(color = MaterialTheme.colorScheme.primary),
+                textStyle = MaterialTheme.typography.bodySmall,
+                textAlign = TextAlign.Center,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .clickable { onTryAgain() },
+            )
+        }
+    }
+}
+
+@Preview
+@Composable
+private fun CheckEmailScreenPreview() {
+    GoCartTheme {
+        CheckEmailScreen(onBack = {}, onSkip = {}, onTryAgain = {})
+    }
+}
