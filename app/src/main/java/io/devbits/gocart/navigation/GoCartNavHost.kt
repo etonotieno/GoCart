@@ -21,15 +21,21 @@ import androidx.navigation.compose.NavHost
 import io.devbit.gocart.orders.navigation.ordersScreen
 import io.devbits.gocart.address.navigation.addressScreen
 import io.devbits.gocart.authentication.navigation.authHomeScreen
+import io.devbits.gocart.authentication.navigation.checkEmailScreen
+import io.devbits.gocart.authentication.navigation.forgotPasswordScreen
 import io.devbits.gocart.authentication.navigation.locationPermissionScreen
 import io.devbits.gocart.authentication.navigation.loginScreen
 import io.devbits.gocart.authentication.navigation.navigateToAuth
+import io.devbits.gocart.authentication.navigation.navigateToCheckEmail
+import io.devbits.gocart.authentication.navigation.navigateToForgotPassword
 import io.devbits.gocart.authentication.navigation.navigateToLocationPermission
 import io.devbits.gocart.authentication.navigation.navigateToLogin
 import io.devbits.gocart.authentication.navigation.navigateToPhoneVerification
 import io.devbits.gocart.authentication.navigation.navigateToSignUp
+import io.devbits.gocart.authentication.navigation.navigateToUpdatePassword
 import io.devbits.gocart.authentication.navigation.phoneVerificationScreen
 import io.devbits.gocart.authentication.navigation.signUpScreen
+import io.devbits.gocart.authentication.navigation.updatePasswordScreen
 import io.devbits.gocart.favorites.navigation.favoritesScreen
 import io.devbits.gocart.homefeed.navigation.homeScreen
 import io.devbits.gocart.homefeed.navigation.navigateToHome
@@ -111,7 +117,35 @@ fun GoCartNavHost(
                 navController.popBackStack()
                 navController.navigateToSignUp()
             },
-            onForgotPassword = {},
+            onForgotPassword = {
+                navController.popBackStack()
+                navController.navigateToForgotPassword()
+            },
+        )
+
+        forgotPasswordScreen(
+            onBack = navController::popBackStack,
+            onSend = {
+                navController.popBackStack()
+                navController.navigateToCheckEmail()
+            },
+        )
+
+        checkEmailScreen(
+            onBack = navController::popBackStack,
+            onSkip = {
+                navController.popBackStack()
+                navController.navigateToUpdatePassword()
+            },
+            onTryAgain = navController::popBackStack,
+        )
+
+        updatePasswordScreen(
+            onBack = navController::popBackStack,
+            onSave = {
+                navController.popBackStack()
+                navController.navigateToHome()
+            },
         )
 
         homeScreen()
