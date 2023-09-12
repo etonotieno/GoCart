@@ -40,12 +40,12 @@ import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
 fun GCAlertDialog(
-    modifier: Modifier = Modifier,
     title: @Composable (() -> Unit)?,
     text: @Composable (() -> Unit)?,
-    onDismiss: () -> Unit = {},
-    dismissButton: @Composable (() -> Unit)?,
     confirmButton: @Composable () -> Unit,
+    dismissButton: @Composable (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    onDismiss: () -> Unit = {},
 ) {
     AlertDialog(
         onDismissRequest = onDismiss,

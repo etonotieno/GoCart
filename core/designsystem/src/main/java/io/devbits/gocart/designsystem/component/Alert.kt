@@ -86,7 +86,7 @@ fun GoCartAlert(
 
 @Preview
 @Composable
-fun GoCartAlertSuccessPreview() {
+private fun GoCartAlertSuccessPreview() {
     GoCartTheme {
         GoCartAlert(
             icon = Icons.Outlined.Info,

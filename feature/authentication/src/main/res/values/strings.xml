@@ -16,4 +16,6 @@
 -->
 <resources>
     <string name="cd_navigate_back">Go back</string>
+    <string name="location_text">Sharing your location with us will help us display your local delivery options providing your with the best delivery experience.</string>
+    <string name="forgot_password_enter_email_">Please enter your email address associated with your account and we will instructions to reset your password via email.</string>
 </resources>

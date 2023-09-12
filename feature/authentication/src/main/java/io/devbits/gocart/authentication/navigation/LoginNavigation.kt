@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.authentication.ui.login.LoginScreen
+import io.devbits.gocart.authentication.ui.login.LoginRoute
 
 const val loginRoute = "authentication/login"
 
@@ -34,7 +34,7 @@ fun NavGraphBuilder.loginScreen(
     navigateToSignUp: () -> Unit,
 ) {
     composable(route = loginRoute) {
-        LoginScreen(
+        LoginRoute(
             onBack = onBack,
             onLogin = onLogin,
             navigateToSignUp = navigateToSignUp,

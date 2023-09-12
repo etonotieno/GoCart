@@ -84,7 +84,7 @@ fun ForgotPasswordScreen(
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
-            Text(text = "Please enter your email address associated with your account and we will instructions to reset your password via email.")
+            Text(text = stringResource(R.string.forgot_password_enter_email_))
 
             Spacer(modifier = Modifier.height(16.dp))
 

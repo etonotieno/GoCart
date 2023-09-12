@@ -16,25 +16,8 @@
 package io.devbits.gocart.authentication.ui.signup
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.devbits.gocart.core.datastore.UserPreferences
 import javax.inject.Inject
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.launch
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(
-    private val preferences: UserPreferences,
-) : ViewModel() {
-
-    private val _uiState = MutableStateFlow("Sign Up")
-    val uiState: StateFlow<String> get() = _uiState
-
-    fun setAuthenticated(authenticated: Boolean) {
-        viewModelScope.launch {
-            preferences.setAuthenticated(authenticated)
-        }
-    }
-}
+class SignUpViewModel @Inject constructor() : ViewModel()

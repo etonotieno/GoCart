@@ -61,7 +61,6 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.AuthenticationViewModel
 import io.devbits.gocart.designsystem.component.GCPasswordTextField
@@ -71,7 +70,7 @@ import io.devbits.gocart.resources.R as resourcesR
 import java.util.regex.Pattern
 
 @Composable
-fun LoginScreen(
+fun LoginRoute(
     onBack: () -> Unit,
     onLogin: () -> Unit,
     navigateToSignUp: () -> Unit,
@@ -79,10 +78,8 @@ fun LoginScreen(
     modifier: Modifier = Modifier,
     viewModel: AuthenticationViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
     LoginScreen(
         modifier = modifier,
-        state = state,
         onBack = onBack,
         onLogin = {
             viewModel.setAuthenticated(true)
@@ -96,7 +93,6 @@ fun LoginScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(
-    state: String,
     onBack: () -> Unit,
     onLogin: () -> Unit,
     navigateToSignUp: () -> Unit,
@@ -270,7 +266,6 @@ fun LoginScreen(
 private fun LoginScreenPreview() {
     GoCartTheme {
         LoginScreen(
-            state = "",
             onBack = {},
             onLogin = {},
             navigateToSignUp = {},
