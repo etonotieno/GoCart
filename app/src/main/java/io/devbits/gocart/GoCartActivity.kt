@@ -48,6 +48,7 @@ class GoCartActivity : ComponentActivity() {
 
         setContent {
             val appTheme by viewModel.theme.collectAsStateWithLifecycle()
+            val useDynamicTheme by viewModel.useDynamicTheme.collectAsStateWithLifecycle()
             val darkTheme = shouldUseDarkTheme(theme = appTheme)
 
             val isLoggedIn by viewModel.isLoggedIn.collectAsStateWithLifecycle()
@@ -61,7 +62,7 @@ class GoCartActivity : ComponentActivity() {
                 navigationBarStyle = navBarStyle,
             )
 
-            GoCartTheme(darkTheme = darkTheme) {
+            GoCartTheme(darkTheme = darkTheme, useDynamicTheme = useDynamicTheme) {
                 GoCartApp(
                     startDestination = viewModel.startDestination.value,
                     appState = appState,

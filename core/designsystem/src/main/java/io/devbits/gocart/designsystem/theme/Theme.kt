@@ -93,12 +93,11 @@ private val darkColorScheme = darkColorScheme(
 @Composable
 fun GoCartTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
-    disableDynamicTheming: Boolean = false,
-    dynamicTheme: Boolean = supportsDynamicTheming(),
+    useDynamicTheme: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     val colorScheme = when {
-        !disableDynamicTheming && dynamicTheme -> {
+        useDynamicTheme && supportsDynamicTheming() -> {
             val context = LocalContext.current
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
