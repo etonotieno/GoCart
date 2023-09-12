@@ -35,7 +35,7 @@ import io.devbits.gocart.ui.GoCartAppState
 import io.devbits.gocart.ui.rememberGoCartAppState
 
 @AndroidEntryPoint
-class GoCartActivity : ComponentActivity() {
+class MainActivity : ComponentActivity() {
 
     private val viewModel: MainViewModel by viewModels()
 
@@ -83,7 +83,7 @@ class GoCartActivity : ComponentActivity() {
         } else {
             SystemBarStyle.auto(
                 lightScrim = lightScrim,
-                darkScrim = lightScrim,
+                darkScrim = darkScrim,
             ) { darkTheme }
         }
 
