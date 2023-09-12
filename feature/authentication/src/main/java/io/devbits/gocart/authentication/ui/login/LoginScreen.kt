@@ -28,7 +28,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -65,6 +64,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.AuthenticationViewModel
+import io.devbits.gocart.designsystem.component.GCPasswordTextField
 import io.devbits.gocart.designsystem.component.SuccessDialog
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
@@ -182,30 +182,16 @@ fun LoginScreen(
                 singleLine = true,
             )
 
-            TextField(
-                value = password,
+            GCPasswordTextField(
+                password = password,
                 onValueChange = {
                     password = it
                     passwordError = it.length < 8
                 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = {
-                    Text(text = "Enter your password")
-                },
-                label = {
-                    Text(text = "Password")
-                },
-                leadingIcon = {
-                    Icon(Icons.Outlined.Lock, null)
-                },
-                supportingText = {
-                    if (passwordError) {
-                        Text(text = "This password doesn't look right, try again")
-                    }
-                },
+                label = "Password",
+                errorText = "This password doesn't look right, try again",
                 isError = passwordError,
-                singleLine = true,
             )
 
             Row(

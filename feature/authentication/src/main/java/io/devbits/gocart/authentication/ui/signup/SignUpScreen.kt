@@ -29,7 +29,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.ArrowDropDown
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.MailOutline
 import androidx.compose.material.icons.outlined.PersonOutline
 import androidx.compose.material3.AlertDialog
@@ -60,7 +59,6 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -69,6 +67,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.HaveAccountText
+import io.devbits.gocart.designsystem.component.GCPasswordTextField
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as ResourcesR
 import java.util.regex.Pattern
@@ -254,66 +253,32 @@ fun SignUpScreen(
                 singleLine = true,
             )
 
-            TextField(
-                value = password,
+            GCPasswordTextField(
+                password = password,
                 onValueChange = {
                     password = it
                     passwordError = it.length < 8
                 },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Next,
-                ),
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
                 keyboardActions = KeyboardActions(
-                    onNext = {
-                        focusManager.moveFocus(FocusDirection.Down)
-                    },
+                    onNext = { focusManager.moveFocus(FocusDirection.Down) },
                 ),
-                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = {
-                    Text(text = "Enter your password")
-                },
-                label = {
-                    Text(text = "Password")
-                },
-                leadingIcon = {
-                    Icon(Icons.Outlined.Lock, null)
-                },
-                supportingText = {
-                    if (passwordError) {
-                        Text(text = "This password doesn't look right, try again")
-                    }
-                },
+                label = "Password",
+                errorText = "This password doesn't look right, try again",
                 isError = passwordError,
-                singleLine = true,
             )
 
-            TextField(
-                value = confirmPassword,
+            GCPasswordTextField(
+                password = confirmPassword,
                 onValueChange = {
                     confirmPassword = it
                     confirmPasswordError = password != confirmPassword
                 },
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-                visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
-                placeholder = {
-                    Text(text = "Confirm your password")
-                },
-                label = {
-                    Text(text = "Confirm Password")
-                },
-                leadingIcon = {
-                    Icon(Icons.Outlined.Lock, null)
-                },
-                supportingText = {
-                    if (confirmPasswordError) {
-                        Text(text = "Passwords do not match")
-                    }
-                },
+                label = "Confirm Password",
+                errorText = "Passwords do not match",
                 isError = confirmPasswordError,
-                singleLine = true,
             )
 
             Row(verticalAlignment = Alignment.CenterVertically) {
