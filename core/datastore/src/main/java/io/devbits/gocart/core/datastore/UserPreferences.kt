@@ -56,10 +56,18 @@ class UserPreferences @Inject constructor(
         dataStore.edit { it[appThemeKey] = theme.name.lowercase() }
     }
 
+    fun useDynamicTheme(): Flow<Boolean> =
+        dataStore.data.map { it[dynamicThemeKey] ?: false }
+
+    suspend fun setDynamicTheme(dynamic: Boolean) {
+        dataStore.edit { it[dynamicThemeKey] = dynamic }
+    }
+
     companion object {
         private val onboardingKey = booleanPreferencesKey("onboarding")
         private val authKey = booleanPreferencesKey("authentication")
         private val guestUserKey = booleanPreferencesKey("user:guest")
         private val appThemeKey = stringPreferencesKey("app_theme")
+        private val dynamicThemeKey = booleanPreferencesKey("dynamic_theme")
     }
 }
