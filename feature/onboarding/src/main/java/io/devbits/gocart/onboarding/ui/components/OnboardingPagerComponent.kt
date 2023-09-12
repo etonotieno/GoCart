@@ -38,8 +38,8 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
@@ -98,26 +98,25 @@ fun OnboardingPagerIndicator(
     val next = stringResource(R.string.text_button_next)
     val done = stringResource(R.string.text_button_done)
 
-    val buttonsState by remember {
-        derivedStateOf {
-            when (pagerState.currentPage) {
-                0 -> OnboardingButtonState() to OnboardingButtonState(text = start)
-                1 -> OnboardingButtonState(
-                    text = back,
-                    startIcon = R.drawable.ic_left,
-                ) to OnboardingButtonState(
-                    text = next,
-                    endIcon = R.drawable.ic_right,
-                )
+    val buttonsState by remember(pagerState.currentPage) {
+        val state = when (pagerState.currentPage) {
+            0 -> OnboardingButtonState() to OnboardingButtonState(text = start)
+            1 -> OnboardingButtonState(
+                text = back,
+                startIcon = R.drawable.ic_left,
+            ) to OnboardingButtonState(
+                text = next,
+                endIcon = R.drawable.ic_right,
+            )
 
-                2 -> OnboardingButtonState(
-                    text = back,
-                    startIcon = R.drawable.ic_left,
-                ) to OnboardingButtonState(text = done)
+            2 -> OnboardingButtonState(
+                text = back,
+                startIcon = R.drawable.ic_left,
+            ) to OnboardingButtonState(text = done)
 
-                else -> OnboardingButtonState() to OnboardingButtonState()
-            }
+            else -> OnboardingButtonState() to OnboardingButtonState()
         }
+        mutableStateOf(state)
     }
 
     Column(
