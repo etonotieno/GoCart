@@ -37,9 +37,22 @@ class SettingsViewModel @Inject constructor(
             initialValue = AppTheme.SYSTEM,
         )
 
+    val useDynamicTheme = preferences.useDynamicTheme()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(5_000),
+            initialValue = false,
+        )
+
     fun setAppTheme(appTheme: AppTheme) {
         viewModelScope.launch {
             preferences.setAppTheme(appTheme)
+        }
+    }
+
+    fun setDynamicTheme(dynamicTheme: Boolean) {
+        viewModelScope.launch {
+            preferences.setDynamicTheme(dynamicTheme)
         }
     }
 }

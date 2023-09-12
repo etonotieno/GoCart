@@ -26,6 +26,7 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.AutoMode
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconToggleButton
@@ -47,6 +48,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.core.datastore.model.AppTheme
 import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.designsystem.theme.supportsDynamicTheming
 
 @Composable
 fun SettingsScreen(
@@ -55,9 +57,12 @@ fun SettingsScreen(
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val theme by viewModel.theme.collectAsStateWithLifecycle()
+    val useDynamicTheme by viewModel.useDynamicTheme.collectAsStateWithLifecycle()
     SettingsScreen(
         theme = theme,
         onSetTheme = viewModel::setAppTheme,
+        useDynamicTheme = useDynamicTheme,
+        setDynamicTheme = viewModel::setDynamicTheme,
         onBack = onBack,
         modifier = modifier,
     )
@@ -68,6 +73,8 @@ fun SettingsScreen(
 fun SettingsScreen(
     theme: AppTheme,
     onSetTheme: (AppTheme) -> Unit,
+    useDynamicTheme: Boolean,
+    setDynamicTheme: (Boolean) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -98,7 +105,52 @@ fun SettingsScreen(
                 selected = theme,
                 onThemeSelected = onSetTheme,
             )
+
             Divider(Modifier.padding(horizontal = 16.dp))
+
+            if (supportsDynamicTheming()) {
+                CheckboxPreference(
+                    title = "Dynamic Theme",
+                    checked = useDynamicTheme,
+                    onCheckedChange = setDynamicTheme,
+                )
+
+                Divider(Modifier.padding(horizontal = 16.dp))
+            }
+        }
+    }
+}
+
+@Composable
+private fun CheckboxPreference(
+    title: String,
+    checked: Boolean,
+    onCheckedChange: (Boolean) -> Unit,
+    modifier: Modifier = Modifier,
+    description: String? = null,
+) {
+    Surface(modifier = modifier) {
+        Row(
+            modifier = Modifier.padding(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(2.dp),
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.bodyLarge,
+                )
+                if (!description.isNullOrBlank()) {
+                    Text(
+                        text = description,
+                        style = MaterialTheme.typography.bodyLarge,
+                    )
+                }
+            }
+
+            Checkbox(checked = checked, onCheckedChange = onCheckedChange)
         }
     }
 }
@@ -170,6 +222,12 @@ private fun AppThemeButton(
 @Composable
 private fun SettingsScreenPreview() {
     GoCartTheme {
-        SettingsScreen(theme = AppTheme.SYSTEM, onSetTheme = {}, onBack = {})
+        SettingsScreen(
+            theme = AppTheme.SYSTEM,
+            onSetTheme = {},
+            onBack = {},
+            useDynamicTheme = false,
+            setDynamicTheme = {},
+        )
     }
 }
