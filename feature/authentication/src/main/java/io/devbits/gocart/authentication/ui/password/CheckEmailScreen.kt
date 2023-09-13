@@ -47,8 +47,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.authentication.R
-import io.devbits.gocart.designsystem.component.GCIconBackground
 import io.devbits.gocart.designsystem.component.GCStyledTextPair
+import io.devbits.gocart.designsystem.component.IconContainer
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -85,7 +85,7 @@ fun CheckEmailScreen(
         ) {
             Spacer(modifier = Modifier.height(32.dp))
 
-            GCIconBackground(
+            IconContainer(
                 color = MaterialTheme.colorScheme.primary.copy(alpha = 0.3f),
                 modifier = Modifier
                     .size(100.dp)

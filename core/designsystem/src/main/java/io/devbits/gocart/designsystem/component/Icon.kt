@@ -24,7 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun GCIconBackground(
+fun IconContainer(
     color: Color,
     modifier: Modifier = Modifier,
     content: @Composable (BoxScope.() -> Unit),
