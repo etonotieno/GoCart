@@ -46,7 +46,7 @@ android {
             signingConfig = signingConfigs["debug"]
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -66,8 +66,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:designsystem"))
     implementation(project(":core:datastore"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:model"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:authentication"))
     implementation(project(":feature:homefeed"))

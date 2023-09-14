@@ -35,7 +35,7 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -57,6 +57,7 @@ android {
 dependencies {
     implementation(project(":core:datastore"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:model"))
 
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
