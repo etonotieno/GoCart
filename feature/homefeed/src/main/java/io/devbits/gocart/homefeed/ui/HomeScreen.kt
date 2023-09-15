@@ -13,23 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package io.devbits.gocart.homefeed.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.devbits.gocart.core.model.ProductCategories
+import io.devbits.gocart.designsystem.component.Chip
+import io.devbits.gocart.designsystem.component.ProductCard
+import io.devbits.gocart.designsystem.component.TertiaryButton
+import io.devbits.gocart.designsystem.component.sampleProducts
+import io.devbits.gocart.designsystem.model.Product
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
@@ -37,15 +61,68 @@ fun HomeScreen(
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
-    HomeScreen(modifier = modifier, state = state)
+    val products by viewModel.products.collectAsStateWithLifecycle()
+    HomeScreen(
+        modifier = modifier,
+        products = products,
+        onBookmark = {},
+        onAddToCart = {},
+    )
 }
 
 @Composable
-fun HomeScreen(state: String, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxSize()) {
+fun HomeScreen(
+    products: List<Product>,
+    onBookmark: () -> Unit,
+    onAddToCart: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    // Default span that fills the entire width.
+    val span = GridItemSpan(2)
+
+    LazyVerticalGrid(
+        modifier = modifier.fillMaxSize(),
+        columns = GridCells.Fixed(2),
+        horizontalArrangement = Arrangement.spacedBy(18.dp),
+        verticalArrangement = Arrangement.spacedBy(18.dp),
+    ) {
+        item(span = { span }) {
+            HeaderText()
+        }
+
+        item(span = { span }) {
+            ExploreCategories(onViewAll = {})
+        }
+
+        item(span = { span }) {
+            TopSellingProducts()
+        }
+
+        // We do not pass the span to the ProductCard items in order to display the ProductCard in
+        // a 2 column grid
+        items(products.size) { index: Int ->
+            // Add padding start for products in the first column & padding end for products in the
+            // second column.
+            val padding = if ((index % 2) == 0) {
+                PaddingValues(start = 16.dp)
+            } else {
+                PaddingValues(end = 16.dp)
+            }
+            ProductCard(
+                product = products[index],
+                onBookmark = onBookmark,
+                onAddToCart = onAddToCart,
+                modifier = Modifier.padding(padding),
+            )
+        }
+    }
+}
+
+@Composable
+private fun HeaderText() {
+    Row {
         Text(
-            text = state,
+            text = "Free delivery within Nairobi",
             modifier = Modifier
                 .fillMaxWidth()
                 .height(40.dp)
@@ -55,10 +132,83 @@ fun HomeScreen(state: String, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview
+@Composable
+private fun ProductCategories(modifier: Modifier = Modifier) {
+    LazyRow(
+        modifier = modifier,
+        contentPadding = PaddingValues(horizontal = 8.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        items(ProductCategories.values()) { category ->
+            var selected by remember { mutableStateOf(false) }
+            Chip(
+                label = category.label,
+                selected = selected,
+                onClick = { selected = !selected },
+            )
+        }
+    }
+}
+
+@Composable
+private fun TopSellingProducts(modifier: Modifier = Modifier) {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+    ) {
+        Text(
+            text = "TOP SELLING PRODUCTS",
+            modifier = Modifier.padding(vertical = 12.dp),
+            style = MaterialTheme.typography.bodyMedium,
+        )
+
+        TertiaryButton(
+            text = "Sort",
+            onClick = {},
+            leadingIcon = {
+                Icon(imageVector = Icons.Default.Sort, contentDescription = null)
+            },
+        )
+    }
+}
+
+@Composable
+private fun ExploreCategories(
+    onViewAll: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Column(modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = "EXPLORE CATEGORIES",
+                modifier = Modifier.padding(vertical = 12.dp),
+                style = MaterialTheme.typography.bodyMedium,
+            )
+
+            TertiaryButton(text = "View All", onClick = onViewAll)
+        }
+
+        ProductCategories()
+    }
+}
+
+@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 private fun HomeScreenPreview() {
     GoCartTheme {
-        HomeScreen(state = "Free delivery within Nairobi")
+        HomeScreen(
+            products = sampleProducts,
+            onBookmark = {},
+            onAddToCart = {},
+        )
     }
 }
