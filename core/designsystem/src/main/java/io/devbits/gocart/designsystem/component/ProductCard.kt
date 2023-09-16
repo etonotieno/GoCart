@@ -35,7 +35,6 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -52,7 +51,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.model.Product
 import io.devbits.gocart.designsystem.theme.GoCartTheme
@@ -81,14 +79,19 @@ fun ProductCard(
                     .fillMaxWidth()
                     .height(150.dp)
                     .border(
-                        width = Dp.Hairline,
-                        color = MaterialTheme.colorScheme.inverseSurface,
+                        width = 1.dp,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
                         shape = RoundedCornerShape(16.dp),
                     ),
             )
 
+            val color = if (bookmarked) {
+                MaterialTheme.colorScheme.secondary
+            } else {
+                MaterialTheme.colorScheme.surface
+            }
             IconContainer(
-                color = MaterialTheme.colorScheme.surface,
+                color = color,
                 modifier = Modifier
                     .padding(top = 8.dp, end = 8.dp)
                     .size(32.dp)
@@ -99,20 +102,14 @@ fun ProductCard(
                         onBookmark()
                     },
             ) {
-                val icon = if (bookmarked) {
-                    Icons.Default.Favorite
-                } else {
-                    Icons.Outlined.FavoriteBorder
-                }
-
                 val tint = if (bookmarked) {
-                    MaterialTheme.colorScheme.secondary
+                    MaterialTheme.colorScheme.onSecondary
                 } else {
                     MaterialTheme.colorScheme.primary
                 }
 
                 Icon(
-                    imageVector = icon,
+                    imageVector = Icons.Outlined.FavoriteBorder,
                     contentDescription = null,
                     tint = tint,
                     modifier = Modifier.size(16.dp),
