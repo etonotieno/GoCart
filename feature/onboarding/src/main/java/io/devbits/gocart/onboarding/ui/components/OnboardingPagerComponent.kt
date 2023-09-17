@@ -15,10 +15,7 @@
  */
 package io.devbits.gocart.onboarding.ui.components
 
-import androidx.compose.animation.animateColorAsState
-import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,12 +23,10 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -44,12 +39,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.devbits.gocart.designsystem.component.Indicator
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.onboarding.R
 import io.devbits.gocart.onboarding.ui.model.OnboardingItem
@@ -149,7 +143,7 @@ fun OnboardingPagerIndicator(
             )
 
             Indicator(
-                pageSize = pages.size,
+                pageCount = pages.size,
                 currentPage = pagerState.currentPage,
             )
 
@@ -167,41 +161,6 @@ fun OnboardingPagerIndicator(
                         }
                     }
                 },
-            )
-        }
-    }
-}
-
-private const val ANIMATION_DURATION = 400
-
-@Composable
-private fun Indicator(
-    pageSize: Int,
-    currentPage: Int,
-    modifier: Modifier = Modifier,
-) {
-    Row(modifier = modifier, horizontalArrangement = Arrangement.SpaceBetween) {
-        repeat(pageSize) { page ->
-            val isSelected = currentPage == page
-
-            val indicatorColor: Color by animateColorAsState(
-                targetValue = if (isSelected) {
-                    MaterialTheme.colorScheme.secondary
-                } else {
-                    MaterialTheme.colorScheme.onSurfaceVariant
-                },
-                animationSpec = tween(
-                    durationMillis = ANIMATION_DURATION,
-                ),
-                label = "anim:indicatorColor",
-            )
-
-            Box(
-                modifier = Modifier
-                    .padding(2.dp)
-                    .size(8.dp)
-                    .clip(CircleShape)
-                    .background(indicatorColor),
             )
         }
     }
