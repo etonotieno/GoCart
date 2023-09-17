@@ -51,6 +51,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.core.model.ProductCategories
 import io.devbits.gocart.designsystem.component.Chip
 import io.devbits.gocart.designsystem.component.ProductCard
+import io.devbits.gocart.designsystem.component.PromotionBanner
 import io.devbits.gocart.designsystem.component.TertiaryButton
 import io.devbits.gocart.designsystem.component.sampleProducts
 import io.devbits.gocart.designsystem.model.Product
@@ -88,6 +89,10 @@ fun HomeScreen(
     ) {
         item(span = { span }) {
             HeaderText()
+        }
+
+        item(span = { span }) {
+            PromotionBanner(modifier = Modifier.padding(horizontal = 16.dp))
         }
 
         item(span = { span }) {
