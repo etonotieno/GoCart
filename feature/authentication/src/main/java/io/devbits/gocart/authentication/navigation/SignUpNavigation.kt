@@ -15,14 +15,13 @@
  */
 package io.devbits.gocart.authentication.navigation
 
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.EaseIn
-import androidx.compose.animation.core.tween
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import io.devbits.gocart.authentication.ui.signup.SignUpScreen
+import io.devbits.gocart.designsystem.animation.slideIn
+import io.devbits.gocart.designsystem.animation.slideOut
 
 const val signUpRoute = "authentication/signup"
 
@@ -37,18 +36,8 @@ fun NavGraphBuilder.signUpScreen(
 ) {
     composable(
         route = signUpRoute,
-        enterTransition = {
-            slideIntoContainer(
-                animationSpec = tween(easing = EaseIn),
-                towards = AnimatedContentTransitionScope.SlideDirection.Start,
-            )
-        },
-        exitTransition = {
-            slideOutOfContainer(
-                animationSpec = tween(easing = EaseIn),
-                towards = AnimatedContentTransitionScope.SlideDirection.End,
-            )
-        },
+        enterTransition = { slideIn() },
+        exitTransition = { slideOut() },
     ) {
         SignUpScreen(
             onLogin = onLogin,
