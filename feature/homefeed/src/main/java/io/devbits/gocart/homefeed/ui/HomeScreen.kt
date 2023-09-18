@@ -18,6 +18,7 @@
 package io.devbits.gocart.homefeed.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -44,10 +45,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.rememberAsyncImagePainter
 import io.devbits.gocart.core.model.ProductCategories
 import io.devbits.gocart.designsystem.component.Chip
 import io.devbits.gocart.designsystem.component.ProductCard
@@ -56,6 +60,7 @@ import io.devbits.gocart.designsystem.component.TertiaryButton
 import io.devbits.gocart.designsystem.component.sampleProducts
 import io.devbits.gocart.designsystem.model.Product
 import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
 fun HomeScreen(
@@ -125,15 +130,25 @@ fun HomeScreen(
 
 @Composable
 private fun HeaderText() {
-    Row {
-        Text(
-            text = "Free delivery within Nairobi",
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(40.dp)
-                .background(MaterialTheme.colorScheme.secondaryContainer)
-                .padding(horizontal = 16.dp, vertical = 8.dp),
+    val isLocalInspection = LocalInspectionMode.current
+
+    val imageLoader = rememberAsyncImagePainter(resourcesR.raw.truck_loading)
+    val placeholder = painterResource(resourcesR.drawable.ic_placeholder)
+
+    Row(
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.secondaryContainer)
+            .padding(horizontal = 16.dp)
+            .height(40.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Image(
+            painter = if (!isLocalInspection) imageLoader else placeholder,
+            contentDescription = null,
         )
+
+        Text(text = "Free delivery within Nairobi")
     }
 }
 
