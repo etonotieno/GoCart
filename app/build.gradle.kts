@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":core:datastore"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:model"))
+    implementation(project(":core:network"))
     implementation(project(":feature:onboarding"))
     implementation(project(":feature:authentication"))
     implementation(project(":feature:homefeed"))

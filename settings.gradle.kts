@@ -18,6 +18,7 @@ rootProject.name = "GoCart"
 include(":core:datastore")
 include(":core:designsystem")
 include(":core:model")
+include(":core:network")
 include(":core:resources")
 include(":app")
 include(":feature:onboarding")
