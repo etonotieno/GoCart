@@ -3,7 +3,7 @@ static def isLinuxOrMacOs() {
     return osName.contains("linux") || osName.contains("mac os") || osName.contains("macos")
 }
 
-task copyGitHooks(type: Copy) {
+tasks.register('copyGitHooks', Copy) {
     description "Copies the git hooks from /git-hooks to the .git folder."
     from("$rootDir/scripts/git-hooks/") {
         include "**/*.sh"
@@ -13,7 +13,7 @@ task copyGitHooks(type: Copy) {
     onlyIf { isLinuxOrMacOs() }
 }
 
-task installGitHooks(type: Exec) {
+tasks.register('installGitHooks', Exec) {
     description = "Installs the pre-commit git hooks from scripts/git-hooks."
     group "git hooks"
     workingDir rootDir
