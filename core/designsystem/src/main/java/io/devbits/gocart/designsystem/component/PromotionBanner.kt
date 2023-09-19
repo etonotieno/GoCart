@@ -13,16 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:OptIn(ExperimentalFoundationApi::class)
-
 package io.devbits.gocart.designsystem.component
 
+import io.devbits.gocart.resources.R as resourcesR
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -39,13 +37,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.designsystem.theme.go_cart_orange_yellow
-import io.devbits.gocart.resources.R as resourcesR
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 private const val PAGE_COUNT = 3
 private const val SCROLL_DELAY = 5_000L
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun PromotionBanner(
     modifier: Modifier = Modifier,
@@ -61,7 +59,10 @@ fun PromotionBanner(
         }
     }
 
-    Column(modifier = modifier.fillMaxWidth()) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
         HorizontalPager(state = pagerState) { currentPage ->
             val image = when (currentPage) {
                 0 -> resourcesR.drawable.ic_promotions_bundle_offer
@@ -79,8 +80,6 @@ fun PromotionBanner(
             )
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         Indicator(
             modifier = Modifier.align(Alignment.CenterHorizontally),
             pageCount = pagerState.pageCount,
@@ -95,6 +94,7 @@ fun PromotionBanner(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 private fun PromotionBannerPreview() {

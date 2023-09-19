@@ -23,12 +23,10 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -66,11 +64,11 @@ fun ProductCard(
     var quantity by remember { mutableIntStateOf(0) }
     var bookmarked by remember { mutableStateOf(false) }
 
-    Column(modifier = modifier) {
-        Box(
-            modifier = Modifier
-                .clip(RoundedCornerShape(16.dp)),
-        ) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+    ) {
+        Box(modifier = Modifier.clip(RoundedCornerShape(16.dp))) {
             Image(
                 painter = painterResource(product.image),
                 contentDescription = null,
@@ -117,15 +115,11 @@ fun ProductCard(
             }
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
-
         Text(
             text = product.name.uppercase(),
             modifier = Modifier.fillMaxWidth(),
             style = MaterialTheme.typography.labelMedium,
         )
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
             text = "KSH ${product.price}",
@@ -133,17 +127,16 @@ fun ProductCard(
             style = MaterialTheme.typography.titleSmall,
         )
 
-        Spacer(modifier = Modifier.height(8.dp))
-
-        Row(modifier = Modifier.fillMaxWidth()) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
             if (product.unit.isNotBlank()) {
                 Text(
                     text = product.unit,
                     style = MaterialTheme.typography.bodySmall,
                 )
             }
-
-            Spacer(modifier = Modifier.width(8.dp))
 
             if (product.unitQuantity.isNotBlank()) {
                 val unitQuantity =
@@ -154,8 +147,6 @@ fun ProductCard(
                 )
             }
         }
-
-        Spacer(modifier = Modifier.height(8.dp))
 
         if (quantity <= 0) {
             SecondaryButton(

@@ -15,12 +15,11 @@
  */
 package io.devbits.gocart.designsystem.component
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
@@ -51,13 +50,15 @@ fun GoCartAlert(
         colors = CardDefaults.cardColors(containerColor = containerColor),
         modifier = modifier,
     ) {
-        Row(modifier = Modifier.padding(8.dp)) {
+        Row(
+            modifier = Modifier.padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
             CompositionLocalProvider(LocalContentColor provides iconColor) {
                 Box(modifier = Modifier.align(Alignment.CenterVertically)) {
                     icon()
                 }
             }
-            Spacer(modifier = Modifier.width(16.dp))
             text()
         }
     }

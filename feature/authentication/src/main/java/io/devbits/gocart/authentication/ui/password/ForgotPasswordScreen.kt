@@ -15,6 +15,7 @@
  */
 package io.devbits.gocart.authentication.ui.password
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -81,12 +82,11 @@ fun ForgotPasswordScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
                 .padding(horizontal = 16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(text = stringResource(R.string.forgot_password_enter_email_))
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             TextField(
                 value = email,
@@ -110,8 +110,6 @@ fun ForgotPasswordScreen(
                 isError = emailError,
                 singleLine = true,
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
 
             Button(onClick = onSend, modifier = Modifier.fillMaxWidth()) {
                 Text(text = "Send")
