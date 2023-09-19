@@ -15,7 +15,6 @@
  */
 package io.devbits.gocart.designsystem.component
 
-import io.devbits.gocart.resources.R as resourcesR
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -37,6 +36,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.designsystem.theme.go_cart_orange_yellow
+import io.devbits.gocart.resources.R as resourcesR
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
