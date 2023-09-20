@@ -60,6 +60,7 @@ fun ProductCard(
     onBookmark: () -> Unit,
     onAddToCart: () -> Unit,
     modifier: Modifier = Modifier,
+    showDelete: Boolean = false,
 ) {
     var quantity by remember { mutableIntStateOf(0) }
     var bookmarked by remember { mutableStateOf(false) }
@@ -162,6 +163,8 @@ fun ProductCard(
                 quantity = quantity,
                 onAdd = { quantity++ },
                 onRemove = { quantity-- },
+                onDelete = { quantity-- },
+                showDelete = showDelete,
                 modifier = Modifier.fillMaxWidth(),
             )
         }
