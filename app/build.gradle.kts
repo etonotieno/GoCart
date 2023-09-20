@@ -80,6 +80,9 @@ dependencies {
     implementation(project(":feature:orders"))
     implementation(project(":feature:services"))
     implementation(project(":feature:settings"))
+    implementation(project(":feature:product:categories"))
+    implementation(project(":feature:product:category"))
+    implementation(project(":feature:product:details"))
 
     implementation("androidx.core:core-splashscreen:1.0.1")
 
