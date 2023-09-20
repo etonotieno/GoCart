@@ -163,7 +163,6 @@ fun ProductCard(
                 quantity = quantity,
                 onAdd = { quantity++ },
                 onRemove = { quantity-- },
-                onDelete = { quantity-- },
                 showDelete = showDelete,
                 modifier = Modifier.fillMaxWidth(),
             )

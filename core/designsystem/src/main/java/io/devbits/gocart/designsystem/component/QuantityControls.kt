@@ -41,7 +41,6 @@ fun QuantityControl(
     onAdd: () -> Unit,
     onRemove: () -> Unit,
     modifier: Modifier = Modifier,
-    onDelete: () -> Unit = {},
     showDelete: Boolean = false,
 ) {
     Row(
@@ -54,7 +53,7 @@ fun QuantityControl(
                 imageVector = Icons.Outlined.Delete,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.error,
-                modifier = Modifier.clickable { onDelete() },
+                modifier = Modifier.clickable { onRemove() },
             )
         } else {
             Icon(
