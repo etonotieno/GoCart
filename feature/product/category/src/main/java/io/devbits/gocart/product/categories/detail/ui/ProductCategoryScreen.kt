@@ -1,0 +1,209 @@
+/*
+ * Copyright 2023 Eton Otieno
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package io.devbits.gocart.product.categories.detail.ui
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.outlined.FilterAlt
+import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.Text
+import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.devbits.gocart.core.model.ProductCategory
+import io.devbits.gocart.designsystem.component.GCTopAppBar
+import io.devbits.gocart.designsystem.component.GcSortBottomSheet
+import io.devbits.gocart.designsystem.component.ProductCard
+import io.devbits.gocart.designsystem.component.TertiaryButton
+import io.devbits.gocart.designsystem.component.productCategories
+import io.devbits.gocart.designsystem.component.sampleProducts
+import io.devbits.gocart.designsystem.model.Product
+import io.devbits.gocart.designsystem.theme.GoCartTheme
+import kotlinx.coroutines.launch
+
+@Composable
+fun ProductCategoryRoute(
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
+    viewModel: ProductCategoryViewModel = hiltViewModel(),
+) {
+    val categories by viewModel.categories.collectAsStateWithLifecycle()
+    val products by viewModel.products.collectAsStateWithLifecycle()
+    ProductCategoryScreen(
+        category = categories,
+        products = products,
+        onBookmark = {},
+        onAddToCart = {},
+        onBack = onBack,
+        modifier = modifier,
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun ProductCategoryScreen(
+    category: ProductCategory,
+    products: List<Product>,
+    onBookmark: () -> Unit,
+    onAddToCart: () -> Unit,
+    onBack: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    var showBottomSheet by remember { mutableStateOf(false) }
+
+    val span = GridItemSpan(2)
+
+    Scaffold(
+        topBar = {
+            GCTopAppBar(
+                title = { Text(category.name) },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(
+                            imageVector = Icons.Default.ArrowBack,
+                            contentDescription = null,
+                        )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Filled.Search,
+                            contentDescription = null,
+                        )
+                    }
+
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Outlined.ShoppingCart,
+                            contentDescription = null,
+                        )
+                    }
+                },
+            )
+        },
+        modifier = modifier,
+    ) { contentPadding ->
+        LazyVerticalGrid(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(contentPadding),
+            columns = GridCells.Fixed(2),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            item(span = { span }) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "${category.quantity} Products",
+                        modifier = Modifier.weight(1f),
+                    )
+
+                    TertiaryButton(
+                        text = "Filter",
+                        leadingIcon = {
+                            Icon(imageVector = Icons.Outlined.FilterAlt, contentDescription = null)
+                        },
+                        onClick = { },
+                    )
+
+                    TertiaryButton(
+                        text = "Sort",
+                        leadingIcon = {
+                            Icon(imageVector = Icons.Default.Sort, contentDescription = null)
+                        },
+                        onClick = { showBottomSheet = true },
+                    )
+                }
+            }
+
+            items(products.size) { index: Int ->
+                val padding = if ((index % 2) == 0) {
+                    PaddingValues(start = 16.dp)
+                } else {
+                    PaddingValues(end = 16.dp)
+                }
+                ProductCard(
+                    product = products[index],
+                    onBookmark = onBookmark,
+                    onAddToCart = onAddToCart,
+                    showDelete = true,
+                    modifier = Modifier.padding(padding),
+                )
+            }
+        }
+    }
+
+    val sheetState: SheetState = rememberModalBottomSheetState()
+    val scope = rememberCoroutineScope()
+
+    if (showBottomSheet) {
+        GcSortBottomSheet(
+            onDismiss = { showBottomSheet = false },
+            onSortChanged = {
+                scope.launch { sheetState.hide() }.invokeOnCompletion {
+                    if (!sheetState.isVisible) {
+                        showBottomSheet = false
+                    }
+                }
+            },
+        )
+    }
+}
+
+@Preview
+@Composable
+private fun ProductCategoriesScreenPreview() {
+    GoCartTheme {
+        ProductCategoryScreen(
+            category = productCategories[0],
+            products = sampleProducts,
+            onBookmark = {},
+            onAddToCart = {},
+            onBack = {},
+        )
+    }
+}
