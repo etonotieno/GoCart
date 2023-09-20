@@ -54,6 +54,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:model"))
     api(project(":core:resources"))
 
     api(platform("androidx.compose:compose-bom:2023.09.00"))
