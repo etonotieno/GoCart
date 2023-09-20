@@ -17,6 +17,8 @@ package io.devbits.gocart.designsystem.component
 
 import android.content.res.Configuration
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.LocalContentColor
@@ -106,12 +108,14 @@ fun TertiaryButton(
         CompositionLocalProvider(LocalContentColor provides iconColor) {
             if (leadingIcon != null) {
                 leadingIcon()
+                Spacer(modifier = Modifier.width(8.dp))
             }
         }
         Text(text = text)
 
         CompositionLocalProvider(LocalContentColor provides iconColor) {
             if (trailingIcon != null) {
+                Spacer(modifier = Modifier.width(8.dp))
                 trailingIcon()
             }
         }
