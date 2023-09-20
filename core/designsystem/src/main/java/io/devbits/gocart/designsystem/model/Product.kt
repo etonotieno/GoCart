@@ -16,6 +16,7 @@
 package io.devbits.gocart.designsystem.model
 
 import androidx.annotation.DrawableRes
+import java.math.BigDecimal
 
 data class Product(
     val id: Int,
@@ -26,9 +27,8 @@ data class Product(
     val unit: String,
     val unitQuantity: String,
     val bookmarked: Boolean,
-)
-
-data class PriceOffer(
-    val percent: Int,
-    val price: Double,
+    val description: String,
+    val category: ProductCategory,
+    val offer: Int = 0,
+    val finalPrice: BigDecimal = BigDecimal(price).multiply(offer.toBigDecimal()),
 )

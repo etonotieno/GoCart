@@ -27,6 +27,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -51,6 +52,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.model.Product
+import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
 
@@ -66,7 +68,7 @@ fun ProductCard(
     var bookmarked by remember { mutableStateOf(false) }
 
     Column(
-        modifier = modifier,
+        modifier = modifier.widthIn(min = 150.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Box(modifier = Modifier.clip(RoundedCornerShape(16.dp))) {
@@ -75,7 +77,6 @@ fun ProductCard(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
-                    .fillMaxWidth()
                     .height(150.dp)
                     .border(
                         width = 1.dp,
@@ -223,6 +224,10 @@ private fun ProductCardPreview() {
     }
 }
 
+private const val DESCRIPTION =
+    "Rich in fibre, heart-healthy potassium and some beneficial " +
+        "vitamins for your health. Also high nutrient absorption."
+
 val sampleProducts = listOf(
     Product(
         id = 1,
@@ -232,6 +237,8 @@ val sampleProducts = listOf(
         unit = "500 grams",
         unitQuantity = "4 Pieces",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 2,
@@ -241,6 +248,8 @@ val sampleProducts = listOf(
         unit = "1 Bunch",
         unitQuantity = "5 Pieces",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 3,
@@ -250,6 +259,8 @@ val sampleProducts = listOf(
         unit = "1 Kg",
         unitQuantity = "4 Pieces",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 4,
@@ -259,6 +270,8 @@ val sampleProducts = listOf(
         unit = "1 Bunch",
         unitQuantity = "5 Pieces",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 5,
@@ -268,6 +281,8 @@ val sampleProducts = listOf(
         unit = "1 Kg",
         unitQuantity = "2 Pieces",
         bookmarked = true,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 6,
@@ -277,6 +292,8 @@ val sampleProducts = listOf(
         unit = "1 Kg",
         unitQuantity = "4 Pieces",
         bookmarked = true,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 7,
@@ -286,6 +303,8 @@ val sampleProducts = listOf(
         unit = "1 Bunch",
         unitQuantity = "5 Pieces",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 8,
@@ -295,6 +314,8 @@ val sampleProducts = listOf(
         unit = "1 Kg",
         unitQuantity = "2 Pieces",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 9,
@@ -304,6 +325,8 @@ val sampleProducts = listOf(
         unit = "1 Kg",
         unitQuantity = "2 Pieces",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 10,
@@ -313,6 +336,8 @@ val sampleProducts = listOf(
         unit = "1.5 Kg",
         unitQuantity = "3 Pieces",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 11,
@@ -322,6 +347,8 @@ val sampleProducts = listOf(
         unit = "1 Packet",
         unitQuantity = "",
         bookmarked = true,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 12,
@@ -331,6 +358,8 @@ val sampleProducts = listOf(
         unit = "6.9 Kg",
         unitQuantity = "Pieces",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
     ),
     Product(
         id = 13,
@@ -340,6 +369,8 @@ val sampleProducts = listOf(
         unit = "1 Kg",
         unitQuantity = "1 large piece",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 14,
@@ -349,6 +380,8 @@ val sampleProducts = listOf(
         unit = "",
         unitQuantity = "1 bunch",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 15,
@@ -358,6 +391,8 @@ val sampleProducts = listOf(
         unit = "2 Kg",
         unitQuantity = "15 piece",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 16,
@@ -367,6 +402,8 @@ val sampleProducts = listOf(
         unit = "2 Kg",
         unitQuantity = "15 piece",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
     ),
     Product(
         id = 17,
@@ -376,6 +413,9 @@ val sampleProducts = listOf(
         unit = "1 Mega bundle",
         unitQuantity = "",
         bookmarked = false,
+        category = ProductCategory.Other,
+        description = DESCRIPTION,
+        offer = 12,
     ),
     Product(
         id = 18,
@@ -385,6 +425,9 @@ val sampleProducts = listOf(
         unit = "2 Kg",
         unitQuantity = "14 Pieces",
         bookmarked = false,
+        category = ProductCategory.Vegetables,
+        description = DESCRIPTION,
+        offer = 20,
     ),
     Product(
         id = 19,
@@ -394,6 +437,9 @@ val sampleProducts = listOf(
         unit = "",
         unitQuantity = "2 Pieces",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
+        offer = 15,
     ),
     Product(
         id = 20,
@@ -403,5 +449,8 @@ val sampleProducts = listOf(
         unit = "",
         unitQuantity = "1 Packed Bundle",
         bookmarked = false,
+        category = ProductCategory.Fruits,
+        description = DESCRIPTION,
+        offer = 15,
     ),
 )
