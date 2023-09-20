@@ -37,10 +37,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.devbits.gocart.core.model.ProductCategory
 import io.devbits.gocart.designsystem.component.GCTopAppBar
 import io.devbits.gocart.designsystem.component.ProductCategoryCard
-import io.devbits.gocart.designsystem.component.productCategories
+import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
@@ -111,7 +110,7 @@ fun ProductCategoriesScreen(
 private fun ProductCategoriesScreenPreview() {
     GoCartTheme {
         ProductCategoriesScreen(
-            categories = productCategories,
+            categories = ProductCategory.values().toList(),
             onClickCategory = {},
             onBack = {},
         )

@@ -39,9 +39,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import io.devbits.gocart.core.model.ProductCategory
+import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartTheme
-import io.devbits.gocart.resources.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -72,7 +71,7 @@ fun ProductCategoryCard(
 
             Column(modifier = Modifier.weight(1f)) {
                 Text(
-                    text = category.name,
+                    text = category.label,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.Bold,
                 )
@@ -96,57 +95,6 @@ fun ProductCategoryCard(
 @Composable
 private fun ProductCategoryCardPreview() {
     GoCartTheme {
-        ProductCategoryCard(category = productCategories[0], onClick = {})
+        ProductCategoryCard(category = ProductCategory.GrainBakery, onClick = {})
     }
 }
-
-val productCategories = listOf(
-    ProductCategory(
-        name = "Fruits",
-        image = R.drawable.ic_product_category_fruits,
-        quantity = 120,
-        limit = 5,
-    ),
-    ProductCategory(
-        name = "Vegetables",
-        image = R.drawable.ic_product_category_vegetables,
-        quantity = 120,
-        limit = 5,
-    ),
-    ProductCategory(
-        name = "Drinks",
-        image = R.drawable.ic_product_category_drinks,
-        quantity = 120,
-        limit = 5,
-    ),
-    ProductCategory(
-        name = "Meat",
-        image = R.drawable.ic_product_category_meat,
-        quantity = 120,
-        limit = 5,
-    ),
-    ProductCategory(
-        name = "Spreads",
-        image = R.drawable.ic_product_category_spreads,
-        quantity = 120,
-        limit = 5,
-    ),
-    ProductCategory(
-        name = "Condiments",
-        image = R.drawable.ic_product_category_condiments,
-        quantity = 120,
-        limit = 5,
-    ),
-    ProductCategory(
-        name = "Grain & Bakery",
-        image = R.drawable.ic_product_category_grains_bakery,
-        quantity = 120,
-        limit = 5,
-    ),
-    ProductCategory(
-        name = "Cleaners",
-        image = R.drawable.ic_product_category_cleaners,
-        quantity = 120,
-        limit = 5,
-    ),
-)

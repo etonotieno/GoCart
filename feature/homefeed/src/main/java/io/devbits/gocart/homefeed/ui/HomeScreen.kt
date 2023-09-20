@@ -51,15 +51,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
-import io.devbits.gocart.core.model.ProductCategory
 import io.devbits.gocart.designsystem.component.Chip
 import io.devbits.gocart.designsystem.component.GcSortBottomSheet
 import io.devbits.gocart.designsystem.component.ProductCard
 import io.devbits.gocart.designsystem.component.PromotionBanner
 import io.devbits.gocart.designsystem.component.TertiaryButton
-import io.devbits.gocart.designsystem.component.productCategories
 import io.devbits.gocart.designsystem.component.sampleProducts
 import io.devbits.gocart.designsystem.model.Product
+import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
 
@@ -182,7 +181,7 @@ private fun ProductCategories(
         items(categories) { category ->
             var selected by remember { mutableStateOf(false) }
             Chip(
-                label = category.name,
+                label = category.label,
                 selected = selected,
                 onClick = { selected = !selected },
             )
@@ -248,7 +247,7 @@ private fun HomeScreenPreview() {
     GoCartTheme {
         HomeScreen(
             products = sampleProducts,
-            categories = productCategories,
+            categories = ProductCategory.values().toList(),
             onBookmark = {},
             onAddToCart = {},
             onViewAll = {},

@@ -48,14 +48,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.devbits.gocart.core.model.ProductCategory
 import io.devbits.gocart.designsystem.component.GCTopAppBar
 import io.devbits.gocart.designsystem.component.GcSortBottomSheet
 import io.devbits.gocart.designsystem.component.ProductCard
 import io.devbits.gocart.designsystem.component.TertiaryButton
-import io.devbits.gocart.designsystem.component.productCategories
 import io.devbits.gocart.designsystem.component.sampleProducts
 import io.devbits.gocart.designsystem.model.Product
+import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import kotlinx.coroutines.launch
 
@@ -65,10 +64,9 @@ fun ProductCategoryRoute(
     modifier: Modifier = Modifier,
     viewModel: ProductCategoryViewModel = hiltViewModel(),
 ) {
-    val categories by viewModel.categories.collectAsStateWithLifecycle()
     val products by viewModel.products.collectAsStateWithLifecycle()
     ProductCategoryScreen(
-        category = categories,
+        category = ProductCategory.Fruits,
         products = products,
         onBookmark = {},
         onAddToCart = {},
@@ -94,7 +92,7 @@ fun ProductCategoryScreen(
     Scaffold(
         topBar = {
             GCTopAppBar(
-                title = { Text(category.name) },
+                title = { Text(category.label) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
@@ -196,10 +194,10 @@ fun ProductCategoryScreen(
 
 @Preview
 @Composable
-private fun ProductCategoriesScreenPreview() {
+private fun ProductCategoryScreenPreview() {
     GoCartTheme {
         ProductCategoryScreen(
-            category = productCategories[0],
+            category = ProductCategory.Drinks,
             products = sampleProducts,
             onBookmark = {},
             onAddToCart = {},
