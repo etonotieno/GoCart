@@ -13,24 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.devbits.gocart.homefeed.navigation
+package io.devbits.gocart.product.categories.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.homefeed.ui.HomeScreen
+import io.devbits.gocart.core.model.ProductCategory
+import io.devbits.gocart.product.categories.ui.ProductCategoriesRoute
 
-const val homeRoute = "home"
+const val productCategoriesRoute = "product/categories"
 
-fun NavController.navigateToHome(navOptions: NavOptions? = null) {
-    this.navigate(homeRoute, navOptions)
+fun NavController.navigateToProductCategories(navOptions: NavOptions? = null) {
+    this.navigate(productCategoriesRoute, navOptions)
 }
 
-fun NavGraphBuilder.homeScreen(
-    toCategories: () -> Unit,
+fun NavGraphBuilder.productCategoriesScreen(
+    onBack: () -> Unit,
+    onClickCategory: (ProductCategory) -> Unit,
 ) {
-    composable(route = homeRoute) {
-        HomeScreen(toCategories = toCategories)
+    composable(route = productCategoriesRoute) {
+        ProductCategoriesRoute(
+            onBack = onBack,
+            onClickCategory = onClickCategory,
+        )
     }
 }

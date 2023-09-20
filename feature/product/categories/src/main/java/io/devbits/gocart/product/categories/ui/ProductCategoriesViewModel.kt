@@ -13,24 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.devbits.gocart.homefeed.navigation
+package io.devbits.gocart.product.categories.ui
 
-import androidx.navigation.NavController
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import io.devbits.gocart.homefeed.ui.HomeScreen
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.devbits.gocart.core.model.ProductCategory
+import io.devbits.gocart.designsystem.component.productCategories
+import javax.inject.Inject
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-const val homeRoute = "home"
-
-fun NavController.navigateToHome(navOptions: NavOptions? = null) {
-    this.navigate(homeRoute, navOptions)
-}
-
-fun NavGraphBuilder.homeScreen(
-    toCategories: () -> Unit,
-) {
-    composable(route = homeRoute) {
-        HomeScreen(toCategories = toCategories)
-    }
+@HiltViewModel
+class ProductCategoriesViewModel @Inject constructor() : ViewModel() {
+    val categories: StateFlow<List<ProductCategory>> = MutableStateFlow(productCategories)
 }

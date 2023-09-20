@@ -15,13 +15,9 @@
  */
 package io.devbits.gocart.core.model
 
-enum class ProductCategories(val label: String) {
-    Fruits("Fruits"),
-    Vegetables("Vegetables"),
-    Drinks("Drinks"),
-    Meat("Meat"),
-    Spreads("Spreads"),
-    Condiments("Condiments"),
-    GrainBakery("Grain & Bakery"),
-    Cleaners("Cleaners"),
-}
+data class ProductCategory(
+    val name: String,
+    val image: Int,
+    val quantity: Int,
+    val limit: Int,
+)

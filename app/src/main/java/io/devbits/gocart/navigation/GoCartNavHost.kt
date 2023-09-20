@@ -42,6 +42,10 @@ import io.devbits.gocart.homefeed.navigation.navigateToHome
 import io.devbits.gocart.offers.navigation.offersScreen
 import io.devbits.gocart.onboarding.navigation.onboardingScreen
 import io.devbits.gocart.payments.navigation.paymentsScreen
+import io.devbits.gocart.product.categories.detail.navigation.navigateToProductCategory
+import io.devbits.gocart.product.categories.detail.navigation.productCategoryScreen
+import io.devbits.gocart.product.categories.navigation.navigateToProductCategories
+import io.devbits.gocart.product.categories.navigation.productCategoriesScreen
 import io.devbits.gocart.services.navigation.servicesScreen
 import io.devbits.gocart.settings.navigation.settingsScreen
 import io.devbits.gocart.ui.GoCartAppState
@@ -148,7 +152,11 @@ fun GoCartNavHost(
             },
         )
 
-        homeScreen()
+        homeScreen(
+            toCategories = {
+                navController.navigateToProductCategories()
+            },
+        )
 
         servicesScreen()
 
@@ -163,6 +171,15 @@ fun GoCartNavHost(
         offersScreen()
 
         settingsScreen(
+            onBack = navController::popBackStack,
+        )
+
+        productCategoriesScreen(
+            onBack = navController::popBackStack,
+            onClickCategory = { navController.navigateToProductCategory() },
+        )
+
+        productCategoryScreen(
             onBack = navController::popBackStack,
         )
     }

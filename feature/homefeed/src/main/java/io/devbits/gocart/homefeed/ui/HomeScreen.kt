@@ -13,8 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-@file:OptIn(ExperimentalFoundationApi::class)
-
 package io.devbits.gocart.homefeed.ui
 
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -35,6 +33,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -52,11 +51,13 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.rememberAsyncImagePainter
-import io.devbits.gocart.core.model.ProductCategories
+import io.devbits.gocart.core.model.ProductCategory
 import io.devbits.gocart.designsystem.component.Chip
+import io.devbits.gocart.designsystem.component.GcSortBottomSheet
 import io.devbits.gocart.designsystem.component.ProductCard
 import io.devbits.gocart.designsystem.component.PromotionBanner
 import io.devbits.gocart.designsystem.component.TertiaryButton
+import io.devbits.gocart.designsystem.component.productCategories
 import io.devbits.gocart.designsystem.component.sampleProducts
 import io.devbits.gocart.designsystem.model.Product
 import io.devbits.gocart.designsystem.theme.GoCartTheme
@@ -64,25 +65,34 @@ import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
 fun HomeScreen(
+    toCategories: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
     val products by viewModel.products.collectAsStateWithLifecycle()
+    val categories by viewModel.categories.collectAsStateWithLifecycle()
     HomeScreen(
-        modifier = modifier,
         products = products,
+        categories = categories,
         onBookmark = {},
         onAddToCart = {},
+        onViewAll = toCategories,
+        modifier = modifier,
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun HomeScreen(
     products: List<Product>,
+    categories: List<ProductCategory>,
     onBookmark: () -> Unit,
     onAddToCart: () -> Unit,
+    onViewAll: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var showBottomSheet by remember { mutableStateOf(false) }
+
     // Default span that fills the entire width.
     val span = GridItemSpan(2)
 
@@ -101,11 +111,11 @@ fun HomeScreen(
         }
 
         item(span = { span }) {
-            ExploreCategories(onViewAll = {})
+            ExploreCategories(categories = categories, onViewAll = onViewAll)
         }
 
         item(span = { span }) {
-            TopSellingProducts()
+            TopSellingProducts(onSort = { showBottomSheet = true })
         }
 
         // We do not pass the span to the ProductCard items in order to display the ProductCard in
@@ -125,6 +135,13 @@ fun HomeScreen(
                 modifier = Modifier.padding(padding),
             )
         }
+    }
+
+    if (showBottomSheet) {
+        GcSortBottomSheet(
+            onDismiss = { showBottomSheet = false },
+            onSortChanged = {},
+        )
     }
 }
 
@@ -153,16 +170,19 @@ private fun HeaderText() {
 }
 
 @Composable
-private fun ProductCategories(modifier: Modifier = Modifier) {
+private fun ProductCategories(
+    categories: List<ProductCategory>,
+    modifier: Modifier = Modifier,
+) {
     LazyRow(
         modifier = modifier,
         contentPadding = PaddingValues(horizontal = 8.dp),
         horizontalArrangement = Arrangement.spacedBy(8.dp),
     ) {
-        items(ProductCategories.values()) { category ->
+        items(categories) { category ->
             var selected by remember { mutableStateOf(false) }
             Chip(
-                label = category.label,
+                label = category.name,
                 selected = selected,
                 onClick = { selected = !selected },
             )
@@ -171,7 +191,7 @@ private fun ProductCategories(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun TopSellingProducts(modifier: Modifier = Modifier) {
+private fun TopSellingProducts(modifier: Modifier = Modifier, onSort: () -> Unit) {
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -187,7 +207,7 @@ private fun TopSellingProducts(modifier: Modifier = Modifier) {
 
         TertiaryButton(
             text = "Sort",
-            onClick = {},
+            onClick = onSort,
             leadingIcon = {
                 Icon(imageVector = Icons.Default.Sort, contentDescription = null)
             },
@@ -197,6 +217,7 @@ private fun TopSellingProducts(modifier: Modifier = Modifier) {
 
 @Composable
 private fun ExploreCategories(
+    categories: List<ProductCategory>,
     onViewAll: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -217,7 +238,7 @@ private fun ExploreCategories(
             TertiaryButton(text = "View All", onClick = onViewAll)
         }
 
-        ProductCategories()
+        ProductCategories(categories = categories)
     }
 }
 
@@ -227,8 +248,10 @@ private fun HomeScreenPreview() {
     GoCartTheme {
         HomeScreen(
             products = sampleProducts,
+            categories = productCategories,
             onBookmark = {},
             onAddToCart = {},
+            onViewAll = {},
         )
     }
 }
