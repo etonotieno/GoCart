@@ -99,7 +99,7 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-android-compiler:2.48")
 
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")

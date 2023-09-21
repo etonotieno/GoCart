@@ -57,7 +57,7 @@ dependencies {
     implementation(project(":core:model"))
     api(project(":core:resources"))
 
-    api(platform("androidx.compose:compose-bom:2023.09.00"))
+    api(platform("androidx.compose:compose-bom:2023.09.01"))
     api("androidx.compose.ui:ui")
     api("androidx.compose.ui:ui-graphics")
     api("androidx.compose.ui:ui-tooling-preview")
@@ -76,7 +76,7 @@ dependencies {
 
     testImplementation("junit:junit:4.13.2")
 
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.00"))
+    androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.01"))
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
