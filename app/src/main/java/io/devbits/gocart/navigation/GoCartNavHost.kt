@@ -46,6 +46,8 @@ import io.devbits.gocart.product.categories.detail.navigation.navigateToProductC
 import io.devbits.gocart.product.categories.detail.navigation.productCategoryScreen
 import io.devbits.gocart.product.categories.navigation.navigateToProductCategories
 import io.devbits.gocart.product.categories.navigation.productCategoriesScreen
+import io.devbits.gocart.product.details.navigation.navigateToProductDetails
+import io.devbits.gocart.product.details.navigation.productDetailsScreen
 import io.devbits.gocart.services.navigation.servicesScreen
 import io.devbits.gocart.settings.navigation.settingsScreen
 import io.devbits.gocart.ui.GoCartAppState
@@ -156,6 +158,9 @@ fun GoCartNavHost(
             toCategories = {
                 navController.navigateToProductCategories()
             },
+            navigateToProduct = { productId ->
+                navController.navigateToProductDetails(productId)
+            },
         )
 
         servicesScreen()
@@ -176,11 +181,23 @@ fun GoCartNavHost(
 
         productCategoriesScreen(
             onBack = navController::popBackStack,
-            onClickCategory = { navController.navigateToProductCategory() },
+            onClickCategory = { name ->
+                navController.navigateToProductCategory(name)
+            },
         )
 
         productCategoryScreen(
             onBack = navController::popBackStack,
+            navigateToProduct = { productId ->
+                navController.navigateToProductDetails(productId)
+            },
+        )
+
+        productDetailsScreen(
+            onBack = navController::popBackStack,
+            onClickProduct = { productId ->
+                navController.navigateToProductDetails(productId)
+            },
         )
     }
 }

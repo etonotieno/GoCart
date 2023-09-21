@@ -65,6 +65,7 @@ import io.devbits.gocart.resources.R as resourcesR
 @Composable
 fun HomeScreen(
     toCategories: () -> Unit,
+    navigateToProduct: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: HomeViewModel = hiltViewModel(),
 ) {
@@ -75,6 +76,7 @@ fun HomeScreen(
         categories = categories,
         onBookmark = {},
         onAddToCart = {},
+        navigateToProduct = navigateToProduct,
         onViewAll = toCategories,
         modifier = modifier,
     )
@@ -85,6 +87,7 @@ fun HomeScreen(
 fun HomeScreen(
     products: List<Product>,
     categories: List<ProductCategory>,
+    navigateToProduct: (Int) -> Unit,
     onBookmark: () -> Unit,
     onAddToCart: () -> Unit,
     onViewAll: () -> Unit,
@@ -131,6 +134,7 @@ fun HomeScreen(
                 product = products[index],
                 onBookmark = onBookmark,
                 onAddToCart = onAddToCart,
+                onClick = { navigateToProduct(products[index].id) },
                 modifier = Modifier.padding(padding),
             )
         }
@@ -250,6 +254,7 @@ private fun HomeScreenPreview() {
             categories = ProductCategory.values().toList(),
             onBookmark = {},
             onAddToCart = {},
+            navigateToProduct = {},
             onViewAll = {},
         )
     }

@@ -45,7 +45,7 @@ import io.devbits.gocart.designsystem.theme.GoCartTheme
 @Composable
 fun ProductCategoriesRoute(
     onBack: () -> Unit,
-    onClickCategory: (ProductCategory) -> Unit,
+    onClickCategory: (String) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ProductCategoriesViewModel = hiltViewModel(),
 ) {
@@ -62,7 +62,7 @@ fun ProductCategoriesRoute(
 @Composable
 fun ProductCategoriesScreen(
     categories: List<ProductCategory>,
-    onClickCategory: (ProductCategory) -> Unit,
+    onClickCategory: (String) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -98,7 +98,7 @@ fun ProductCategoriesScreen(
             items(categories) { category ->
                 ProductCategoryCard(
                     category = category,
-                    onClick = { onClickCategory(category) },
+                    onClick = { onClickCategory(category.name) },
                 )
             }
         }

@@ -61,15 +61,17 @@ import kotlinx.coroutines.launch
 @Composable
 fun ProductCategoryRoute(
     onBack: () -> Unit,
+    navigateToProduct: (Int) -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ProductCategoryViewModel = hiltViewModel(),
 ) {
     val products by viewModel.products.collectAsStateWithLifecycle()
     ProductCategoryScreen(
-        category = ProductCategory.Fruits,
+        category = viewModel.category,
         products = products,
         onBookmark = {},
         onAddToCart = {},
+        navigateToProduct = navigateToProduct,
         onBack = onBack,
         modifier = modifier,
     )
@@ -83,6 +85,7 @@ fun ProductCategoryScreen(
     onBookmark: () -> Unit,
     onAddToCart: () -> Unit,
     onBack: () -> Unit,
+    navigateToProduct: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -166,6 +169,7 @@ fun ProductCategoryScreen(
                 }
                 ProductCard(
                     product = products[index],
+                    onClick = { navigateToProduct(products[index].id) },
                     onBookmark = onBookmark,
                     onAddToCart = onAddToCart,
                     showDelete = true,
@@ -201,6 +205,7 @@ private fun ProductCategoryScreenPreview() {
             products = sampleProducts,
             onBookmark = {},
             onAddToCart = {},
+            navigateToProduct = {},
             onBack = {},
         )
     }

@@ -29,8 +29,12 @@ fun NavController.navigateToHome(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.homeScreen(
     toCategories: () -> Unit,
+    navigateToProduct: (Int) -> Unit,
 ) {
     composable(route = homeRoute) {
-        HomeScreen(toCategories = toCategories)
+        HomeScreen(
+            toCategories = toCategories,
+            navigateToProduct = navigateToProduct,
+        )
     }
 }

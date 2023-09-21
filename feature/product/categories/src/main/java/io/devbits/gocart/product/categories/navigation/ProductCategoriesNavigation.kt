@@ -19,7 +19,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.product.categories.ui.ProductCategoriesRoute
 
 const val productCategoriesRoute = "product/categories"
@@ -30,7 +29,7 @@ fun NavController.navigateToProductCategories(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.productCategoriesScreen(
     onBack: () -> Unit,
-    onClickCategory: (ProductCategory) -> Unit,
+    onClickCategory: (String) -> Unit,
 ) {
     composable(route = productCategoriesRoute) {
         ProductCategoriesRoute(
