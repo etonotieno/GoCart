@@ -90,7 +90,7 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
-    implementation("androidx.navigation:navigation-compose:2.7.2")
+    implementation("androidx.navigation:navigation-compose:2.7.3")
     implementation("androidx.navigation:navigation-common-ktx:2.7.2")
     implementation("androidx.navigation:navigation-runtime-ktx:2.7.2")
 
