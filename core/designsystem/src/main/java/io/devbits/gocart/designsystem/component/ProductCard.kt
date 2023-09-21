@@ -21,16 +21,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -62,13 +58,21 @@ fun ProductCard(
     onBookmark: () -> Unit,
     onAddToCart: () -> Unit,
     modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
     showDelete: Boolean = false,
 ) {
     var quantity by remember { mutableIntStateOf(0) }
     var bookmarked by remember { mutableStateOf(false) }
 
+    val clickModifier = if (onClick != null) {
+        Modifier.clickable { onClick() }
+    } else {
+        Modifier
+    }
     Column(
-        modifier = modifier.widthIn(min = 150.dp),
+        modifier = modifier
+            .then(clickModifier)
+            .width(150.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
     ) {
         Box(modifier = Modifier.clip(RoundedCornerShape(16.dp))) {
@@ -77,6 +81,7 @@ fun ProductCard(
                 contentDescription = null,
                 contentScale = ContentScale.Crop,
                 modifier = Modifier
+                    .fillMaxWidth()
                     .height(150.dp)
                     .border(
                         width = 1.dp,
@@ -163,56 +168,13 @@ fun ProductCard(
             QuantityControl(
                 quantity = quantity,
                 onAdd = { quantity++ },
-                onRemove = { quantity-- },
+                onRemove = { if (quantity > 0) quantity-- },
                 showDelete = showDelete,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(48.dp),
             )
         }
-    }
-}
-
-@Composable
-fun ProductDetails(
-    products: List<Product>,
-    onBookmark: () -> Unit,
-    onAddToCart: () -> Unit,
-    modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp),
-) {
-    LazyVerticalGrid(
-        modifier = modifier,
-        columns = GridCells.Adaptive(160.dp),
-        contentPadding = contentPadding,
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-    ) {
-        items(products) { product ->
-            ProductCard(
-                product = product,
-                onBookmark = onBookmark,
-                onAddToCart = onAddToCart,
-            )
-        }
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun ProductDetailsPreview() {
-    GoCartTheme {
-        ProductDetails(
-            products = sampleProducts,
-            onBookmark = {},
-            onAddToCart = {},
-        )
-    }
-}
-
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
-@Composable
-private fun ProductCardEmptyPreview() {
-    GoCartTheme {
-        ProductCard(product = sampleProducts[0], onBookmark = {}, onAddToCart = {})
     }
 }
 
@@ -220,7 +182,12 @@ private fun ProductCardEmptyPreview() {
 @Composable
 private fun ProductCardPreview() {
     GoCartTheme {
-        ProductCard(product = sampleProducts[1], onBookmark = {}, onAddToCart = {})
+        ProductCard(
+            product = sampleProducts[1],
+            onClick = {},
+            onBookmark = {},
+            onAddToCart = {},
+        )
     }
 }
 
