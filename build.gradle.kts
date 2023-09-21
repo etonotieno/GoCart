@@ -56,6 +56,6 @@ subprojects {
     }
 
     dependencies {
-        detektPlugins("io.nlopez.compose.rules:detekt:0.2.3")
+        detektPlugins("io.nlopez.compose.rules:detekt:0.3.0")
     }
 }
