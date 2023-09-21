@@ -70,7 +70,7 @@ dependencies {
 
     api("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
 
-    api("androidx.navigation:navigation-compose:2.7.2")
+    api("androidx.navigation:navigation-compose:2.7.3")
 
     api("io.coil-kt:coil-compose:2.4.0")
 
