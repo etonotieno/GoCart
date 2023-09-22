@@ -44,7 +44,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import io.devbits.gocart.designsystem.component.AuthButton
 import io.devbits.gocart.designsystem.component.FacebookSignupButton
 import io.devbits.gocart.designsystem.component.GoogleSignupButton
-import io.devbits.gocart.designsystem.component.ThemePreviews
+import io.devbits.gocart.designsystem.component.PreviewThemes
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.designsystem.theme.go_cart_avocado
 import io.devbits.gocart.designsystem.theme.go_cart_eggshell
@@ -203,7 +203,7 @@ fun HaveAccountText(
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun AuthenticationScreenPreview() {
     GoCartTheme {
