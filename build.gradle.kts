@@ -25,16 +25,11 @@ plugins {
 
 apply(from = "scripts/git-hooks.gradle")
 
-subprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
-    detekt {
-        config.setFrom("${project.rootDir}/detekt.yml")
-        parallel = true
-        buildUponDefaultConfig = true
-    }
+allprojects {
+    apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
 
-    apply(plugin = "com.diffplug.spotless")
-    spotless {
+    // Spotless Configuration Issue https://github.com/diffplug/spotless/issues/1380#issuecomment-1459601930
+    val configureSpotless: com.diffplug.gradle.spotless.SpotlessExtension.() -> Unit = {
         kotlin {
             target("**/*.kt")
             targetExclude("**/build/**/*.kt")
@@ -53,6 +48,21 @@ subprojects {
             targetExclude("**/build/**/*.xml")
             licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
         }
+    }
+
+    if (project === rootProject) {
+        spotless { predeclareDeps() }
+        extensions.configure<com.diffplug.gradle.spotless.SpotlessExtensionPredeclare>(configureSpotless)
+    } else {
+        extensions.configure(configureSpotless)
+    }
+
+    apply<io.gitlab.arturbosch.detekt.DetektPlugin>()
+
+    detekt {
+        config.setFrom("${project.rootDir}/detekt.yml")
+        parallel = true
+        buildUponDefaultConfig = true
     }
 
     dependencies {
