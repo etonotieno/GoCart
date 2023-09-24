@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
@@ -34,7 +34,7 @@ android {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -49,7 +49,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3"
+        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
 }
 
@@ -57,30 +57,28 @@ dependencies {
     implementation(project(":core:model"))
     api(project(":core:resources"))
 
-    api(platform("androidx.compose:compose-bom:2023.09.01"))
-    api("androidx.compose.ui:ui")
-    api("androidx.compose.ui:ui-graphics")
-    api("androidx.compose.ui:ui-tooling-preview")
-    api("androidx.compose.material3:material3")
-    api("androidx.compose.material:material-icons-extended")
+    api(platform(libs.androidx.compose.bom))
+    api(libs.androidx.compose.ui.tooling.preview)
+    api(libs.androidx.compose.material3)
+    api(libs.androidx.compose.material.iconsExtended)
 
-    api("androidx.core:core-ktx:1.12.0")
+    api(libs.androidx.core.ktx)
 
-    api("androidx.activity:activity-compose:1.8.0-rc01")
+    api(libs.androidx.activity.compose)
 
-    api("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    api(libs.androidx.lifecycle.runtime.compose)
 
-    api("androidx.navigation:navigation-compose:2.7.3")
+    api(libs.androidx.navigation.compose)
 
-    api("io.coil-kt:coil-compose:2.4.0")
+    api(libs.coil.compose)
 
-    testImplementation("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.09.01"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    androidTestImplementation(platform(libs.androidx.compose.bom))
+    androidTestImplementation(libs.androidx.compose.ui.test)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    debugImplementation(libs.androidx.compose.ui.testManifest)
 
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
