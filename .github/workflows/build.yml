@@ -27,8 +27,11 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Check Spotless
-        run: ./gradlew spotlessCheck
+        run: ./gradlew spotlessCheck detekt
 
       - name: Check Detekt
         run: ./gradlew detekt
@@ -54,6 +57,9 @@ jobs:
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
 
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
       - name: Gradle assemble
         run: ./gradlew assemble
 
@@ -62,6 +68,12 @@ jobs:
         with:
           name: APKs
           path: '**/build/outputs/apk/**/*.apk'
+
+      - name: Upload build reports
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-reports
+          path: build/reports/
 
       - name: Run local tests
         run: ./gradlew test
