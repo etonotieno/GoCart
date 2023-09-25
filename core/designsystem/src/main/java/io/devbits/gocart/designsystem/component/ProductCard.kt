@@ -71,6 +71,7 @@ fun ProductCard(
     }
     Column(
         modifier = modifier
+            .clip(RoundedCornerShape(16.dp))
             .then(clickModifier)
             .width(150.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp),
