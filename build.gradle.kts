@@ -14,27 +14,24 @@
  * limitations under the License.
  */
 plugins {
-    id("com.android.application") version "8.1.1" apply false
-    id("com.android.library") version "8.1.1" apply false
-    id("org.jetbrains.kotlin.android") version "1.9.10" apply false
-    id("org.jetbrains.kotlin.jvm") version "1.9.10" apply false
-    id("com.google.dagger.hilt.android") version "2.48" apply false
-    id("io.gitlab.arturbosch.detekt") version "1.23.1"
-    id("com.diffplug.spotless") version "6.21.0"
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.jvm) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.hilt) apply false
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.detekt)
+    alias(libs.plugins.spotless)
 }
 
 apply(from = "scripts/git-hooks.gradle")
 
-subprojects {
-    apply(plugin = "io.gitlab.arturbosch.detekt")
-    detekt {
-        config.setFrom("${project.rootDir}/detekt.yml")
-        parallel = true
-        buildUponDefaultConfig = true
-    }
+allprojects {
+    apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
 
-    apply(plugin = "com.diffplug.spotless")
-    spotless {
+    // Spotless Configuration Issue https://github.com/diffplug/spotless/issues/1380#issuecomment-1459601930
+    val configureSpotless: com.diffplug.gradle.spotless.SpotlessExtension.() -> Unit = {
         kotlin {
             target("**/*.kt")
             targetExclude("**/build/**/*.kt")
@@ -53,6 +50,21 @@ subprojects {
             targetExclude("**/build/**/*.xml")
             licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
         }
+    }
+
+    if (project === rootProject) {
+        spotless { predeclareDeps() }
+        extensions.configure<com.diffplug.gradle.spotless.SpotlessExtensionPredeclare>(configureSpotless)
+    } else {
+        extensions.configure(configureSpotless)
+    }
+
+    apply<io.gitlab.arturbosch.detekt.DetektPlugin>()
+
+    detekt {
+        config.setFrom("${project.rootDir}/detekt.yml")
+        parallel = true
+        buildUponDefaultConfig = true
     }
 
     dependencies {

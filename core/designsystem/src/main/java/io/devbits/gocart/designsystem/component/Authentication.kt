@@ -97,7 +97,7 @@ fun FacebookSignupButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
     )
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun AuthButtonsPreview() {
     GoCartTheme {

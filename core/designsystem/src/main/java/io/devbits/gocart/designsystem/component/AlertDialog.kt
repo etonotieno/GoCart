@@ -111,7 +111,7 @@ fun SuccessDialog(
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun SuccessDialogPreview() {
     GoCartTheme {
@@ -119,7 +119,7 @@ private fun SuccessDialogPreview() {
     }
 }
 
-@ThemePreviews
+@PreviewThemes
 @Composable
 private fun GCAlertDialogPreview() {
     GoCartTheme {
