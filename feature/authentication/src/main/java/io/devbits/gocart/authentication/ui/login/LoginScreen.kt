@@ -16,7 +16,6 @@
 package io.devbits.gocart.authentication.ui.login
 
 import android.util.Patterns
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,7 +26,6 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -37,8 +35,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MediumTopAppBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SheetState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -48,7 +48,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -63,10 +62,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.devbits.gocart.authentication.R
 import io.devbits.gocart.authentication.ui.AuthenticationViewModel
+import io.devbits.gocart.designsystem.component.CountriesBottomSheet
+import io.devbits.gocart.designsystem.component.CountryIcon
 import io.devbits.gocart.designsystem.component.GCPasswordTextField
 import io.devbits.gocart.designsystem.component.SuccessDialog
+import io.devbits.gocart.designsystem.model.defaultCountries
 import io.devbits.gocart.designsystem.theme.GoCartTheme
-import io.devbits.gocart.resources.R as resourcesR
 import java.util.regex.Pattern
 
 @Composable
@@ -110,6 +111,9 @@ fun LoginScreen(
     var passwordError by remember { mutableStateOf(false) }
 
     var rememberMe by remember { mutableStateOf(false) }
+
+    var showCountries by remember { mutableStateOf(false) }
+    var country by remember { mutableStateOf(defaultCountries.first()) }
 
     Scaffold(
         modifier = modifier,
@@ -158,16 +162,11 @@ fun LoginScreen(
                     Text(text = "Phone Number")
                 },
                 leadingIcon = {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
+                    CountryIcon(
+                        country = country,
+                        onClick = { showCountries = true },
                         modifier = Modifier.padding(start = 16.dp),
-                    ) {
-                        Image(
-                            painter = painterResource(resourcesR.drawable.ic_outlined_kenyaflag),
-                            contentDescription = null,
-                        )
-                        Icon(imageVector = Icons.Default.ArrowDropDown, contentDescription = null)
-                    }
+                    )
                 },
                 supportingText = {
                     if (phoneError) {
@@ -257,6 +256,15 @@ fun LoginScreen(
                 showLoginDialog = false
                 onLogin()
             },
+        )
+    }
+
+    if (showCountries) {
+        val sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+        CountriesBottomSheet(
+            onDismiss = { showCountries = false },
+            onCheck = { country = it },
+            sheetState = sheetState,
         )
     }
 }
