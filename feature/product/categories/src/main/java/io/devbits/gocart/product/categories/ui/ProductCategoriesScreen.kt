@@ -110,7 +110,7 @@ fun ProductCategoriesScreen(
 private fun ProductCategoriesScreenPreview() {
     GoCartTheme {
         ProductCategoriesScreen(
-            categories = ProductCategory.values().toList(),
+            categories = ProductCategory.entries,
             onClickCategory = {},
             onBack = {},
         )

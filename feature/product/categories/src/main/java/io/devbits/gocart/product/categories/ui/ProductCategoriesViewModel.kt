@@ -25,5 +25,5 @@ import kotlinx.coroutines.flow.StateFlow
 @HiltViewModel
 class ProductCategoriesViewModel @Inject constructor() : ViewModel() {
     val categories: StateFlow<List<ProductCategory>> =
-        MutableStateFlow(ProductCategory.values().toList())
+        MutableStateFlow(ProductCategory.entries)
 }

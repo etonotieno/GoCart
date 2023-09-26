@@ -251,7 +251,7 @@ private fun HomeScreenPreview() {
     GoCartTheme {
         HomeScreen(
             products = sampleProducts,
-            categories = ProductCategory.values().toList(),
+            categories = ProductCategory.entries,
             onBookmark = {},
             onAddToCart = {},
             navigateToProduct = {},

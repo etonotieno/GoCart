@@ -54,7 +54,7 @@ fun GcSortBottomSheet(
     onDismiss: () -> Unit,
     onSortChanged: (SortOption) -> Unit,
     modifier: Modifier = Modifier,
-    sortOptions: List<SortOption> = SortOption.values().toList(),
+    sortOptions: List<SortOption> = SortOption.entries,
     sheetState: SheetState = rememberModalBottomSheetState(),
 ) {
     var sortOption by remember { mutableStateOf(SortOption.TopSelling) }

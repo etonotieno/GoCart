@@ -219,7 +219,7 @@ private fun NavDrawerAuthenticatedPreview() {
     GoCartTheme {
         GoCartNavDrawerContent(
             isLoggedIn = true,
-            items = NavDrawerItem.values().asList(),
+            items = NavDrawerItem.entries,
             onClick = {},
             onClickHeader = {},
             onSignUp = {},
@@ -233,7 +233,7 @@ private fun NavDrawerGuestPreview() {
     GoCartTheme {
         GoCartNavDrawerContent(
             isLoggedIn = false,
-            items = NavDrawerItem.values().asList(),
+            items = NavDrawerItem.entries,
             onClick = {},
             onClickHeader = {},
             onSignUp = {},

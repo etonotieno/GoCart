@@ -69,7 +69,7 @@ fun GoCartApp(
                                 appState.navController.popBackStack()
                                 appState.navController.navigateToAuth()
                             },
-                            items = NavDrawerItem.values().asList(),
+                            items = NavDrawerItem.entries,
                             onClick = {
                                 if (it == NavDrawerItem.LOGOUT) onLogout()
                                 appState.scope.launch { drawerState.close() }
@@ -102,7 +102,7 @@ fun GoCartApp(
                     // Hide during onboarding and authentication flows
                     if (appState.currentDestinationRoute != null) {
                         GoCartNavBar(
-                            navigationRoutes = DestinationRoutes.values().asList(),
+                            navigationRoutes = DestinationRoutes.entries,
                             onNavigationSelected = appState::navigateToRoute,
                             currentDestination = appState.currentDestination,
                         )

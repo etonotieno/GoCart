@@ -28,5 +28,5 @@ import kotlinx.coroutines.flow.StateFlow
 class HomeViewModel @Inject constructor() : ViewModel() {
     val products: StateFlow<List<Product>> = MutableStateFlow(sampleProducts)
     val categories: StateFlow<List<ProductCategory>> =
-        MutableStateFlow(ProductCategory.values().toList())
+        MutableStateFlow(ProductCategory.entries)
 }

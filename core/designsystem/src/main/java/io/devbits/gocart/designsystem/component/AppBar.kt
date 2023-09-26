@@ -167,7 +167,7 @@ private fun GoCartTopAppBarPreview() {
 private fun GoCartNavBarPreview() {
     GoCartTheme {
         GoCartNavBar(
-            navigationRoutes = DestinationRoutes.values().asList(),
+            navigationRoutes = DestinationRoutes.entries,
             onNavigationSelected = { _ -> },
             currentDestination = null,
         )
