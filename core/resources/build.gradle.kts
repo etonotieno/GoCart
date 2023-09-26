@@ -18,6 +18,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
 }
 
+kotlin {
+    jvmToolchain(17)
+}
+
 android {
     namespace = "io.devbits.gocart.resources"
     compileSdk = 34
@@ -37,13 +41,6 @@ android {
                 "proguard-rules.pro",
             )
         }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
     }
 }
 
