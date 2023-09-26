@@ -40,6 +40,7 @@ fun GCStyledTextPair(
 ) {
     val finalText = buildAnnotatedString {
         append(pair.first)
+        append(" ")
         withStyle(style) {
             append(pair.second)
         }

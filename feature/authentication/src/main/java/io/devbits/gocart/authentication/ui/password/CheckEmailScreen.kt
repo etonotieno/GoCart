@@ -130,7 +130,7 @@ fun CheckEmailScreen(
 
             GCStyledTextPair(
                 pair = Pair(
-                    first = "Did not receive the email? Check your spam filter, or ",
+                    first = "Did not receive the email? Check your spam filter, or",
                     second = "try another email address",
                 ),
                 style = SpanStyle(color = MaterialTheme.colorScheme.primary),
