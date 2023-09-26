@@ -83,6 +83,7 @@ dependencies {
     implementation(project(":feature:product:categories"))
     implementation(project(":feature:product:category"))
     implementation(project(":feature:product:details"))
+    implementation(project(":feature:cart"))
 
     implementation(libs.androidx.core.splashscreen)
 
