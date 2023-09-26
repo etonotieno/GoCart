@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material3.Card
@@ -34,7 +35,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
@@ -42,13 +42,14 @@ import io.devbits.gocart.designsystem.theme.GoCartTheme
 fun GoCartAlert(
     icon: @Composable () -> Unit,
     text: @Composable () -> Unit,
-    iconColor: Color,
-    containerColor: Color,
     modifier: Modifier = Modifier,
+    iconColor: Color = MaterialTheme.colorScheme.inversePrimary,
+    containerColor: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f),
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = containerColor),
         modifier = modifier,
+        shape = RoundedCornerShape(8.dp),
     ) {
         Row(
             modifier = Modifier.padding(8.dp),
@@ -68,15 +69,19 @@ fun GoCartAlert(
 fun GoCartAlert(
     icon: ImageVector,
     text: String,
-    iconColor: Color,
-    containerColor: Color,
     modifier: Modifier = Modifier,
+    iconColor: Color = MaterialTheme.colorScheme.inversePrimary,
+    containerColor: Color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.2f),
 ) {
     GoCartAlert(
         containerColor = containerColor,
         iconColor = iconColor,
         icon = {
-            Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(24.dp))
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier.size(24.dp),
+            )
         },
         text = {
             Text(text = text)
@@ -85,15 +90,13 @@ fun GoCartAlert(
     )
 }
 
-@Preview
+@PreviewWhiteBackground
 @Composable
 private fun GoCartAlertSuccessPreview() {
     GoCartTheme {
         GoCartAlert(
             icon = Icons.Outlined.Info,
             text = "You can only order a maximum quantity of 3 in your item.",
-            iconColor = MaterialTheme.colorScheme.inversePrimary,
-            containerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.2f),
         )
     }
 }
