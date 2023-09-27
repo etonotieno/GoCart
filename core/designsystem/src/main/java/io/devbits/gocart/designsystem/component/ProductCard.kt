@@ -167,9 +167,7 @@ fun ProductCard(
             )
         } else {
             QuantityControl(
-                quantity = quantity,
-                onAdd = { quantity++ },
-                onRemove = { if (quantity > 0) quantity-- },
+                onUpdate = { quantity = it },
                 showDelete = showDelete,
                 modifier = Modifier
                     .fillMaxWidth()

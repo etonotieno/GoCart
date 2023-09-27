@@ -74,11 +74,7 @@ fun ProductDetailsCard(
         }
 
         QuantityControl(
-            quantity = quantity,
-            onAdd = { quantity++ },
-            onRemove = {
-                if (quantity > 0) quantity--
-            },
+            onUpdate = { quantity = it },
             showDelete = true,
             modifier = Modifier.align(Alignment.Top),
         )

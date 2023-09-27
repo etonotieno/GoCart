@@ -28,39 +28,56 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.designsystem.thenIf
 
 @Composable
 fun QuantityControl(
-    quantity: Int,
-    onAdd: () -> Unit,
-    onRemove: () -> Unit,
+    onUpdate: (quantity: Int) -> Unit,
     modifier: Modifier = Modifier,
     showDelete: Boolean = false,
 ) {
+    var quantity by remember { mutableIntStateOf(0) }
+    val enabled by remember { derivedStateOf { quantity > 0 } }
+
+    LaunchedEffect(quantity) {
+        onUpdate(quantity)
+    }
+
     Row(
         modifier = modifier,
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        @Suppress("MagicNumber")
+        val alpha = if (enabled) 1f else 0.3f
+
+        val decrement = Modifier.clickable(enabled = enabled) { quantity-- }
+
         if (showDelete) {
             Icon(
                 imageVector = Icons.Outlined.Delete,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.error,
-                modifier = Modifier.clickable { onRemove() },
+                tint = MaterialTheme.colorScheme.error.copy(alpha = alpha),
+                modifier = Modifier.thenIf(enabled) { decrement },
             )
         } else {
             Icon(
                 imageVector = Icons.Default.RemoveCircle,
                 contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.clickable { onRemove() },
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = alpha),
+                modifier = Modifier.thenIf(enabled) { decrement },
             )
         }
 
@@ -79,7 +96,7 @@ fun QuantityControl(
             imageVector = Icons.Default.AddCircle,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.clickable { onAdd() },
+            modifier = Modifier.clickable { quantity++ },
         )
     }
 }
@@ -88,6 +105,6 @@ fun QuantityControl(
 @Composable
 private fun QuantityControlPreview() {
     GoCartTheme {
-        QuantityControl(quantity = 1, onAdd = {}, onRemove = {})
+        QuantityControl(onUpdate = {}, showDelete = true)
     }
 }
