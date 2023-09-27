@@ -46,4 +46,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.splashscreen)
+
+    detektPlugins(libs.compose.rules.detekt)
 }

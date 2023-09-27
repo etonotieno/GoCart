@@ -78,4 +78,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    detektPlugins(libs.compose.rules.detekt)
 }

@@ -66,8 +66,4 @@ allprojects {
         parallel = true
         buildUponDefaultConfig = true
     }
-
-    dependencies {
-        detektPlugins("io.nlopez.compose.rules:detekt:0.3.0")
-    }
 }

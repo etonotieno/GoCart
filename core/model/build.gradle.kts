@@ -20,3 +20,7 @@ plugins {
 kotlin {
     jvmToolchain(17)
 }
+
+dependencies {
+    detektPlugins(libs.compose.rules.detekt)
+}
