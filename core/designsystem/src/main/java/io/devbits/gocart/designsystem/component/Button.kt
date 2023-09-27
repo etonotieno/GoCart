@@ -53,13 +53,15 @@ fun SecondaryButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     border: BorderStroke? = null,
+    containerColor: Color = MaterialTheme.colorScheme.inversePrimary.copy(alpha = 0.2f),
+    contentColor: Color = MaterialTheme.colorScheme.primary,
 ) {
     Button(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = MaterialTheme.colorScheme.inversePrimary.copy(alpha = 0.2f),
-            contentColor = MaterialTheme.colorScheme.primary,
+            containerColor = containerColor,
+            contentColor = contentColor,
         ),
         border = border,
     ) {
@@ -76,12 +78,13 @@ fun SecondaryGrayButton(
         width = 1.dp,
         color = MaterialTheme.colorScheme.inverseSurface,
     ),
+    contentColor: Color = MaterialTheme.colorScheme.inverseSurface,
 ) {
     TextButton(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.textButtonColors(
-            contentColor = MaterialTheme.colorScheme.inverseSurface,
+            contentColor = contentColor,
         ),
         border = border,
     ) {
@@ -97,12 +100,13 @@ fun TertiaryButton(
     leadingIcon: @Composable (() -> Unit)? = null,
     trailingIcon: @Composable (() -> Unit)? = null,
     iconColor: Color = MaterialTheme.colorScheme.onSurface,
+    contentColor: Color = MaterialTheme.colorScheme.inverseSurface,
 ) {
     TextButton(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.textButtonColors(
-            contentColor = MaterialTheme.colorScheme.inverseSurface,
+            contentColor = contentColor,
         ),
     ) {
         CompositionLocalProvider(LocalContentColor provides iconColor) {
