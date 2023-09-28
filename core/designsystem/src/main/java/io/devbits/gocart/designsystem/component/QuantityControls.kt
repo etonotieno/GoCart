@@ -101,6 +101,62 @@ fun QuantityControl(
     }
 }
 
+@Composable
+fun QuantityControl(
+    quantity: Int,
+    onAdd: () -> Unit,
+    onRemove: () -> Unit,
+    modifier: Modifier = Modifier,
+    showDelete: Boolean = false,
+) {
+    val enabled by remember { derivedStateOf { quantity > 0 } }
+
+    Row(
+        modifier = modifier,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        @Suppress("MagicNumber")
+        val alpha = if (enabled) 1f else 0.3f
+
+        val decrement = Modifier.clickable(enabled = enabled) { onRemove() }
+
+        if (showDelete) {
+            Icon(
+                imageVector = Icons.Outlined.Delete,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.error.copy(alpha = alpha),
+                modifier = Modifier.thenIf(enabled) { decrement },
+            )
+        } else {
+            Icon(
+                imageVector = Icons.Default.RemoveCircle,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary.copy(alpha = alpha),
+                modifier = Modifier.thenIf(enabled) { decrement },
+            )
+        }
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Text(
+            text = "$quantity",
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+        )
+
+        Spacer(modifier = Modifier.width(8.dp))
+
+        Icon(
+            imageVector = Icons.Default.AddCircle,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.primary,
+            modifier = Modifier.clickable { onAdd() },
+        )
+    }
+}
+
 @Preview
 @Composable
 private fun QuantityControlPreview() {
