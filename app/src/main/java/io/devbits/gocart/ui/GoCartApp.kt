@@ -94,7 +94,7 @@ fun GoCartApp(
                                 }
                             },
                             onSearch = {},
-                            onCheckout = {},
+                            onCheckout = appState::navigateToCart,
                         )
                     }
                 },

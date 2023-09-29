@@ -31,6 +31,7 @@ import io.devbit.gocart.orders.navigation.ordersRoute
 import io.devbits.gocart.address.navigation.navigateToAddress
 import io.devbits.gocart.authentication.navigation.authenticationRoute
 import io.devbits.gocart.authentication.navigation.navigateToAuth
+import io.devbits.gocart.cart.navigation.navigateToCart
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.model.NavDrawerItem
 import io.devbits.gocart.favorites.navigation.favoritesRoute
@@ -104,6 +105,8 @@ class GoCartAppState(
             restoreState = true
         }
     }
+
+    fun navigateToCart() = navController.navigateToCart()
 }
 
 @Composable

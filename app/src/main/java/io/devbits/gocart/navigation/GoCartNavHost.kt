@@ -36,6 +36,8 @@ import io.devbits.gocart.authentication.navigation.navigateToUpdatePassword
 import io.devbits.gocart.authentication.navigation.phoneVerificationScreen
 import io.devbits.gocart.authentication.navigation.signUpScreen
 import io.devbits.gocart.authentication.navigation.updatePasswordScreen
+import io.devbits.gocart.cart.navigation.cartScreen
+import io.devbits.gocart.cart.navigation.navigateToCart
 import io.devbits.gocart.favorites.navigation.favoritesScreen
 import io.devbits.gocart.homefeed.navigation.homeScreen
 import io.devbits.gocart.homefeed.navigation.navigateToHome
@@ -191,6 +193,7 @@ fun GoCartNavHost(
             navigateToProduct = { productId ->
                 navController.navigateToProductDetails(productId)
             },
+            navigateToCart = navController::navigateToCart,
         )
 
         productDetailsScreen(
@@ -198,6 +201,11 @@ fun GoCartNavHost(
             onClickProduct = { productId ->
                 navController.navigateToProductDetails(productId)
             },
+            navigateToCart = navController::navigateToCart,
+        )
+
+        cartScreen(
+            onBack = navController::popBackStack,
         )
     }
 }

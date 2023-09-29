@@ -34,6 +34,7 @@ fun NavController.navigateToProductDetails(productId: Int, navOptions: NavOption
 fun NavGraphBuilder.productDetailsScreen(
     onBack: () -> Unit,
     onClickProduct: (Int) -> Unit,
+    navigateToCart: () -> Unit,
 ) {
     composable(
         route = "$productDetailRoute/{$productIdArg}",
@@ -42,6 +43,7 @@ fun NavGraphBuilder.productDetailsScreen(
         ProductDetailsRoute(
             onBack = onBack,
             onClickProduct = onClickProduct,
+            navigateToCart = navigateToCart,
         )
     }
 }

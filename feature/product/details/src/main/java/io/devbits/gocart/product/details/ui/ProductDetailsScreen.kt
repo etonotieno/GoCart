@@ -59,6 +59,7 @@ import io.devbits.gocart.designsystem.theme.GoCartTheme
 fun ProductDetailsRoute(
     onBack: () -> Unit,
     onClickProduct: (Int) -> Unit,
+    navigateToCart: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ProductDetailsViewModel = hiltViewModel(),
 ) {
@@ -66,10 +67,11 @@ fun ProductDetailsRoute(
     ProductDetailsScreen(
         product = viewModel.product,
         relatedProducts = relatedProducts,
+        onClickProduct = onClickProduct,
         onBookmark = {},
         onAddToCart = {},
+        navigateToCart = navigateToCart,
         onAddToWishlist = {},
-        onClickProduct = onClickProduct,
         onBack = onBack,
         modifier = modifier,
     )
@@ -84,6 +86,7 @@ fun ProductDetailsScreen(
     onBookmark: () -> Unit,
     onAddToCart: () -> Unit,
     onAddToWishlist: () -> Unit,
+    navigateToCart: () -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -100,7 +103,7 @@ fun ProductDetailsScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = navigateToCart) {
                         Icon(
                             imageVector = Icons.Outlined.ShoppingCart,
                             contentDescription = null,
@@ -211,10 +214,11 @@ private fun ProductDetailsScreenPreview() {
         ProductDetailsScreen(
             product = sampleProducts[0],
             relatedProducts = sampleProducts,
+            onClickProduct = {},
             onBookmark = {},
             onAddToCart = {},
             onAddToWishlist = {},
-            onClickProduct = {},
+            navigateToCart = {},
             onBack = {},
         )
     }

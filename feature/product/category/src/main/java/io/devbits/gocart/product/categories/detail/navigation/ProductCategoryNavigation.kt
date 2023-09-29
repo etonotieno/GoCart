@@ -32,11 +32,13 @@ fun NavController.navigateToProductCategory(category: String, navOptions: NavOpt
 fun NavGraphBuilder.productCategoryScreen(
     onBack: () -> Unit,
     navigateToProduct: (Int) -> Unit,
+    navigateToCart: () -> Unit,
 ) {
     composable(route = "$productCategoryRoute/{$categoryArg}") {
         ProductCategoryRoute(
             onBack = onBack,
             navigateToProduct = navigateToProduct,
+            navigateToCart = navigateToCart,
         )
     }
 }

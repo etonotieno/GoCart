@@ -62,6 +62,7 @@ import kotlinx.coroutines.launch
 fun ProductCategoryRoute(
     onBack: () -> Unit,
     navigateToProduct: (Int) -> Unit,
+    navigateToCart: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ProductCategoryViewModel = hiltViewModel(),
 ) {
@@ -71,8 +72,9 @@ fun ProductCategoryRoute(
         products = products,
         onBookmark = {},
         onAddToCart = {},
-        navigateToProduct = navigateToProduct,
         onBack = onBack,
+        navigateToProduct = navigateToProduct,
+        navigateToCart = navigateToCart,
         modifier = modifier,
     )
 }
@@ -86,6 +88,7 @@ fun ProductCategoryScreen(
     onAddToCart: () -> Unit,
     onBack: () -> Unit,
     navigateToProduct: (Int) -> Unit,
+    navigateToCart: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var showBottomSheet by remember { mutableStateOf(false) }
@@ -112,7 +115,7 @@ fun ProductCategoryScreen(
                         )
                     }
 
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = navigateToCart) {
                         Icon(
                             imageVector = Icons.Outlined.ShoppingCart,
                             contentDescription = null,
@@ -205,8 +208,9 @@ private fun ProductCategoryScreenPreview() {
             products = sampleProducts,
             onBookmark = {},
             onAddToCart = {},
-            navigateToProduct = {},
             onBack = {},
+            navigateToProduct = {},
+            navigateToCart = {},
         )
     }
 }
