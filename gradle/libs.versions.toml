@@ -1,5 +1,5 @@
 [versions]
-activityCompose = "1.8.0-rc01"
+activityCompose = "1.8.0"
 androidxComposeBom = "2023.09.02"
 androidxComposeCompiler = "1.5.3"
 androidxDataStore = "1.0.0"
