@@ -15,9 +15,48 @@
  */
 plugins {
     `kotlin-dsl`
+    alias(libs.plugins.spotless)
 }
 
-repositories {
-    google()
-    mavenCentral()
+kotlin {
+    jvmToolchain(17)
+}
+
+spotless {
+    kotlin {
+        target("src/**/*.kt")
+        ktlint(libs.versions.ktlint.get())
+        licenseHeaderFile(rootProject.file("../spotless/copyright.kt"))
+    }
+
+    kotlinGradle {
+        target("*.kts")
+        ktlint(libs.versions.ktlint.get())
+        licenseHeaderFile(rootProject.file("../spotless/copyright.kts"), "(^(?![\\/ ]\\**).*$)")
+    }
+}
+
+dependencies {
+    compileOnly(libs.android.gradlePlugin)
+    compileOnly(libs.detekt.gradlePlugin)
+    compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.compose.gradlePlugin)
+    compileOnly(libs.spotless.gradlePlugin)
+}
+
+gradlePlugin {
+    plugins {
+        register("root") {
+            id = "gocart.root"
+            implementationClass = "RootConventionPlugin"
+        }
+        register("androidApplication") {
+            id = "gocart.android.application"
+            implementationClass = "AndroidAppConventionPlugin"
+        }
+        register("kotlinAndroid") {
+            id = "gocart.kotlin.android"
+            implementationClass = "KotlinAndroidConventionPlugin"
+        }
+    }
 }
