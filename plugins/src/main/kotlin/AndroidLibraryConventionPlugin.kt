@@ -13,31 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import io.devbits.gocart.configureAndroid
+import org.gradle.api.Plugin
+import org.gradle.api.Project
 
-plugins {
-    id("gocart.jvm.library")
-    alias(libs.plugins.compose.multiplatform)
-}
-
-dependencies {
-    implementation(project(":shared"))
-    implementation(compose.desktop.currentOs)
-}
-
-compose.desktop {
-    application {
-        mainClass = "io.devbits.gocart.desktop.MainKt"
-
-        nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-
-            packageName = "gocart"
-            packageVersion = "1.0.0"
-
-            windows {
-                iconFile.set(project.file("icon.ico"))
+class AndroidLibraryConventionPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        with(target) {
+            with(pluginManager) {
+                apply("com.android.library")
             }
+
+            configureAndroid()
         }
     }
 }

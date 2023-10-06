@@ -14,27 +14,19 @@
  * limitations under the License.
  */
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
+    id("gocart.android.application")
+    id("gocart.kotlin.android")
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
 android {
-    compileSdk = 34
     namespace = "io.devbits.gocart"
 
     defaultConfig {
         applicationId = "io.devbits.gocart"
-        minSdk = 21
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
         manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_round"
     }
@@ -107,8 +99,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    detektPlugins(libs.compose.rules.detekt)
 }
 
 kapt {

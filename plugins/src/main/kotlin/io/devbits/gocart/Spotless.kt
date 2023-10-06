@@ -29,8 +29,8 @@ internal fun Project.configureSpotless() {
     spotless {
         kotlin {
             target("**/*.kt")
-            targetExclude("**/build/**/*.kt")
-            ktlint(ktlintVersion).userData(mapOf("android" to "true"))
+            targetExclude("**/build/**/*.kt", rootProject.file("spotless/copyright.kt"))
+            ktlint(ktlintVersion)
             licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
             trimTrailingWhitespace()
             endWithNewline()
@@ -38,12 +38,12 @@ internal fun Project.configureSpotless() {
         kotlinGradle {
             ktlint(ktlintVersion)
             target("**/*.kts")
-            targetExclude("**/build/**/*.kts")
+            targetExclude("**/build/**/*.kts", rootProject.file("spotless/copyright.kts"))
             licenseHeaderFile(rootProject.file("spotless/copyright.kts"), "(^(?![\\/ ]\\*).*$)")
         }
         format("xml") {
             target("**/*.xml")
-            targetExclude("**/build/**/*.xml")
+            targetExclude("**/build/**/*.xml", rootProject.file("spotless/copyright.xml"))
             licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
         }
     }

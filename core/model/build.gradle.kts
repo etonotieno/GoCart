@@ -14,13 +14,5 @@
  * limitations under the License.
  */
 plugins {
-    alias(libs.plugins.kotlin.jvm)
-}
-
-kotlin {
-    jvmToolchain(17)
-}
-
-dependencies {
-    detektPlugins(libs.compose.rules.detekt)
+    id("gocart.jvm.library")
 }

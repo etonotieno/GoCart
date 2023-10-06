@@ -18,20 +18,17 @@ plugins {
     alias(libs.plugins.spotless)
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
 spotless {
     kotlin {
-        target("src/**/*.kt")
         ktlint(libs.versions.ktlint.get())
+        target("src/**/*.kt")
+        targetExclude("**/build/**/*.kt")
         licenseHeaderFile(rootProject.file("../spotless/copyright.kt"))
     }
-
     kotlinGradle {
-        target("*.kts")
         ktlint(libs.versions.ktlint.get())
+        target("**/*.kts")
+        targetExclude("**/build/**/*.kts")
         licenseHeaderFile(rootProject.file("../spotless/copyright.kts"), "(^(?![\\/ ]\\**).*$)")
     }
 }
@@ -50,13 +47,30 @@ gradlePlugin {
             id = "gocart.root"
             implementationClass = "RootConventionPlugin"
         }
+
         register("androidApplication") {
             id = "gocart.android.application"
             implementationClass = "AndroidAppConventionPlugin"
         }
+
+        register("androidLibrary") {
+            id = "gocart.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
+
+        register("jvmLibrary") {
+            id = "gocart.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
+        }
+
         register("kotlinAndroid") {
             id = "gocart.kotlin.android"
             implementationClass = "KotlinAndroidConventionPlugin"
+        }
+
+        register("kotlinMultiplatform") {
+            id = "gocart.kotlin.multiplatform"
+            implementationClass = "KotlinMultiplatformConventionPlugin"
         }
     }
 }

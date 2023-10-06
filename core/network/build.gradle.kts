@@ -14,22 +14,15 @@
  * limitations under the License.
  */
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    id("gocart.android.library")
+    id("gocart.kotlin.android")
     alias(libs.plugins.kotlin.kapt)
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
 android {
-    compileSdk = 34
     namespace = "io.devbits.gocart.core.network"
 
     defaultConfig {
-        minSdk = 21
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
@@ -51,8 +44,6 @@ dependencies {
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-
-    detektPlugins(libs.compose.rules.detekt)
 }
 
 kapt {

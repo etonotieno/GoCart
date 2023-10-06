@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 plugins {
+    id("gocart.root")
+
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.android) apply false
@@ -22,50 +24,6 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.hilt) apply false
     alias(libs.plugins.ksp) apply false
-    alias(libs.plugins.detekt)
-    alias(libs.plugins.spotless)
-}
-
-apply(from = "scripts/git-hooks.gradle")
-
-allprojects {
-    apply<com.diffplug.gradle.spotless.SpotlessPlugin>()
-
-    // Spotless Configuration Issue https://github.com/diffplug/spotless/issues/1380#issuecomment-1459601930
-    val configureSpotless: com.diffplug.gradle.spotless.SpotlessExtension.() -> Unit = {
-        kotlin {
-            target("**/*.kt")
-            targetExclude("**/build/**/*.kt")
-            ktlint(libs.versions.ktlint.get()).userData(mapOf("android" to "true"))
-            licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
-            trimTrailingWhitespace()
-            endWithNewline()
-        }
-        kotlinGradle {
-            ktlint(libs.versions.ktlint.get())
-            target("**/*.kts")
-            targetExclude("**/build/**/*.kts")
-            licenseHeaderFile(rootProject.file("spotless/copyright.kts"), "(^(?![\\/ ]\\*).*$)")
-        }
-        format("xml") {
-            target("**/*.xml")
-            targetExclude("**/build/**/*.xml")
-            licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
-        }
-    }
-
-    if (project === rootProject) {
-        spotless { predeclareDeps() }
-        extensions.configure<com.diffplug.gradle.spotless.SpotlessExtensionPredeclare>(configureSpotless)
-    } else {
-        extensions.configure(configureSpotless)
-    }
-
-    apply<io.gitlab.arturbosch.detekt.DetektPlugin>()
-
-    detekt {
-        config.setFrom("${project.rootDir}/detekt.yml")
-        parallel = true
-        buildUponDefaultConfig = true
-    }
+    alias(libs.plugins.detekt) apply false
+    alias(libs.plugins.spotless) apply false
 }

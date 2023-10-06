@@ -14,23 +14,16 @@
  * limitations under the License.
  */
 plugins {
-    alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
+    id("gocart.android.library")
+    id("gocart.kotlin.android")
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.hilt)
 }
 
-kotlin {
-    jvmToolchain(17)
-}
-
 android {
-    compileSdk = 34
     namespace = "io.devbits.gocart.onboarding"
 
     defaultConfig {
-        minSdk = 21
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -67,8 +60,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    detektPlugins(libs.compose.rules.detekt)
 }
 
 kapt {

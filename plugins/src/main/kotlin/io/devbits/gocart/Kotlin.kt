@@ -25,5 +25,9 @@ internal fun Project.configureKotlin() {
     }
 }
 
+internal fun Project.configureKotlinJvm() {
+    configureKotlin()
+}
+
 private fun Project.kotlin(action: KotlinProjectExtension.() -> Unit) =
     extensions.configure<KotlinProjectExtension>(action)
