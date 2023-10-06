@@ -63,6 +63,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared"))
     implementation(project(":core:datastore"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:model"))

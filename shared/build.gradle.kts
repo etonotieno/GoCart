@@ -18,22 +18,20 @@ plugins {
     alias(libs.plugins.android.library)
 }
 
-@OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
 kotlin {
+    @OptIn(org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi::class)
     targetHierarchy.default()
 
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
+    jvmToolchain(17)
+
+    androidTarget()
+
+    jvm()
 
     listOf(
         iosX64(),
         iosArm64(),
-        iosSimulatorArm64()
+        iosSimulatorArm64(),
     ).forEach {
         it.binaries.framework {
             baseName = "shared"
@@ -41,7 +39,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        named("commonMain") {
             dependencies {
             }
         }
@@ -52,6 +50,10 @@ android {
     namespace = "io.devbits.gocart.shared"
     compileSdk = 34
     defaultConfig {
-        minSdk = 24
+        minSdk = 21
     }
+}
+
+dependencies {
+    detektPlugins(libs.compose.rules.detekt)
 }
