@@ -36,12 +36,13 @@ allprojects {
         kotlin {
             target("**/*.kt")
             targetExclude("**/build/**/*.kt")
-            ktlint().userData(mapOf("android" to "true"))
+            ktlint(libs.versions.ktlint.get()).userData(mapOf("android" to "true"))
             licenseHeaderFile(rootProject.file("spotless/copyright.kt"))
             trimTrailingWhitespace()
             endWithNewline()
         }
-        format("kts") {
+        kotlinGradle {
+            ktlint(libs.versions.ktlint.get())
             target("**/*.kts")
             targetExclude("**/build/**/*.kts")
             licenseHeaderFile(rootProject.file("spotless/copyright.kts"), "(^(?![\\/ ]\\*).*$)")
