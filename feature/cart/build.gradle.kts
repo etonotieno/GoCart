@@ -45,9 +45,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:datastore"))
-    implementation(project(":core:designsystem"))
-    implementation(project(":core:model"))
+    implementation(projects.core.datastore)
+    implementation(projects.core.designsystem)
+    implementation(projects.core.model)
 
     implementation(libs.androidx.datastore.preferences)
 

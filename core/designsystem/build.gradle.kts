@@ -44,8 +44,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:model"))
-    api(project(":core:resources"))
+    implementation(projects.core.model)
+    api(projects.core.resources)
 
     api(platform(libs.androidx.compose.bom))
     api(libs.androidx.compose.ui.tooling.preview)
