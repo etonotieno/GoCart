@@ -46,6 +46,7 @@ internal fun Project.configureSpotless() {
             targetExclude(
                 "**/build/**/*.xml",
                 ".idea/*.xml",
+                ".idea/**/*.xml",
                 rootProject.file("spotless/copyright.xml"),
             )
             licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
