@@ -16,7 +16,7 @@
 plugins {
     id("gocart.android.library")
     id("gocart.kotlin.android")
-    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -40,12 +40,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.compiler)
 
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlinx.coroutines.android)
-}
-
-kapt {
-    correctErrorTypes = true
 }
