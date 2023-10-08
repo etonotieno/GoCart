@@ -60,8 +60,8 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: Gradle assemble
-        run: ./gradlew assemble
+      - name: Build with Gradle
+        run: ./gradlew build
 
       - name: Upload build outputs
         uses: actions/upload-artifact@v3
