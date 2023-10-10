@@ -70,10 +70,12 @@ jobs:
           path: '**/build/outputs/apk/**/*.apk'
 
       - name: Upload build reports
+        if: always()
         uses: actions/upload-artifact@v3
         with:
-          name: build-reports
-          path: build/reports/
+          name: android-reports
+          path: |
+            **/build/reports/*
 
       - name: Run local tests
         run: ./gradlew test
