@@ -2,6 +2,7 @@ name: Bug Report
 description: File a bug report
 title: "[Bug]: "
 labels: [ "bug" ]
+assignees: [ "etonotieno" ]
 body:
   - type: checkboxes
     attributes:
@@ -28,11 +29,10 @@ body:
       label: Reproduce the bug
       description: Steps to reproduce the behaviour
       placeholder: |
-        1. In this environment...
         1. With this config...
-        1. Run '...'
-        1. Click on '...'
-        1. See error...
+        2. Run '...'
+        3. Click on '...'
+        4. See error...
     validations:
       required: false
   - type: textarea
@@ -49,7 +49,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Environment!
+        # Environment
   - type: input
     id: android-version
     attributes:

@@ -22,11 +22,11 @@ does in a short paragraph. please check the below boxes
 - [ ] I have tested the changes added on a physical device
 
 ## Closes/Fixes Issues
-_Declare any issues by typing `Fixes #1` or `Closes #1` for example so that the automation can kick
-in when this is merged_
+Declare any issues by typing `Fixes #1` or `Closes #1` for example so that the automation can kick
+in when this is merged
 
 ## Other testing QA Notes
-_What have you tested specifically and what possible impacts/areas there are that may need retesting
-by others._
+What have you tested specifically and what possible impacts/areas there are that may need retesting
+by others.
 
 Please add a screenshot (if necessary)
