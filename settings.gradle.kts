@@ -21,10 +21,26 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+    }
+}
+
+plugins {
+    id("com.gradle.enterprise") version "3.15.1"
+}
+
+val isCi = providers.environmentVariable("CI").isPresent
+
+gradleEnterprise {
+    buildScan {
+        termsOfServiceUrl = "https://gradle.com/terms-of-service"
+        termsOfServiceAgree = "yes"
+
+        publishAlwaysIf(isCi)
     }
 }
 
