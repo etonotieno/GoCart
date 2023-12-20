@@ -20,7 +20,7 @@ kotlinxCoroutines = "1.7.3"
 ksp = "1.9.21-1.0.16"
 ktlint = "0.50.0"
 lifecycleRuntimeCompose = "2.6.2"
-navigationCompose = "2.7.5"
+navigationCompose = "2.7.6"
 spotless = "6.23.0"
 
 [libraries]
