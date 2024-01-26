@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 pluginManagement {
-    includeBuild("plugins")
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
