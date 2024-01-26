@@ -1,10 +1,11 @@
 [versions]
 activityCompose = "1.8.2"
 androidxComposeBom = "2024.01.00"
-androidxComposeCompiler = "1.5.3"
+androidxComposeCompiler = "1.5.8"
 androidxDataStore = "1.0.0"
 agp = "8.2.2"
 compose = "1.5.11"
+composeMultiplatform = "1.6.0-beta01"
 coilCompose = "2.5.0"
 coreKtx = "1.12.0"
 composeRules = "0.3.10"
@@ -15,10 +16,10 @@ hilt = "2.50"
 hiltNavigationCompose = "1.1.0"
 junit = "4.13.2"
 junitExt = "1.1.5"
-kotlin = "1.9.10"
+kotlin = "1.9.22"
 kotlinxCoroutines = "1.7.3"
-ksp = "1.9.21-1.0.16"
-ktlint = "0.50.0"
+ksp = "1.9.22-1.0.17"
+ktlint = "1.1.1"
 lifecycleRuntimeCompose = "2.7.0"
 navigationCompose = "2.7.6"
 spotless = "6.25.0"
@@ -54,7 +55,7 @@ kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-c
 ktlint = { module = "com.pinterest:ktlint", version.ref = "ktlint" }
 
 android-gradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
-compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "compose" }
+compose-gradlePlugin = { module = "org.jetbrains.compose:compose-gradle-plugin", version.ref = "composeMultiplatform" }
 detekt-gradlePlugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
 kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
@@ -62,7 +63,7 @@ spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
-compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose" }
+compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
