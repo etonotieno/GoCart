@@ -60,21 +60,21 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      - name: Upload build reports
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-reports
-          path: |
-            **/build/reports/*
+#      - name: Upload build reports
+#        if: always()
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: android-reports
+#          path: |
+#            **/build/reports/*
 
       - name: Run local tests
         run: ./gradlew test
 
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-test-results
-          path: |
-            **/build/test-results/*
+#      - name: Upload test results
+#        if: always()
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: android-test-results
+#          path: |
+#            **/build/test-results/*
