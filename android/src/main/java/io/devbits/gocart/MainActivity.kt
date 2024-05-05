@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        installSplashScreen().apply {
+        installSplashScreen().run {
             setKeepOnScreenCondition { viewModel.showSplashScreen.value }
         }
 

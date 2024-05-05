@@ -33,6 +33,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,9 +51,10 @@ fun QuantityControl(
 ) {
     var quantity by remember { mutableIntStateOf(0) }
     val enabled by remember { derivedStateOf { quantity > 0 } }
+    val latestOnUpdate: (quantity: Int) -> Unit by rememberUpdatedState(onUpdate)
 
     LaunchedEffect(quantity) {
-        onUpdate(quantity)
+        latestOnUpdate(quantity)
     }
 
     Row(
