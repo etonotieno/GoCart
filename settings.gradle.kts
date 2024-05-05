@@ -30,17 +30,17 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.gradle.enterprise") version "3.17.2"
+    id("com.gradle.develocity") version "3.17.2"
 }
 
 val isCi = providers.environmentVariable("CI").isPresent
 
-gradleEnterprise {
+develocity {
     buildScan {
-        termsOfServiceUrl = "https://gradle.com/terms-of-service"
-        termsOfServiceAgree = "yes"
+        termsOfUseUrl = "https://gradle.com/terms-of-service"
+        termsOfUseAgree = "yes"
 
-        publishAlwaysIf(isCi)
+        publishing.onlyIf { isCi }
     }
 }
 
