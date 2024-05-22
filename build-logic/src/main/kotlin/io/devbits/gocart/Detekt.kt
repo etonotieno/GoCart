@@ -25,7 +25,7 @@ internal fun Project.configureDetekt() {
         apply("io.gitlab.arturbosch.detekt")
 
         dependencies {
-            "detektPlugins"(libs.getLibrary("compose.rules.detekt"))
+            add("detektPlugins", libs.getLibrary("compose.rules.detekt"))
         }
     }
 
