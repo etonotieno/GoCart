@@ -20,7 +20,7 @@ kotlin = "1.9.23"
 kotlinxCoroutines = "1.8.1"
 ksp = "1.9.23-1.0.20"
 ktlint = "1.1.1"
-lifecycleRuntimeCompose = "2.8.0"
+lifecycleRuntimeCompose = "2.7.0"
 navigationCompose = "2.7.7"
 spotless = "6.25.0"
 
