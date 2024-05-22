@@ -59,6 +59,7 @@ import io.devbits.gocart.designsystem.component.TertiaryButton
 import io.devbits.gocart.designsystem.component.sampleProducts
 import io.devbits.gocart.designsystem.model.Product
 import io.devbits.gocart.designsystem.model.ProductCategory
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
 
@@ -98,53 +99,55 @@ fun HomeScreen(
     // Default span that fills the entire width.
     val span = GridItemSpan(2)
 
-    LazyVerticalGrid(
-        modifier = modifier.fillMaxSize(),
-        columns = GridCells.Fixed(2),
-        horizontalArrangement = Arrangement.spacedBy(18.dp),
-        verticalArrangement = Arrangement.spacedBy(18.dp),
-    ) {
-        item(span = { span }) {
-            HeaderText()
-        }
-
-        item(span = { span }) {
-            PromotionBanner(modifier = Modifier.padding(horizontal = 16.dp))
-        }
-
-        item(span = { span }) {
-            ExploreCategories(categories = categories, onViewAll = onViewAll)
-        }
-
-        item(span = { span }) {
-            TopSellingProducts(onSort = { showBottomSheet = true })
-        }
-
-        // We do not pass the span to the ProductCard items in order to display the ProductCard in
-        // a 2 column grid
-        items(products.size) { index: Int ->
-            // Add padding start for products in the first column & padding end for products in the
-            // second column.
-            val padding = if ((index % 2) == 0) {
-                PaddingValues(start = 16.dp)
-            } else {
-                PaddingValues(end = 16.dp)
+    GoCartSurface(modifier = modifier) {
+        LazyVerticalGrid(
+            modifier = Modifier.fillMaxSize(),
+            columns = GridCells.Fixed(2),
+            horizontalArrangement = Arrangement.spacedBy(18.dp),
+            verticalArrangement = Arrangement.spacedBy(18.dp),
+        ) {
+            item(span = { span }) {
+                HeaderText()
             }
-            ProductCard(
-                product = products[index],
-                onBookmark = onBookmark,
-                onAddToCart = onAddToCart,
-                onClick = { navigateToProduct(products[index].id) },
-                modifier = Modifier.padding(padding),
+
+            item(span = { span }) {
+                PromotionBanner(modifier = Modifier.padding(horizontal = 16.dp))
+            }
+
+            item(span = { span }) {
+                ExploreCategories(categories = categories, onViewAll = onViewAll)
+            }
+
+            item(span = { span }) {
+                TopSellingProducts(onSort = { showBottomSheet = true })
+            }
+
+            // We do not pass the span to the ProductCard items in order to display the ProductCard in
+            // a 2 column grid
+            items(products.size) { index: Int ->
+                // Add padding start for products in the first column & padding end for products in the
+                // second column.
+                val padding = if ((index % 2) == 0) {
+                    PaddingValues(start = 16.dp)
+                } else {
+                    PaddingValues(end = 16.dp)
+                }
+                ProductCard(
+                    product = products[index],
+                    onBookmark = onBookmark,
+                    onAddToCart = onAddToCart,
+                    onClick = { navigateToProduct(products[index].id) },
+                    modifier = Modifier.padding(padding),
+                )
+            }
+        }
+
+        if (showBottomSheet) {
+            GcSortBottomSheet(
+                onDismiss = { showBottomSheet = false },
+                onSortChanged = {},
             )
         }
-    }
-
-    if (showBottomSheet) {
-        GcSortBottomSheet(
-            onDismiss = { showBottomSheet = false },
-            onSortChanged = {},
-        )
     }
 }
 
@@ -245,7 +248,7 @@ private fun ExploreCategories(
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Preview
 @Composable
 private fun HomeScreenPreview() {
     GoCartTheme {

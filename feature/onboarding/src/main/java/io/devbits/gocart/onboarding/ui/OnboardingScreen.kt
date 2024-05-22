@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.onboarding.ui.components.OnboardingHorizontalPager
 
@@ -39,10 +40,12 @@ fun OnboardingRoute(
 
 @Composable
 fun OnboardingScreen(onOnboarded: () -> Unit, modifier: Modifier = Modifier) {
-    OnboardingHorizontalPager(modifier = modifier, onOnboarded = onOnboarded)
+    GoCartSurface(modifier = modifier) {
+        OnboardingHorizontalPager(onOnboarded = onOnboarded)
+    }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
+@Preview
 @Composable
 private fun OnboardingScreenPreview() {
     GoCartTheme {

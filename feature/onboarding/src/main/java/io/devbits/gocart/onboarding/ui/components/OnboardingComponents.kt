@@ -32,6 +32,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.onboarding.R
 import io.devbits.gocart.onboarding.ui.model.OnboardingItem
@@ -68,41 +69,32 @@ fun OnboardingPage(page: OnboardingItem, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(
-    showBackground = true,
-    backgroundColor = 0xFFFFFFFF,
-    group = "Onboarding",
-    name = "Page One",
-)
+@Preview(group = "Onboarding", name = "Page One")
 @Composable
 private fun OnboardingPageOnePreview() {
     GoCartTheme {
-        OnboardingPage(OnboardingPageOne)
+        GoCartSurface {
+            OnboardingPage(OnboardingPageOne)
+        }
     }
 }
 
-@Preview(
-    showBackground = true,
-    backgroundColor = 0xFFFFFFFF,
-    group = "Onboarding",
-    name = "Page Two",
-)
+@Preview(group = "Onboarding", name = "Page Two")
 @Composable
 private fun OnboardingPageTwoPreview() {
     GoCartTheme {
-        OnboardingPage(OnboardingPageTwo)
+        GoCartSurface {
+            OnboardingPage(OnboardingPageTwo)
+        }
     }
 }
 
-@Preview(
-    showBackground = true,
-    backgroundColor = 0xFFFFFFFF,
-    name = "Page Three",
-    group = "Onboarding",
-)
+@Preview(name = "Page Three", group = "Onboarding")
 @Composable
 private fun OnboardingPageThreePreview() {
     GoCartTheme {
-        OnboardingPage(OnboardingPageThree)
+        GoCartSurface {
+            OnboardingPage(OnboardingPageThree)
+        }
     }
 }

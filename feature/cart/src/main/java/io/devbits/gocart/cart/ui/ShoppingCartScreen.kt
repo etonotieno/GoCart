@@ -59,13 +59,13 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import io.devbits.gocart.designsystem.component.GCTextField
 import io.devbits.gocart.designsystem.component.GCTopAppBar
 import io.devbits.gocart.designsystem.component.GoCartAlert
-import io.devbits.gocart.designsystem.component.PreviewWhiteBackground
 import io.devbits.gocart.designsystem.component.PrimaryButton
 import io.devbits.gocart.designsystem.component.SecondaryButton
 import io.devbits.gocart.designsystem.component.ShoppingCartCard
 import io.devbits.gocart.designsystem.component.TertiaryButton
 import io.devbits.gocart.designsystem.component.sampleProducts
 import io.devbits.gocart.designsystem.model.Product
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
 
@@ -351,10 +351,12 @@ private fun ShoppingCartScreenPreview() {
     }
 }
 
-@PreviewWhiteBackground
+@Preview
 @Composable
 private fun EmptyContentPreview() {
     GoCartTheme {
-        EmptyContent(navigateToCategories = {})
+        GoCartSurface {
+            EmptyContent(navigateToCategories = {})
+        }
     }
 }

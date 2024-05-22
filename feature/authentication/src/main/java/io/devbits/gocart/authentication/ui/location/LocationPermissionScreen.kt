@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import io.devbits.gocart.authentication.R
 import io.devbits.gocart.designsystem.component.PreviewThemes
-import io.devbits.gocart.designsystem.component.PreviewWhiteBackground
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
 
@@ -132,7 +131,6 @@ fun LocationPermissionScreen(
 }
 
 @Composable
-@PreviewWhiteBackground
 @PreviewThemes
 private fun LocationPermissionScreenPreview() {
     GoCartTheme {

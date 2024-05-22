@@ -44,6 +44,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.component.Indicator
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.onboarding.R
 import io.devbits.gocart.onboarding.ui.model.OnboardingItem
@@ -68,11 +69,13 @@ fun OnboardingHorizontalPager(onOnboarded: () -> Unit, modifier: Modifier = Modi
     }
 }
 
-@Preview(showBackground = true, backgroundColor = 0xFFFFFFFF, showSystemUi = true)
+@Preview
 @Composable
 private fun OnboardingHorizontalPagerPreview() {
     GoCartTheme {
-        OnboardingHorizontalPager(onOnboarded = {})
+        GoCartSurface {
+            OnboardingHorizontalPager(onOnboarded = {})
+        }
     }
 }
 
@@ -113,64 +116,63 @@ fun OnboardingPagerIndicator(
         mutableStateOf(state)
     }
 
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally,
-    ) {
-        Spacer(modifier = Modifier.size(8.dp))
-
-        if (skipIntro) {
-            Button(onClick = onOnboarded) {
-                Text(stringResource(R.string.text_button_skip_intro).uppercase())
-            }
-        }
-
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween,
+    GoCartSurface(modifier = modifier) {
+        Column(
+            modifier = modifier,
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            OnboardingButton(
-                state = buttonsState.first,
-                onClick = {
-                    coroutineScope.launch {
-                        val previousPage = pagerState.currentPage - 1
-                        if (pagerState.currentPage != 0) {
-                            pagerState.animateScrollToPage(previousPage)
-                        }
-                    }
-                },
-            )
+            Spacer(modifier = Modifier.size(8.dp))
 
-            Indicator(
-                pageCount = pages.size,
-                currentPage = pagerState.currentPage,
-            )
+            if (skipIntro) {
+                Button(onClick = onOnboarded) {
+                    Text(stringResource(R.string.text_button_skip_intro).uppercase())
+                }
+            }
 
-            OnboardingButton(
-                state = buttonsState.second,
-                onClick = {
-                    coroutineScope.launch {
-                        if (pagerState.currentPage == 2) {
-                            onOnboarded()
-                        } else {
-                            val nextPage = pagerState.currentPage + 1
-                            if (pagerState.currentPage != pages.size - 1) {
-                                pagerState.animateScrollToPage(nextPage)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                OnboardingButton(
+                    state = buttonsState.first,
+                    onClick = {
+                        coroutineScope.launch {
+                            val previousPage = pagerState.currentPage - 1
+                            if (pagerState.currentPage != 0) {
+                                pagerState.animateScrollToPage(previousPage)
                             }
                         }
-                    }
-                },
-            )
+                    },
+                )
+
+                Indicator(
+                    pageCount = pages.size,
+                    currentPage = pagerState.currentPage,
+                )
+
+                OnboardingButton(
+                    state = buttonsState.second,
+                    onClick = {
+                        coroutineScope.launch {
+                            if (pagerState.currentPage == 2) {
+                                onOnboarded()
+                            } else {
+                                val nextPage = pagerState.currentPage + 1
+                                if (pagerState.currentPage != pages.size - 1) {
+                                    pagerState.animateScrollToPage(nextPage)
+                                }
+                            }
+                        }
+                    },
+                )
+            }
         }
     }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
-@Preview(
-    showBackground = true,
-    backgroundColor = 0xFFFFFFFF,
-)
+@Preview
 @Composable
 private fun OnboardingPagerIndicatorPreview() {
     GoCartTheme {

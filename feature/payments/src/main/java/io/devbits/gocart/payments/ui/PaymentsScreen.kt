@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
@@ -34,8 +35,10 @@ fun PaymentsScreen(modifier: Modifier = Modifier, viewModel: PaymentsViewModel =
 
 @Composable
 fun PaymentsScreen(state: String, modifier: Modifier = Modifier) {
-    Column(modifier = modifier.fillMaxSize()) {
-        Text(text = state)
+    GoCartSurface(modifier = modifier) {
+        Column(modifier = Modifier.fillMaxSize()) {
+            Text(text = state)
+        }
     }
 }
 

@@ -15,17 +15,14 @@
  */
 package io.devbits.gocart.ui
 
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -36,10 +33,10 @@ import io.devbits.gocart.designsystem.component.GoCartNavDrawerContent
 import io.devbits.gocart.designsystem.component.GoCartTopAppBar
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.model.NavDrawerItem
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.navigation.GoCartNavHost
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun GoCartApp(
     startDestination: String,
@@ -50,10 +47,7 @@ fun GoCartApp(
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
 
-    Surface(
-        modifier = modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background,
-    ) {
+    GoCartSurface(modifier = modifier.fillMaxSize()) {
         // Hide during onboarding and authentication flows
         //  Only draw the content if the current route is a DestinationRoute.
         //  Disable gestures on non DestinationRoutes

@@ -35,7 +35,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
 @Composable
@@ -90,13 +92,15 @@ fun GoCartAlert(
     )
 }
 
-@PreviewWhiteBackground
+@Preview
 @Composable
 private fun GoCartAlertSuccessPreview() {
     GoCartTheme {
-        GoCartAlert(
-            icon = Icons.Outlined.Info,
-            text = "You can only order a maximum quantity of 3 in your item.",
-        )
+        GoCartSurface {
+            GoCartAlert(
+                icon = Icons.Outlined.Info,
+                text = "You can only order a maximum quantity of 3 in your item.",
+            )
+        }
     }
 }

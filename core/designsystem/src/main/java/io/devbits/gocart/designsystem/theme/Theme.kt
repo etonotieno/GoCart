@@ -19,12 +19,16 @@ import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 
 private val lightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,
@@ -89,6 +93,17 @@ private val darkColorScheme = darkColorScheme(
     outlineVariant = md_theme_dark_outlineVariant,
     scrim = md_theme_dark_scrim,
 )
+
+/**
+ * Main surface to be displayed by the app. The surface uses the [GoCartTheme]'s background color
+ *
+ * This is useful for [Preview]s especially in screens that don't use [Scaffold] which by default
+ * uses the theme's background color as the container color.
+ */
+@Composable
+fun GoCartSurface(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    Surface(modifier = modifier, color = MaterialTheme.colorScheme.background, content = content)
+}
 
 @Composable
 fun GoCartTheme(
