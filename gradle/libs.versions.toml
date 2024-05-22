@@ -71,3 +71,11 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+
+# Project plugins
+gocart-root = { id = "gocart.root", version = "unspecified" }
+gocart-android-application = { id = "gocart.android.application", version = "unspecified" }
+gocart-android-library = { id = "gocart.android.library", version = "unspecified" }
+gocart-jvm-library = { id = "gocart.jvm.library", version = "unspecified" }
+gocart-kotlin-android = { id = "gocart.kotlin.android", version = "unspecified" }
+gocart-kotlin-multiplatform = { id = "gocart.kotlin.multiplatform", version = "unspecified" }
