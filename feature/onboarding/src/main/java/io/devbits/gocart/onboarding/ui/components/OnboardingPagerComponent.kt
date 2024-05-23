@@ -117,10 +117,7 @@ fun OnboardingPagerIndicator(
     }
 
     GoCartSurface(modifier = modifier) {
-        Column(
-            modifier = modifier,
-            horizontalAlignment = Alignment.CenterHorizontally,
-        ) {
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.size(8.dp))
 
             if (skipIntro) {
