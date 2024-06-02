@@ -20,7 +20,7 @@ kotlin = "1.9.23"
 kotlinxCoroutines = "1.8.1"
 ksp = "1.9.23-1.0.20"
 ktlint = "1.1.1"
-lifecycleRuntimeCompose = "2.8.1"
+lifecycleRuntimeCompose = "2.7.0"
 navigationCompose = "2.7.7"
 spotless = "6.25.0"
 
@@ -73,9 +73,9 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 
 # Project plugins
-gocart-root = { id = "gocart.root", version = "unspecified" }
-gocart-android-application = { id = "gocart.android.application", version = "unspecified" }
-gocart-android-library = { id = "gocart.android.library", version = "unspecified" }
-gocart-jvm-library = { id = "gocart.jvm.library", version = "unspecified" }
-gocart-kotlin-android = { id = "gocart.kotlin.android", version = "unspecified" }
-gocart-kotlin-multiplatform = { id = "gocart.kotlin.multiplatform", version = "unspecified" }
+gocart-root = { id = "gocart.root" }
+gocart-android-application = { id = "gocart.android.application" }
+gocart-android-library = { id = "gocart.android.library" }
+gocart-jvm-library = { id = "gocart.jvm.library" }
+gocart-kotlin-android = { id = "gocart.kotlin.android" }
+gocart-kotlin-multiplatform = { id = "gocart.kotlin.multiplatform" }
