@@ -14,5 +14,5 @@
  * limitations under the License.
  */
 plugins {
-    id("gocart.jvm.library")
+    id("gocart.kotlin.multiplatform")
 }
