@@ -16,17 +16,11 @@
 plugins {
     id("gocart.android.library")
     id("gocart.kotlin.android")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
     namespace = "io.devbits.gocart.designsystem"
-
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
-    }
 }
 
 dependencies {

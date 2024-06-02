@@ -1,3 +1,6 @@
+# Since Kotlin 2.0.0
+.kotlin
+
 # Gradle files
 .gradle/
 build/

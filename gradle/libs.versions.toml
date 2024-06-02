@@ -1,10 +1,8 @@
 [versions]
 activityCompose = "1.9.0"
 androidxComposeBom = "2024.05.00"
-androidxComposeCompiler = "1.5.13"
 androidxDataStore = "1.1.1"
 agp = "8.4.1"
-compose = "1.5.13"
 composeMultiplatform = "1.6.10"
 coilCompose = "2.6.0"
 coreKtx = "1.13.1"
@@ -16,10 +14,11 @@ hilt = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 junit = "4.13.2"
 junitExt = "1.1.5"
-kotlin = "1.9.23"
+kotlin = "2.0.0"
 kotlinxCoroutines = "1.8.1"
-ksp = "1.9.23-1.0.20"
+ksp = "2.0.0-1.0.21"
 ktlint = "1.1.1"
+#noinspection GradleDependency
 lifecycleRuntimeCompose = "2.7.0"
 navigationCompose = "2.7.7"
 spotless = "6.25.0"
@@ -64,6 +63,7 @@ spotless-gradlePlugin = { module = "com.diffplug.spotless:spotless-plugin-gradle
 android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "composeMultiplatform" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -71,11 +71,3 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-
-# Project plugins
-gocart-root = { id = "gocart.root" }
-gocart-android-application = { id = "gocart.android.application" }
-gocart-android-library = { id = "gocart.android.library" }
-gocart-jvm-library = { id = "gocart.jvm.library" }
-gocart-kotlin-android = { id = "gocart.kotlin.android" }
-gocart-kotlin-multiplatform = { id = "gocart.kotlin.multiplatform" }

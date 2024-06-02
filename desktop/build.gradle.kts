@@ -18,6 +18,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 plugins {
     id("gocart.jvm.library")
     alias(libs.plugins.compose.multiplatform)
+    alias(libs.plugins.compose.compiler)
 }
 
 dependencies {

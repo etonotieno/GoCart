@@ -18,6 +18,7 @@ plugins {
     id("gocart.kotlin.android")
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -25,12 +26,6 @@ android {
 
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.androidxComposeCompiler.get()
     }
 }
 
