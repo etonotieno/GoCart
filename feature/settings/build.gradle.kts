@@ -25,7 +25,6 @@ android {
 
     defaultConfig {
         vectorDrawables.useSupportLibrary = true
-        consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
         release {

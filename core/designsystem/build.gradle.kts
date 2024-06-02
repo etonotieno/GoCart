@@ -23,7 +23,6 @@ android {
 
     defaultConfig {
 
-        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {

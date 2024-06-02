@@ -23,7 +23,6 @@ android {
     namespace = "io.devbits.gocart.core.network"
 
     defaultConfig {
-        consumerProguardFiles("consumer-rules.pro")
     }
     buildTypes {
         release {

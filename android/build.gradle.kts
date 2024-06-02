@@ -37,8 +37,8 @@ android {
             manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_debug_round"
         }
         release {
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             signingConfig = signingConfigs["debug"]
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
