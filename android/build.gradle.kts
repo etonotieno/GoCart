@@ -31,6 +31,11 @@ android {
         manifestPlaceholders["appIcon"] = "@mipmap/ic_launcher"
         manifestPlaceholders["appIconRound"] = "@mipmap/ic_launcher_round"
     }
+
+    buildFeatures {
+        compose = true
+    }
+
     buildTypes {
         debug {
             applicationIdSuffix = ".debug"

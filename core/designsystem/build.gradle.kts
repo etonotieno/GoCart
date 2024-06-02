@@ -21,6 +21,10 @@ plugins {
 
 android {
     namespace = "io.devbits.gocart.designsystem"
+
+    buildFeatures {
+        compose = true
+    }
 }
 
 dependencies {
