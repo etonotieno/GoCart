@@ -28,7 +28,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -57,6 +56,7 @@ import io.devbits.gocart.designsystem.component.ProductCard
 import io.devbits.gocart.designsystem.component.PromotionBanner
 import io.devbits.gocart.designsystem.component.TertiaryButton
 import io.devbits.gocart.designsystem.component.sampleProducts
+import io.devbits.gocart.designsystem.fullWidthItem
 import io.devbits.gocart.designsystem.model.Product
 import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartSurface
@@ -96,9 +96,6 @@ fun HomeScreen(
 ) {
     var showBottomSheet by remember { mutableStateOf(false) }
 
-    // Default span that fills the entire width.
-    val span = GridItemSpan(2)
-
     GoCartSurface(modifier = modifier) {
         LazyVerticalGrid(
             modifier = Modifier.fillMaxSize(),
@@ -106,19 +103,19 @@ fun HomeScreen(
             horizontalArrangement = Arrangement.spacedBy(18.dp),
             verticalArrangement = Arrangement.spacedBy(18.dp),
         ) {
-            item(span = { span }) {
+            fullWidthItem {
                 HeaderText()
             }
 
-            item(span = { span }) {
+            fullWidthItem {
                 PromotionBanner(modifier = Modifier.padding(horizontal = 16.dp))
             }
 
-            item(span = { span }) {
+            fullWidthItem {
                 ExploreCategories(categories = categories, onViewAll = onViewAll)
             }
 
-            item(span = { span }) {
+            fullWidthItem {
                 TopSellingProducts(onSort = { showBottomSheet = true })
             }
 

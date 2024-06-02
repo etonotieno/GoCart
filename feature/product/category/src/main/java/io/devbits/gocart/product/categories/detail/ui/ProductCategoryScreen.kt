@@ -21,7 +21,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -53,6 +52,7 @@ import io.devbits.gocart.designsystem.component.GcSortBottomSheet
 import io.devbits.gocart.designsystem.component.ProductCard
 import io.devbits.gocart.designsystem.component.TertiaryButton
 import io.devbits.gocart.designsystem.component.sampleProducts
+import io.devbits.gocart.designsystem.fullWidthItem
 import io.devbits.gocart.designsystem.model.Product
 import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartTheme
@@ -93,8 +93,6 @@ fun ProductCategoryScreen(
 ) {
     var showBottomSheet by remember { mutableStateOf(false) }
 
-    val span = GridItemSpan(2)
-
     Scaffold(
         topBar = {
             GCTopAppBar(
@@ -134,7 +132,7 @@ fun ProductCategoryScreen(
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
-            item(span = { span }) {
+            fullWidthItem {
                 Row(
                     modifier = Modifier
                         .fillMaxSize()
@@ -182,7 +180,7 @@ fun ProductCategoryScreen(
         }
     }
 
-    val sheetState: SheetState = rememberModalBottomSheetState()
+    val sheetState: SheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
 
     if (showBottomSheet) {
