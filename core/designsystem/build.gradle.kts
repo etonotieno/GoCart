@@ -21,19 +21,6 @@ plugins {
 android {
     namespace = "io.devbits.gocart.designsystem"
 
-    defaultConfig {
-
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro",
-            )
-        }
-    }
     buildFeatures {
         compose = true
     }

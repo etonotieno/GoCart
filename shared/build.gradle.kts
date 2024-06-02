@@ -18,15 +18,6 @@ plugins {
     id("gocart.kotlin.multiplatform")
 }
 
-kotlin {
-    sourceSets {
-        named("commonMain") {
-            dependencies {
-            }
-        }
-    }
-}
-
 android {
     namespace = "io.devbits.gocart.shared"
 }
