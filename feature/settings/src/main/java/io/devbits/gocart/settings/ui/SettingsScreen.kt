@@ -103,7 +103,7 @@ fun SettingsScreen(
             ThemePreference(
                 title = "Theme",
                 selected = theme,
-                onThemeSelected = onSetTheme,
+                onSelectTheme = onSetTheme,
             )
 
             HorizontalDivider(Modifier.padding(horizontal = 16.dp))
@@ -158,7 +158,7 @@ private fun CheckboxPreference(
 @Composable
 private fun ThemePreference(
     selected: AppTheme,
-    onThemeSelected: (AppTheme) -> Unit,
+    onSelectTheme: (AppTheme) -> Unit,
     title: String,
     modifier: Modifier = Modifier,
 ) {
@@ -184,19 +184,19 @@ private fun ThemePreference(
             Row(Modifier.selectableGroup()) {
                 AppThemeButton(
                     icon = Icons.Default.AutoMode,
-                    onClick = { onThemeSelected(AppTheme.SYSTEM) },
+                    onClick = { onSelectTheme(AppTheme.SYSTEM) },
                     isSelected = selected == AppTheme.SYSTEM,
                 )
 
                 AppThemeButton(
                     icon = Icons.Default.LightMode,
-                    onClick = { onThemeSelected(AppTheme.LIGHT) },
+                    onClick = { onSelectTheme(AppTheme.LIGHT) },
                     isSelected = selected == AppTheme.LIGHT,
                 )
 
                 AppThemeButton(
                     icon = Icons.Default.DarkMode,
-                    onClick = { onThemeSelected(AppTheme.DARK) },
+                    onClick = { onSelectTheme(AppTheme.DARK) },
                     isSelected = selected == AppTheme.DARK,
                 )
             }

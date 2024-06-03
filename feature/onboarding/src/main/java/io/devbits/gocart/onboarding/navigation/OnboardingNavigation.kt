@@ -23,6 +23,6 @@ const val onboardingRoute = "onboarding"
 
 fun NavGraphBuilder.onboardingScreen(onOnboarded: () -> Unit) {
     composable(route = onboardingRoute) {
-        OnboardingRoute(onOnboarded = onOnboarded)
+        OnboardingRoute(onFinishOnboarding = onOnboarded)
     }
 }

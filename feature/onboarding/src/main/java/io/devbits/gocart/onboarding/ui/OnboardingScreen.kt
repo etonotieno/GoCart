@@ -25,23 +25,23 @@ import io.devbits.gocart.onboarding.ui.components.OnboardingHorizontalPager
 
 @Composable
 fun OnboardingRoute(
-    onOnboarded: () -> Unit,
+    onFinishOnboarding: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: OnboardingViewModel = hiltViewModel(),
 ) {
     OnboardingScreen(
         modifier = modifier,
-        onOnboarded = {
+        onFinishOnboarding = {
             viewModel.setOnboarded()
-            onOnboarded()
+            onFinishOnboarding()
         },
     )
 }
 
 @Composable
-fun OnboardingScreen(onOnboarded: () -> Unit, modifier: Modifier = Modifier) {
+fun OnboardingScreen(onFinishOnboarding: () -> Unit, modifier: Modifier = Modifier) {
     GoCartSurface(modifier = modifier) {
-        OnboardingHorizontalPager(onOnboarded = onOnboarded)
+        OnboardingHorizontalPager(onFinishOnboarding = onFinishOnboarding)
     }
 }
 
@@ -49,6 +49,6 @@ fun OnboardingScreen(onOnboarded: () -> Unit, modifier: Modifier = Modifier) {
 @Composable
 private fun OnboardingScreenPreview() {
     GoCartTheme {
-        OnboardingScreen(onOnboarded = {})
+        OnboardingScreen(onFinishOnboarding = {})
     }
 }

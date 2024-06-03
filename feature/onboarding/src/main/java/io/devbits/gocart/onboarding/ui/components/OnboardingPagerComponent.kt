@@ -52,7 +52,7 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnboardingHorizontalPager(onOnboarded: () -> Unit, modifier: Modifier = Modifier) {
+fun OnboardingHorizontalPager(onFinishOnboarding: () -> Unit, modifier: Modifier = Modifier) {
     val pages = onboardingPages
     val pagerState = rememberPagerState(pageCount = { pages.size })
     Box(modifier = modifier.fillMaxSize()) {
@@ -64,7 +64,7 @@ fun OnboardingHorizontalPager(onOnboarded: () -> Unit, modifier: Modifier = Modi
             pagerState = pagerState,
             pages = pages,
             modifier = Modifier.align(Alignment.BottomCenter),
-            onOnboarded = onOnboarded,
+            onFinishOnboarding = onFinishOnboarding,
         )
     }
 }
@@ -74,7 +74,7 @@ fun OnboardingHorizontalPager(onOnboarded: () -> Unit, modifier: Modifier = Modi
 private fun OnboardingHorizontalPagerPreview() {
     GoCartTheme {
         GoCartSurface {
-            OnboardingHorizontalPager(onOnboarded = {})
+            OnboardingHorizontalPager(onFinishOnboarding = {})
         }
     }
 }
@@ -84,7 +84,7 @@ private fun OnboardingHorizontalPagerPreview() {
 fun OnboardingPagerIndicator(
     pages: List<OnboardingItem>,
     pagerState: PagerState,
-    onOnboarded: () -> Unit,
+    onFinishOnboarding: () -> Unit,
     modifier: Modifier = Modifier,
     skipIntro: Boolean = false,
 ) {
@@ -121,7 +121,7 @@ fun OnboardingPagerIndicator(
             Spacer(modifier = Modifier.size(8.dp))
 
             if (skipIntro) {
-                Button(onClick = onOnboarded) {
+                Button(onClick = onFinishOnboarding) {
                     Text(stringResource(R.string.text_button_skip_intro).uppercase())
                 }
             }
@@ -153,7 +153,7 @@ fun OnboardingPagerIndicator(
                     onClick = {
                         coroutineScope.launch {
                             if (pagerState.currentPage == 2) {
-                                onOnboarded()
+                                onFinishOnboarding()
                             } else {
                                 val nextPage = pagerState.currentPage + 1
                                 if (pagerState.currentPage != pages.size - 1) {
@@ -178,7 +178,7 @@ private fun OnboardingPagerIndicatorPreview() {
             pages = pages,
             skipIntro = true,
             pagerState = rememberPagerState { pages.size },
-            onOnboarded = {},
+            onFinishOnboarding = {},
         )
     }
 }
