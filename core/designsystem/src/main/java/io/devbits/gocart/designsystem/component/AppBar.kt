@@ -122,7 +122,7 @@ private fun NavDestination?.isRouteDestination(destination: DestinationRoutes) =
 @Composable
 fun GoCartNavBar(
     navigationRoutes: List<DestinationRoutes>,
-    onNavigationSelected: (DestinationRoutes) -> Unit,
+    onClickItem: (DestinationRoutes) -> Unit,
     currentDestination: NavDestination?,
     modifier: Modifier = Modifier,
 ) {
@@ -144,7 +144,7 @@ fun GoCartNavBar(
                     Text(text = route.titleText)
                 },
                 selected = selected,
-                onClick = { onNavigationSelected(route) },
+                onClick = { onClickItem(route) },
             )
         }
     }
@@ -168,7 +168,7 @@ private fun GoCartNavBarPreview() {
     GoCartTheme {
         GoCartNavBar(
             navigationRoutes = DestinationRoutes.entries,
-            onNavigationSelected = { _ -> },
+            onClickItem = { _ -> },
             currentDestination = null,
         )
     }

@@ -52,7 +52,7 @@ import io.devbits.gocart.designsystem.model.defaultCountries
 @Composable
 fun GcSortBottomSheet(
     onDismiss: () -> Unit,
-    onSortChanged: (SortOption) -> Unit,
+    onSortChange: (SortOption) -> Unit,
     modifier: Modifier = Modifier,
     sortOptions: List<SortOption> = SortOption.entries,
     sheetState: SheetState = rememberModalBottomSheetState(),
@@ -76,7 +76,7 @@ fun GcSortBottomSheet(
             ListItem(
                 modifier = Modifier
                     .clickable {
-                        onSortChanged(it)
+                        onSortChange(it)
                         sortOption = it
                     },
                 headlineContent = {
@@ -86,7 +86,7 @@ fun GcSortBottomSheet(
                     RadioButton(
                         selected = selected,
                         onClick = {
-                            onSortChanged(it)
+                            onSortChange(it)
                             sortOption = it
                         },
                     )

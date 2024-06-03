@@ -189,7 +189,7 @@ fun ProductCategoryScreen(
     if (showBottomSheet) {
         GcSortBottomSheet(
             onDismiss = { showBottomSheet = false },
-            onSortChanged = {
+            onSortChange = {
                 scope.launch { sheetState.hide() }.invokeOnCompletion {
                     if (!sheetState.isVisible) {
                         showBottomSheet = false

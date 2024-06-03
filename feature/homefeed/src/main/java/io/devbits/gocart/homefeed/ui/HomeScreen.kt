@@ -142,7 +142,7 @@ fun HomeScreen(
         if (showBottomSheet) {
             GcSortBottomSheet(
                 onDismiss = { showBottomSheet = false },
-                onSortChanged = {},
+                onSortChange = {},
             )
         }
     }

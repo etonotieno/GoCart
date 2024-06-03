@@ -97,7 +97,7 @@ fun GoCartApp(
                     if (appState.currentDestinationRoute != null) {
                         GoCartNavBar(
                             navigationRoutes = DestinationRoutes.entries,
-                            onNavigationSelected = appState::navigateToRoute,
+                            onClickItem = appState::navigateToRoute,
                             currentDestination = appState.currentDestination,
                         )
                     }
