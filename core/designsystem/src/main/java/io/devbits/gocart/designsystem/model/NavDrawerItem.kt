@@ -17,17 +17,17 @@ package io.devbits.gocart.designsystem.model
 
 import androidx.annotation.IntRange
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Help
+import androidx.compose.material.icons.automirrored.filled.Logout
+import androidx.compose.material.icons.automirrored.outlined.HelpOutline
+import androidx.compose.material.icons.automirrored.outlined.Logout
 import androidx.compose.material.icons.filled.CreditCard
-import androidx.compose.material.icons.filled.Help
 import androidx.compose.material.icons.filled.LocalOffer
 import androidx.compose.material.icons.filled.LocationOn
-import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.outlined.CreditCard
-import androidx.compose.material.icons.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.LocalOffer
 import androidx.compose.material.icons.outlined.LocationOn
-import androidx.compose.material.icons.outlined.Logout
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.ui.graphics.vector.ImageVector
 
@@ -62,14 +62,14 @@ enum class NavDrawerItem(
         section = 2,
     ),
     HELP(
-        selectedIcon = Icons.Default.Help,
-        unselectedIcon = Icons.Outlined.HelpOutline,
+        selectedIcon = Icons.AutoMirrored.Filled.Help,
+        unselectedIcon = Icons.AutoMirrored.Outlined.HelpOutline,
         titleText = "Help & FAQ",
         section = 2,
     ),
     LOGOUT(
-        selectedIcon = Icons.Default.Logout,
-        unselectedIcon = Icons.Outlined.Logout,
+        selectedIcon = Icons.AutoMirrored.Filled.Logout,
+        unselectedIcon = Icons.AutoMirrored.Outlined.Logout,
         titleText = "Logout",
         section = 2,
     ),

@@ -31,7 +31,7 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Sort
+import androidx.compose.material.icons.automirrored.filled.Sort
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -212,7 +212,7 @@ private fun TopSellingProducts(modifier: Modifier = Modifier, onSort: () -> Unit
             text = "Sort",
             onClick = onSort,
             leadingIcon = {
-                Icon(imageVector = Icons.Default.Sort, contentDescription = null)
+                Icon(imageVector = Icons.AutoMirrored.Filled.Sort, contentDescription = null)
             },
         )
     }

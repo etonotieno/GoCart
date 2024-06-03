@@ -16,11 +16,11 @@
 package io.devbits.gocart.designsystem.model
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Chat
+import androidx.compose.material.icons.automirrored.filled.Chat
+import androidx.compose.material.icons.automirrored.outlined.Chat
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingBag
-import androidx.compose.material.icons.outlined.Chat
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.ShoppingBag
@@ -37,8 +37,8 @@ enum class DestinationRoutes(
         titleText = "Home",
     ),
     SERVICES(
-        selectedIcon = Icons.Default.Chat,
-        unselectedIcon = Icons.Outlined.Chat,
+        selectedIcon = Icons.AutoMirrored.Filled.Chat,
+        unselectedIcon = Icons.AutoMirrored.Outlined.Chat,
         titleText = "Services",
     ),
     ORDERS(

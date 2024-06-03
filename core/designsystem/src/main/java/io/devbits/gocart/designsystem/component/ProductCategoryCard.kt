@@ -24,9 +24,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForwardIos
+import androidx.compose.material.icons.automirrored.filled.ArrowForwardIos
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -42,7 +41,6 @@ import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.model.ProductCategory
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ProductCategoryCard(
     category: ProductCategory,
@@ -83,7 +81,7 @@ fun ProductCategoryCard(
             }
 
             Icon(
-                imageVector = Icons.Default.ArrowForwardIos,
+                imageVector = Icons.AutoMirrored.Filled.ArrowForwardIos,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary,
             )

@@ -17,7 +17,6 @@ package io.devbits.gocart.designsystem.component
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilterChip
 import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.MaterialTheme
@@ -28,7 +27,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Chip(
     label: String,

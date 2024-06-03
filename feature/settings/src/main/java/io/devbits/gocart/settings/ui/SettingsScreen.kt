@@ -22,14 +22,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.AutoMode
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledIconToggleButton
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -85,7 +85,7 @@ fun SettingsScreen(
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(
-                            imageVector = Icons.Default.ArrowBack,
+                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = null,
                         )
                     }
@@ -106,7 +106,7 @@ fun SettingsScreen(
                 onThemeSelected = onSetTheme,
             )
 
-            Divider(Modifier.padding(horizontal = 16.dp))
+            HorizontalDivider(Modifier.padding(horizontal = 16.dp))
 
             if (supportsDynamicTheming()) {
                 CheckboxPreference(
@@ -115,7 +115,7 @@ fun SettingsScreen(
                     onCheckedChange = setDynamicTheme,
                 )
 
-                Divider(Modifier.padding(horizontal = 16.dp))
+                HorizontalDivider(Modifier.padding(horizontal = 16.dp))
             }
         }
     }

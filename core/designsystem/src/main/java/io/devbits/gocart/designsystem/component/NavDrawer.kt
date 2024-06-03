@@ -30,7 +30,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.PersonOutline
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -93,7 +93,7 @@ fun GoCartNavDrawerContent(
                 if (index == 0) {
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Divider(
+                    HorizontalDivider(
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
                             .padding(horizontal = 16.dp),
@@ -127,7 +127,7 @@ fun GoCartNavDrawerContent(
                 if (index == 2) {
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Divider(
+                    HorizontalDivider(
                         modifier = Modifier
                             .padding(horizontal = 12.dp)
                             .padding(horizontal = 16.dp),
