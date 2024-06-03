@@ -28,6 +28,7 @@ internal const val productDetailRoute = "product/detail"
 internal const val productIdArg = "productId"
 
 fun NavController.navigateToProductDetails(productId: Int, navOptions: NavOptions? = null) {
+    if (this.currentBackStackEntry?.arguments?.getInt(productIdArg) == productId) return
     this.navigate("$productDetailRoute/$productId", navOptions)
 }
 
