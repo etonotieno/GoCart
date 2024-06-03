@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
@@ -126,11 +125,7 @@ fun GoCartNavBar(
     currentDestination: NavDestination?,
     modifier: Modifier = Modifier,
 ) {
-    NavigationBar(
-        modifier = modifier,
-        windowInsets = WindowInsets.navigationBars,
-        containerColor = MaterialTheme.colorScheme.surface,
-    ) {
+    NavigationBar(modifier = modifier) {
         navigationRoutes.forEach { route ->
             val selected = currentDestination.isRouteDestination(route)
             NavigationBarItem(
