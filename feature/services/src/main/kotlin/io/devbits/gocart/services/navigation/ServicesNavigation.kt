@@ -19,7 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.services.ui.ServicesScreen
+import io.devbits.gocart.services.ui.ServicesRoute
 
 const val servicesRoute = "services"
 
@@ -29,6 +29,6 @@ fun NavController.navigateToServices(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.servicesScreen() {
     composable(route = servicesRoute) {
-        ServicesScreen()
+        ServicesRoute()
     }
 }

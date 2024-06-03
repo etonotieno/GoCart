@@ -13,42 +13,136 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package io.devbits.gocart.services.ui
 
+import androidx.annotation.DrawableRes
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import io.devbits.gocart.designsystem.theme.GoCartSurface
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import io.devbits.gocart.designsystem.theme.GoCartTheme
+import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
-fun ServicesScreen(
-    modifier: Modifier = Modifier,
-    viewModel: ServicesViewModel = hiltViewModel(),
-) {
-    val state by viewModel.uiState.collectAsStateWithLifecycle()
-    ServicesScreen(modifier = modifier, state = state)
+fun ServicesRoute(modifier: Modifier = Modifier) {
+    ServicesScreen(modifier = modifier)
 }
 
 @Composable
-fun ServicesScreen(state: String, modifier: Modifier = Modifier) {
-    GoCartSurface(modifier = modifier) {
-        Column(modifier = Modifier.fillMaxSize()) {
-            Text(text = state)
+fun ServicesScreen(modifier: Modifier = Modifier) {
+    Surface(modifier = modifier, color = MaterialTheme.colorScheme.surfaceVariant) {
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(vertical = 12.dp),
+        ) {
+            SectionHeader()
+
+            SupportOptions()
         }
     }
 }
 
-@Preview
+@Composable
+private fun SectionHeader(modifier: Modifier = Modifier) {
+    Text(
+        text = "QUESTIONS",
+        style = MaterialTheme.typography.titleSmall.copy(
+            fontSize = 12.sp,
+            lineHeight = 20.sp,
+        ),
+        modifier = modifier.padding(horizontal = 16.dp, vertical = 8.dp),
+    )
+}
+
+@Composable
+fun SupportOptions(modifier: Modifier = Modifier) {
+    Card(modifier = modifier.padding(horizontal = 16.dp), shape = RoundedCornerShape(8.dp)) {
+        SupportServicesItem(
+            headline = "Live Chat",
+            supporting = "Sun-Fri 8:00am-5:00pm",
+            leadingIcon = resourcesR.drawable.ic_outlined_chat,
+            trailingIcon = resourcesR.drawable.ic_outlined_chevronright,
+            onClick = {},
+        )
+
+        HorizontalDivider()
+
+        SupportServicesItem(
+            headline = "Email Us",
+            supporting = "help@gocart.com",
+            leadingIcon = resourcesR.drawable.ic_outlined_email,
+            trailingIcon = resourcesR.drawable.ic_outlined_chevronright,
+            onClick = {},
+        )
+
+        HorizontalDivider()
+
+        SupportServicesItem(
+            headline = "Call Support Line",
+            supporting = "+254(700456xx2)",
+            leadingIcon = resourcesR.drawable.ic_outlined_call,
+            trailingIcon = resourcesR.drawable.ic_outlined_chevronright,
+            onClick = {},
+        )
+    }
+}
+
+@Composable
+private fun SupportServicesItem(
+    headline: String,
+    supporting: String,
+    @DrawableRes leadingIcon: Int,
+    @DrawableRes trailingIcon: Int,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    ListItem(
+        headlineContent = {
+            Text(headline)
+        },
+        supportingContent = {
+            Text(supporting)
+        },
+        leadingContent = {
+            Icon(
+                painter = painterResource(leadingIcon),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primary,
+            )
+        },
+        trailingContent = {
+            Icon(
+                painter = painterResource(trailingIcon),
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        },
+        modifier = modifier.clickable { onClick() },
+    )
+}
+
+@PreviewLightDark
 @Composable
 private fun ServicesScreenPreview() {
     GoCartTheme {
-        ServicesScreen(state = "")
+        ServicesScreen()
     }
 }
