@@ -167,7 +167,7 @@ fun GoCartNavHost(
 
         servicesScreen()
 
-        ordersScreen()
+        ordersScreen(navigateToPlaceOrder = {})
 
         favoritesScreen()
 

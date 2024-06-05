@@ -16,14 +16,56 @@
 package io.devbit.gocart.orders.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.devbit.gocart.orders.ui.preview.sampleRecentOrders
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class OrdersViewModel @Inject constructor() : ViewModel() {
 
-    private val _uiState = MutableStateFlow("Special Offers")
-    val uiState: StateFlow<String> get() = _uiState
+    private val _uiState = MutableStateFlow<OrdersUiState>(Loading)
+    val uiState: StateFlow<OrdersUiState> get() = _uiState
+
+    init {
+        viewModelScope.launch {
+            // Simulate a network call
+            delay(4.seconds)
+            _uiState.value = Empty
+            delay(4.seconds)
+            _uiState.value = Success(sampleRecentOrders)
+        }
+    }
+}
+
+sealed interface OrdersUiState
+
+data object Loading : OrdersUiState
+
+data object Empty : OrdersUiState
+
+data class Success(val orders: List<UiOrderItem>) : OrdersUiState
+
+data class UiOrderItem(
+    val id: OrderId,
+    val number: String,
+    val price: String,
+    val date: String,
+    val status: OrderStatus,
+)
+
+@JvmInline
+value class OrderId(val id: String)
+
+enum class OrderStatus {
+    Placed,
+    Pending,
+    ReadyToPickup,
+    Delivered,
+    Cancelled,
 }
