@@ -19,6 +19,8 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.baselineprofile)
 }
 
 android {
@@ -88,6 +90,8 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.hilt.android)
+    implementation(libs.androidx.profileinstaller)
+    "baselineProfile"(project(":performance"))
     ksp(libs.hilt.compiler)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
