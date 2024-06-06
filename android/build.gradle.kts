@@ -90,9 +90,11 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.hilt.android)
-    implementation(libs.androidx.profileinstaller)
-    "baselineProfile"(project(":performance"))
     ksp(libs.hilt.compiler)
+
+    implementation(libs.androidx.profileinstaller)
+
+    baselineProfile(projects.performance)
 
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test)
@@ -104,3 +106,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
+
+fun DependencyHandler.baselineProfile(dependencyNotation: Any) =
+    add("baselineProfile", dependencyNotation)
