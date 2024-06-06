@@ -52,15 +52,12 @@ data object Empty : OrdersUiState
 data class Success(val orders: List<UiOrderItem>) : OrdersUiState
 
 data class UiOrderItem(
-    val id: OrderId,
+    val id: String,
     val number: String,
     val price: String,
     val date: String,
     val status: OrderStatus,
 )
-
-@JvmInline
-value class OrderId(val id: String)
 
 enum class OrderStatus {
     Placed,

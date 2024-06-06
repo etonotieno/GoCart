@@ -15,16 +15,22 @@
  */
 package io.devbit.gocart.orders.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -34,7 +40,7 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
@@ -97,12 +103,25 @@ fun OrdersScreen(
     }
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun OrdersUiScreen(orders: List<UiOrderItem>, modifier: Modifier = Modifier) {
     val density = LocalDensity.current
 
+    val pagerState = rememberPagerState { 2 }
+
     val tabs = listOf("Recent", "Cancelled")
-    var selectedTabIndex by remember { mutableIntStateOf(0) }
+    var selectedTabIndex by remember { mutableIntStateOf(pagerState.currentPage) }
+
+    LaunchedEffect(selectedTabIndex) {
+        // Scroll the HorizontalPager when the selected tab is changed
+        pagerState.animateScrollToPage(selectedTabIndex)
+    }
+
+    LaunchedEffect(pagerState.currentPage) {
+        // Change the selected Tab when the HorizontalPager is scrolled
+        selectedTabIndex = pagerState.currentPage
+    }
 
     val tabWidths = remember {
         val tabWidthStateList = mutableStateListOf<Dp>()
@@ -146,18 +165,42 @@ private fun OrdersUiScreen(orders: List<UiOrderItem>, modifier: Modifier = Modif
             }
         }
 
-        val partitionedOrders by remember {
-            derivedStateOf { orders.partition { it.status != OrderStatus.Cancelled } }
+        val (recentOrders, cancelledOrders) = remember {
+            orders.partition { it.status != OrderStatus.Cancelled }
         }
 
-        when (selectedTabIndex) {
-            0 -> {
-                Text("Recent Orders: ${partitionedOrders.first.size}")
-            }
+        HorizontalPager(pagerState) { currentPage ->
+            when (currentPage) {
+                0 -> RecentOrdersPage(recentOrders = recentOrders)
 
-            1 -> {
-                Text("Cancelled Orders: ${partitionedOrders.second.size}")
+                1 -> CancelledOrdersPage(cancelledOrders = cancelledOrders)
             }
+        }
+    }
+}
+
+@Composable
+private fun RecentOrdersPage(modifier: Modifier = Modifier, recentOrders: List<UiOrderItem>) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(16.dp),
+    ) {
+        items(recentOrders, key = { it.id }) {
+            Text("Order: ${it.number}: ${it.date}")
+        }
+    }
+}
+
+@Composable
+private fun CancelledOrdersPage(modifier: Modifier = Modifier, cancelledOrders: List<UiOrderItem>) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        contentPadding = PaddingValues(16.dp),
+    ) {
+        items(cancelledOrders, key = { it.id }) {
+            Text("Order: ${it.number}: ${it.date}")
         }
     }
 }

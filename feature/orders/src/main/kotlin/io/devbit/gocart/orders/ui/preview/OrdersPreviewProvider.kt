@@ -15,23 +15,43 @@
  */
 package io.devbit.gocart.orders.ui.preview
 
-import io.devbit.gocart.orders.ui.OrderId
 import io.devbit.gocart.orders.ui.OrderStatus
 import io.devbit.gocart.orders.ui.UiOrderItem
 
 val sampleRecentOrders = listOf(
     UiOrderItem(
-        id = OrderId("1"),
+        id = "1",
         number = "12309124",
         price = "284.00",
         date = "August 30th, 2022, 9:00AM",
         status = OrderStatus.Pending,
     ),
     UiOrderItem(
-        id = OrderId("2"),
+        id = "2",
         number = "12410344",
         price = "284.00",
-        date = "August 20th, 2022, 4:25PM",
+        date = "August 21st, 2022, 4:25PM",
         status = OrderStatus.Delivered,
+    ),
+    UiOrderItem(
+        id = "3",
+        number = "18301930",
+        price = "1704.00",
+        date = "August 3rd, 2022, 9:00PM",
+        status = OrderStatus.ReadyToPickup,
+    ),
+    UiOrderItem(
+        id = "4",
+        number = "23100144",
+        price = "1365.00",
+        date = "October 22nd, 2020, 10:00AM",
+        status = OrderStatus.Cancelled,
+    ),
+    UiOrderItem(
+        id = "5",
+        number = "12410344",
+        price = "1930.00",
+        date = "May 1st, 2022, 1:05PM",
+        status = OrderStatus.Cancelled,
     ),
 )
