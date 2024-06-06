@@ -16,7 +16,7 @@ junit = "4.13.2"
 junitExt = "1.1.5"
 kotlin = "2.0.0"
 kotlinxCoroutines = "1.8.1"
-ksp = "2.0.0-1.0.21"
+ksp = "2.0.0-1.0.22"
 ktlint = "1.1.1"
 #noinspection GradleDependency
 lifecycleRuntimeCompose = "2.7.0"
