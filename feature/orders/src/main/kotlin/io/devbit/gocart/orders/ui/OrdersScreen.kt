@@ -180,7 +180,7 @@ private fun OrdersUiScreen(orders: List<UiOrderItem>, modifier: Modifier = Modif
 }
 
 @Composable
-private fun RecentOrdersPage(modifier: Modifier = Modifier, recentOrders: List<UiOrderItem>) {
+private fun RecentOrdersPage(recentOrders: List<UiOrderItem>, modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
@@ -193,7 +193,7 @@ private fun RecentOrdersPage(modifier: Modifier = Modifier, recentOrders: List<U
 }
 
 @Composable
-private fun CancelledOrdersPage(modifier: Modifier = Modifier, cancelledOrders: List<UiOrderItem>) {
+private fun CancelledOrdersPage(cancelledOrders: List<UiOrderItem>, modifier: Modifier = Modifier) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(16.dp),
