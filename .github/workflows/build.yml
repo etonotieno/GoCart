@@ -58,7 +58,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Build with Gradle
-        run: ./gradlew build
+        run: ./gradlew assemble -Pandroidx.baselineprofile.skipgeneration
 
 #      - name: Upload build reports
 #        if: always()
