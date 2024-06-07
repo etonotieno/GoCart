@@ -2,7 +2,7 @@
 
 # GoCart
 
-This project is currently a 🚧 **work in progress**.
+> This project is currently a 🚧 **work in progress**.
 
 GoCart is an online grocery shopping app built
 with [Jetpack Compose](https://developer.android.com/jetpack/compose).
@@ -20,6 +20,23 @@ The goal of this project is to showcase Modern Android Development best practice
 
 <img src="docs/images/Onboarding1_dark.png"  width="250"/> <img src="docs/images/Onboarding2_dark.png"  width="250"/> <img src="docs/images/Onboarding3_dark.png"  width="250"/> <img src="docs/images/HomePage_dark.png"  width="250"/> <img src="docs/images/MyCart_dark.png" width="250"/>
 
+## Release
+
+Download the latest release from
+the [GitHub Releases](https://github.com/etonotieno/GoCart/releases/tag/app-release) section
+or [download the apk](https://github.com/etonotieno/GoCart/releases/download/app-release/android-release.apk)
+
+## Build and Run GoCart
+
+1. Clone the repository
+2. Open the whole project in `Android Studio Jellyfish | 2023.3` or above
+3. Sync & Run the `android` configuration
+
+### Requirements
+
+1. JDK 17
+2. Android Studio Jellyfish | 2023.3.1+
+
 ## Tech Stack
 
 * [Kotlin](https://kotlinlang.org/)
@@ -32,3 +49,18 @@ The goal of this project is to showcase Modern Android Development best practice
 
 The app implements
 Google's [guide to app architecture](https://developer.android.com/topic/architecture)
+
+## Features
+
+- [x] Light and Dark theme
+- [x] Dynamic theming
+- [x] [Themed app icon](https://developer.android.com/develop/ui/views/launch/icon_design_adaptive) -
+  Android 13+
+- [ ] Authentication
+- [ ] Shopping Cart
+- [ ] Wishlist
+- [ ] Search for products
+- [ ] Order history
+- [ ] Order summary
+- [ ] Glance widgets
+- [ ] Adaptive UI
