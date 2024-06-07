@@ -39,6 +39,9 @@ android {
         targetSdk = 34
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        // Enables composition tracing from Macrobenchmarks
+        testInstrumentationRunnerArguments["androidx.benchmark.fullTracing.enable"] = "true"
     }
 
     targetProjectPath = ":android"
