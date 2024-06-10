@@ -27,7 +27,7 @@
         <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
     </style>
 
-    <style name="Theme.GoCart.SplashScreen" parent="NightAdjusted.Theme.Splash">
+    <style name="Theme.GoCart.SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/white</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_go_cart_logo</item>
 

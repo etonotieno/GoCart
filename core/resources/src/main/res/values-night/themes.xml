@@ -14,13 +14,16 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <style name="NightAdjusted.Theme.GoCart" parent="android:Theme.Material.NoActionBar" />
 
-    <style name="NightAdjusted.Theme.SplashScreen" parent="Theme.SplashScreen">
-        <item name="android:windowLightStatusBar" tools:targetApi="23">false</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">false</item>
+    <style name="Theme.GoCart.SplashScreen" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_go_cart_logo</item>
+
+        <!-- Set the theme of the Activity that directly follows the splash screen. -->
+        <item name="postSplashScreenTheme">@style/Theme.GoCart</item>
     </style>
 
 </resources>
