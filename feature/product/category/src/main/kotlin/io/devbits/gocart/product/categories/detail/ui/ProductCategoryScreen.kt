@@ -131,12 +131,11 @@ fun ProductCategoryScreen(
             columns = GridCells.Fixed(2),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(horizontal = 16.dp),
         ) {
             fullWidthItem {
                 Row(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(horizontal = 16.dp),
+                    modifier = Modifier.fillMaxSize(),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
@@ -166,18 +165,12 @@ fun ProductCategoryScreen(
             }
 
             items(products.size) { index: Int ->
-                val padding = if ((index % 2) == 0) {
-                    PaddingValues(start = 16.dp)
-                } else {
-                    PaddingValues(end = 16.dp)
-                }
                 ProductCard(
                     product = products[index],
                     onClick = { navigateToProduct(products[index].id) },
                     onBookmark = onBookmark,
                     onAddToCart = onAddToCart,
                     showDelete = true,
-                    modifier = Modifier.padding(padding),
                 )
             }
         }
