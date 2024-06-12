@@ -16,14 +16,34 @@
 package io.devbits.gocart.favorites.ui
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.devbits.gocart.designsystem.component.sampleProducts
+import io.devbits.gocart.favorites.ui.state.FavoritesUiState
+import io.devbits.gocart.favorites.ui.state.Loading
+import io.devbits.gocart.favorites.ui.state.Success
 import javax.inject.Inject
+import kotlin.time.Duration.Companion.seconds
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 
 @HiltViewModel
 class FavoritesViewModel @Inject constructor() : ViewModel() {
 
-    private val _uiState = MutableStateFlow("Favorites")
-    val uiState: StateFlow<String> get() = _uiState
+    private val _uiState: MutableStateFlow<FavoritesUiState> = MutableStateFlow(Loading)
+    val uiState: StateFlow<FavoritesUiState> get() = _uiState
+
+    init {
+        viewModelScope.launch {
+            // Simulate a network call
+            delay(4.seconds)
+            _uiState.value = Success(sampleProducts.shuffled().take(PRODUCT_SIZE))
+        }
+    }
+
+    companion object {
+        private const val PRODUCT_SIZE = 5
+    }
 }
