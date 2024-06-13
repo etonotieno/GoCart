@@ -15,6 +15,7 @@
  */
 package io.devbits.gocart.favorites.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,6 +31,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.outlined.Delete
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
@@ -125,10 +127,27 @@ fun FavoritesUiScreen(
         items(products.size) { index: Int ->
             ProductCard(
                 product = products[index],
-                onClick = {},
-                onBookmark = {},
                 onAddToCart = {},
+                onClick = {},
                 showDelete = true,
+                action = {
+                    IconContainer(
+                        color = MaterialTheme.colorScheme.surface,
+                        modifier = Modifier
+                            .padding(top = 8.dp, end = 8.dp)
+                            .size(32.dp)
+                            .clip(CircleShape)
+                            .align(Alignment.TopEnd)
+                            .clickable {},
+                    ) {
+                        Icon(
+                            imageVector = Icons.Outlined.Delete,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.error,
+                            modifier = Modifier.size(16.dp),
+                        )
+                    }
+                },
             )
         }
     }
