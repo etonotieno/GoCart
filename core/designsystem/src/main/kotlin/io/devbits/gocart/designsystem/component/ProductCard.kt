@@ -20,6 +20,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -61,8 +62,60 @@ fun ProductCard(
     onClick: (() -> Unit)? = null,
     showDelete: Boolean = false,
 ) {
-    var quantity by remember { mutableIntStateOf(0) }
     var bookmarked by remember { mutableStateOf(false) }
+
+    val color = if (bookmarked) {
+        MaterialTheme.colorScheme.secondary
+    } else {
+        MaterialTheme.colorScheme.surface
+    }
+
+    ProductCard(
+        modifier = modifier,
+        product = product,
+        onAddToCart = onAddToCart,
+        onClick = onClick,
+        showDelete = showDelete,
+        action = {
+            IconContainer(
+                color = color,
+                modifier = Modifier
+                    .padding(top = 8.dp, end = 8.dp)
+                    .size(32.dp)
+                    .clip(CircleShape)
+                    .align(Alignment.TopEnd)
+                    .clickable {
+                        bookmarked = !bookmarked
+                        onBookmark()
+                    },
+            ) {
+                val tint = if (bookmarked) {
+                    MaterialTheme.colorScheme.onSecondary
+                } else {
+                    MaterialTheme.colorScheme.primary
+                }
+
+                Icon(
+                    imageVector = Icons.Outlined.FavoriteBorder,
+                    contentDescription = null,
+                    tint = tint,
+                    modifier = Modifier.size(16.dp),
+                )
+            }
+        },
+    )
+}
+
+@Composable
+fun ProductCard(
+    product: Product,
+    onAddToCart: () -> Unit,
+    action: @Composable BoxScope.() -> Unit,
+    modifier: Modifier = Modifier,
+    onClick: (() -> Unit)? = null,
+    showDelete: Boolean = false,
+) {
+    var quantity by remember { mutableIntStateOf(0) }
 
     val clickModifier = if (onClick != null) {
         Modifier.clickable { onClick() }
@@ -91,36 +144,7 @@ fun ProductCard(
                     ),
             )
 
-            val color = if (bookmarked) {
-                MaterialTheme.colorScheme.secondary
-            } else {
-                MaterialTheme.colorScheme.surface
-            }
-            IconContainer(
-                color = color,
-                modifier = Modifier
-                    .padding(top = 8.dp, end = 8.dp)
-                    .size(32.dp)
-                    .clip(CircleShape)
-                    .align(Alignment.TopEnd)
-                    .clickable {
-                        bookmarked = !bookmarked
-                        onBookmark()
-                    },
-            ) {
-                val tint = if (bookmarked) {
-                    MaterialTheme.colorScheme.onSecondary
-                } else {
-                    MaterialTheme.colorScheme.primary
-                }
-
-                Icon(
-                    imageVector = Icons.Outlined.FavoriteBorder,
-                    contentDescription = null,
-                    tint = tint,
-                    modifier = Modifier.size(16.dp),
-                )
-            }
+            action()
         }
 
         Text(
