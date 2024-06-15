@@ -15,10 +15,16 @@
  */
 package io.devbit.gocart.orders.ui
 
+import androidx.compose.ui.graphics.Color
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.devbit.gocart.orders.ui.preview.sampleRecentOrders
+import io.devbits.gocart.designsystem.theme.cancelled
+import io.devbits.gocart.designsystem.theme.delivered
+import io.devbits.gocart.designsystem.theme.pending
+import io.devbits.gocart.designsystem.theme.placed
+import io.devbits.gocart.designsystem.theme.ready_to_pickup
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
@@ -59,10 +65,10 @@ data class UiOrderItem(
     val status: OrderStatus,
 )
 
-enum class OrderStatus {
-    Placed,
-    Pending,
-    ReadyToPickup,
-    Delivered,
-    Cancelled,
+enum class OrderStatus(val color: Color, val text: String) {
+    Placed(placed, "Placed"),
+    Pending(pending, "Pending"),
+    ReadyToPickup(ready_to_pickup, "Ready to Pickup"),
+    Delivered(delivered, "Delivered"),
+    Cancelled(cancelled, "Cancelled"),
 }

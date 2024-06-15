@@ -187,7 +187,7 @@ private fun RecentOrdersPage(recentOrders: List<UiOrderItem>, modifier: Modifier
         contentPadding = PaddingValues(16.dp),
     ) {
         items(recentOrders, key = { it.id }) {
-            Text("Order: ${it.number}: ${it.date}")
+            OrderItem(order = it, onViewSummary = {})
         }
     }
 }
@@ -200,7 +200,7 @@ private fun CancelledOrdersPage(cancelledOrders: List<UiOrderItem>, modifier: Mo
         contentPadding = PaddingValues(16.dp),
     ) {
         items(cancelledOrders, key = { it.id }) {
-            Text("Order: ${it.number}: ${it.date}")
+            OrderItem(order = it, onViewSummary = {})
         }
     }
 }

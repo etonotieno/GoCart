@@ -21,6 +21,12 @@ val ShimmerComponentsColor = Color(0xFFe0e3e5)
 val ShimmerBackgroundColor = Color(0xFFf5f5f5)
 val ShimmeringColor = Color(0xFFe5e5e5)
 
+val placed = Color(0xFF245C91)
+val pending = Color(0xFFAD6206)
+val ready_to_pickup = Color(0xFFAD6206)
+val delivered = Color(0xFF099350)
+val cancelled = Color(0xFFE80129)
+
 val go_cart_eggshell = Color(0xFFF6F6F6)
 val go_cart_avocado = Color(0xFF257A00)
 val go_cart_avocado_dark = Color(0xFF004D00)
