@@ -15,26 +15,43 @@
  */
 package io.devbits.gocart.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.outlined.ShoppingCart
+import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import io.devbit.gocart.orders.navigation.ordersRoute
 import io.devbits.gocart.authentication.navigation.navigateToAuth
+import io.devbits.gocart.designsystem.component.GCTopAppBar
 import io.devbits.gocart.designsystem.component.GoCartNavBar
 import io.devbits.gocart.designsystem.component.GoCartNavDrawerContent
-import io.devbits.gocart.designsystem.component.GoCartTopAppBar
 import io.devbits.gocart.designsystem.model.DestinationRoutes
 import io.devbits.gocart.designsystem.model.NavDrawerItem
 import io.devbits.gocart.designsystem.theme.GoCartSurface
+import io.devbits.gocart.favorites.navigation.favoritesRoute
+import io.devbits.gocart.homefeed.navigation.homeRoute
 import io.devbits.gocart.navigation.GoCartNavHost
+import io.devbits.gocart.resources.R
+import io.devbits.gocart.services.navigation.servicesRoute
 import kotlinx.coroutines.launch
 
 @Composable
@@ -46,6 +63,7 @@ fun GoCartApp(
     modifier: Modifier = Modifier,
 ) {
     val drawerState = rememberDrawerState(DrawerValue.Closed)
+    val currentDestinationRoute = appState.currentDestination?.route
 
     GoCartSurface(modifier = modifier.fillMaxSize()) {
         // Hide during onboarding and authentication flows
@@ -81,14 +99,10 @@ fun GoCartApp(
                 topBar = {
                     // Hide during onboarding and authentication flows
                     if (appState.currentDestinationRoute != null) {
-                        GoCartTopAppBar(
-                            onClickNavigation = {
-                                appState.scope.launch {
-                                    drawerState.apply { if (isClosed) open() else close() }
-                                }
-                            },
-                            onSearch = {},
-                            onCheckout = appState::navigateToCart,
+                        GoCartMainTopAppBar(
+                            currentDestinationRoute = currentDestinationRoute,
+                            appState = appState,
+                            drawerState = drawerState,
                         )
                     }
                 },
@@ -116,4 +130,77 @@ fun GoCartApp(
             }
         }
     }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun GoCartMainTopAppBar(
+    currentDestinationRoute: String?,
+    appState: GoCartAppState,
+    drawerState: DrawerState,
+) {
+    GCTopAppBar(
+        title = {
+            when (currentDestinationRoute) {
+                homeRoute -> {
+                    Image(
+                        painter = painterResource(id = R.drawable.ic_go_cart_horizontal_color),
+                        contentDescription = null,
+                        modifier = Modifier.height(24.dp),
+                    )
+                }
+
+                servicesRoute -> {
+                    Text(text = "Services")
+                }
+
+                ordersRoute -> {
+                    Text(text = "Orders")
+                }
+
+                favoritesRoute -> {
+                    Text(text = "Favorites")
+                }
+
+                else -> Unit
+            }
+        },
+        actions = {
+            if (currentDestinationRoute == homeRoute ||
+                currentDestinationRoute == favoritesRoute
+            ) {
+                IconButton(onClick = {}) {
+                    Icon(
+                        imageVector = Icons.Filled.Search,
+                        contentDescription = null,
+                    )
+                }
+
+                IconButton(
+                    onClick = {
+                        appState.navigateToCart()
+                    },
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.ShoppingCart,
+                        contentDescription = null,
+                    )
+                }
+            }
+        },
+        navigationIcon = {
+            IconButton(
+                onClick = {
+                    appState.scope.launch {
+                        drawerState.apply { if (isClosed) open() else close() }
+                    }
+                },
+            ) {
+                Icon(
+                    imageVector = Icons.Filled.Menu,
+                    contentDescription = null,
+                )
+            }
+        },
+    )
 }
