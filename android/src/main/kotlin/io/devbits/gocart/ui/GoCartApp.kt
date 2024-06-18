@@ -102,7 +102,7 @@ fun GoCartApp(
                         GoCartMainTopAppBar(
                             currentDestinationRoute = currentDestinationRoute,
                             appState = appState,
-                            drawerState = drawerState
+                            drawerState = drawerState,
                         )
                     }
                 },
