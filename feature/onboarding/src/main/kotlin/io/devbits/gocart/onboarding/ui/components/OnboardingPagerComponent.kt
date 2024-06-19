@@ -212,26 +212,25 @@ fun OnboardingButton(
 }
 
 val onboardingPages
-    @Composable
     get() = listOf(OnboardingPageOne, OnboardingPageTwo, OnboardingPageThree)
 
 val OnboardingPageOne
-    @Composable get() = OnboardingItem(
+    get() = OnboardingItem(
         R.drawable.ic_fresh_produce,
-        stringResource(R.string.text_onboarding_fresh_produce_title),
-        stringResource(R.string.text_onboarding_fresh_produce_description),
+        R.string.text_onboarding_fresh_produce_title,
+        R.string.text_onboarding_fresh_produce_description,
     )
 
 val OnboardingPageTwo
-    @Composable get() = OnboardingItem(
+    get() = OnboardingItem(
         R.drawable.ic_fast_delivery,
-        stringResource(R.string.text_onboarding_fast_delivery_title),
-        stringResource(R.string.text_onboarding_fast_delivery_description),
+        R.string.text_onboarding_fast_delivery_title,
+        R.string.text_onboarding_fast_delivery_description,
     )
 
 val OnboardingPageThree
-    @Composable get() = OnboardingItem(
+    get() = OnboardingItem(
         R.drawable.ic_easy_payments,
-        stringResource(R.string.text_onboarding_easy_payments_title),
-        stringResource(R.string.text_onboarding_easy_payments_description),
+        R.string.text_onboarding_easy_payments_title,
+        R.string.text_onboarding_easy_payments_description,
     )

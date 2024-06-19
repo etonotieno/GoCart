@@ -16,10 +16,10 @@
 package io.devbits.gocart.onboarding.ui.model
 
 import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 
 data class OnboardingItem(
-    @DrawableRes
-    val imageRes: Int,
-    val title: String,
-    val description: String,
+    @DrawableRes val imageRes: Int,
+    @StringRes val title: Int,
+    @StringRes val description: Int,
 )

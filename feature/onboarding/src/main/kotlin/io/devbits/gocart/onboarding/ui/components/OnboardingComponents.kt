@@ -19,6 +19,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
@@ -31,6 +32,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
 import io.devbits.gocart.designsystem.theme.GoCartSurface
 import io.devbits.gocart.designsystem.theme.GoCartTheme
@@ -53,7 +56,7 @@ fun OnboardingPage(page: OnboardingItem, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.size(24.dp))
 
         Text(
-            text = page.title,
+            text = stringResource(page.title),
             style = MaterialTheme.typography.displaySmall,
             fontWeight = FontWeight.Bold,
         )
@@ -61,7 +64,7 @@ fun OnboardingPage(page: OnboardingItem, modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.size(24.dp))
 
         Text(
-            text = page.description,
+            text = stringResource(page.description),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             modifier = Modifier.padding(32.dp),
@@ -69,32 +72,19 @@ fun OnboardingPage(page: OnboardingItem, modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(group = "Onboarding", name = "Page One")
-@Composable
-private fun OnboardingPageOnePreview() {
-    GoCartTheme {
-        GoCartSurface {
-            OnboardingPage(OnboardingPageOne)
-        }
-    }
-}
+class OnboardingPagesPreviewProvider(
+    override val values: Sequence<OnboardingItem> = onboardingPages.asSequence(),
+) : PreviewParameterProvider<OnboardingItem>
 
-@Preview(group = "Onboarding", name = "Page Two")
+@Preview
 @Composable
-private fun OnboardingPageTwoPreview() {
+private fun OnboardingPagesPreview(
+    @PreviewParameter(OnboardingPagesPreviewProvider::class)
+    page: OnboardingItem,
+) {
     GoCartTheme {
         GoCartSurface {
-            OnboardingPage(OnboardingPageTwo)
-        }
-    }
-}
-
-@Preview(name = "Page Three", group = "Onboarding")
-@Composable
-private fun OnboardingPageThreePreview() {
-    GoCartTheme {
-        GoCartSurface {
-            OnboardingPage(OnboardingPageThree)
+            OnboardingPage(page = page, modifier = Modifier.fillMaxSize())
         }
     }
 }
