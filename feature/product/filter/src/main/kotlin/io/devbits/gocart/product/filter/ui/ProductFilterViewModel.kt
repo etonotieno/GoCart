@@ -28,11 +28,11 @@ class ProductFilterViewModel @Inject constructor() : ViewModel() {
 
     val produce: StateFlow<List<String>> = MutableStateFlow(produceList)
 
+    @Suppress("UNUSED_PARAMETER")
     fun onApplyFilter(
         selectedProduce: SnapshotStateList<String>,
         activeRangeStart: Float,
         activeRangeEnd: Float,
         selectedCategories: SnapshotStateList<ProductCategory>,
-    ) {
-    }
+    ) = Unit
 }

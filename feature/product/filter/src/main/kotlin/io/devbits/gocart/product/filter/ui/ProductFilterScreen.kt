@@ -74,10 +74,10 @@ fun ProductFilterRoute(
     viewModel: ProductFilterViewModel = hiltViewModel(),
 ) {
     val produce by viewModel.produce.collectAsStateWithLifecycle()
+    // TODO: Navigate back to the origin screen with results
     ProductFilterScreen(
         produce = produce,
         onApplyFilter = { selectedProduce, activeRangeStart, activeRangeEnd, selectedCategories ->
-            // TODO: Navigate back to the origin screen with results
             viewModel.onApplyFilter(
                 selectedProduce = selectedProduce,
                 activeRangeStart = activeRangeStart,
