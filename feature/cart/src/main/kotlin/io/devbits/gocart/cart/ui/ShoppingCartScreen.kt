@@ -346,7 +346,6 @@ private fun EmptyContent(modifier: Modifier = Modifier, navigateToCategories: ()
 @Composable
 private fun ShoppingCartScreenPreview() {
     GoCartTheme {
-        @Suppress("MagicNumber")
         ShoppingCartScreen(products = sampleProducts.take(5), onBack = {})
     }
 }

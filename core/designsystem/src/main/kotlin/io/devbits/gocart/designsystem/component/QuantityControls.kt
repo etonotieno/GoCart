@@ -62,7 +62,6 @@ fun QuantityControl(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        @Suppress("MagicNumber")
         val alpha = if (enabled) 1f else 0.3f
 
         val decrement = Modifier.clickable(enabled = enabled) { quantity-- }
@@ -118,7 +117,6 @@ fun QuantityControl(
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        @Suppress("MagicNumber")
         val alpha = if (enabled) 1f else 0.3f
 
         val decrement = Modifier.clickable(enabled = enabled) { onRemove() }
