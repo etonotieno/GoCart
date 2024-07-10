@@ -49,6 +49,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
@@ -75,6 +76,15 @@ fun ProductFilterRoute(
     val produce by viewModel.produce.collectAsStateWithLifecycle()
     ProductFilterScreen(
         produce = produce,
+        onApplyFilter = { selectedProduce, activeRangeStart, activeRangeEnd, selectedCategories ->
+            // TODO: Navigate back to the origin screen with results
+            viewModel.onApplyFilter(
+                selectedProduce = selectedProduce,
+                activeRangeStart = activeRangeStart,
+                activeRangeEnd = activeRangeEnd,
+                selectedCategories = selectedCategories,
+            )
+        },
         onBack = onBack,
         modifier = modifier,
     )
@@ -84,6 +94,12 @@ fun ProductFilterRoute(
 @Composable
 fun ProductFilterScreen(
     produce: List<String>,
+    onApplyFilter: (
+        selectedProduce: SnapshotStateList<String>,
+        activeRangeStart: Float,
+        activeRangeEnd: Float,
+        selectedCategories: SnapshotStateList<ProductCategory>,
+    ) -> Unit,
     onBack: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -106,10 +122,8 @@ fun ProductFilterScreen(
     val filterIsApplied by remember {
         derivedStateOf {
             selectedProduce.isNotEmpty() || selectedCategories.isNotEmpty() ||
-                (
-                    sliderState.activeRangeStart != sliderRange.start ||
-                        sliderState.activeRangeEnd != sliderRange.endInclusive
-                    )
+                sliderState.activeRangeStart != sliderRange.start ||
+                sliderState.activeRangeEnd != sliderRange.endInclusive
         }
     }
 
@@ -126,7 +140,15 @@ fun ProductFilterScreen(
                     }
                 },
                 actions = {
-                    TextButton(onClick = {}, enabled = filterIsApplied) {
+                    TextButton(
+                        onClick = {
+                            selectedProduce.clear()
+                            sliderState.activeRangeStart = sliderRange.start
+                            sliderState.activeRangeEnd = sliderRange.endInclusive
+                            selectedCategories.clear()
+                        },
+                        enabled = filterIsApplied,
+                    ) {
                         Text(text = "Reset all")
                     }
                 },
@@ -184,7 +206,14 @@ fun ProductFilterScreen(
 
             item {
                 Button(
-                    onClick = {},
+                    onClick = {
+                        onApplyFilter(
+                            selectedProduce,
+                            sliderState.activeRangeStart,
+                            sliderState.activeRangeEnd,
+                            selectedCategories,
+                        )
+                    },
                     modifier = Modifier.fillMaxWidth(),
                     enabled = filterIsApplied,
                 ) {
@@ -360,6 +389,7 @@ private fun ProductFilterScreenPreview() {
     GoCartTheme {
         ProductFilterScreen(
             produce = produceList,
+            onApplyFilter = { _, _, _, _ -> },
             onBack = {},
         )
     }

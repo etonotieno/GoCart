@@ -15,13 +15,24 @@
  */
 package io.devbits.gocart.product.filter.ui
 
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.devbits.gocart.designsystem.model.ProductCategory
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
 @HiltViewModel
 class ProductFilterViewModel @Inject constructor() : ViewModel() {
+
     val produce: StateFlow<List<String>> = MutableStateFlow(produceList)
+
+    fun onApplyFilter(
+        selectedProduce: SnapshotStateList<String>,
+        activeRangeStart: Float,
+        activeRangeEnd: Float,
+        selectedCategories: SnapshotStateList<ProductCategory>,
+    ) {
+    }
 }
