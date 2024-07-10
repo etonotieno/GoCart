@@ -33,6 +33,8 @@ fun Chip(
     selected: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
 ) {
     FilterChip(
         selected = selected,
@@ -49,6 +51,8 @@ fun Chip(
         shape = RoundedCornerShape(16.dp),
         modifier = modifier.height(32.dp),
         border = null,
+        leadingIcon = leadingIcon,
+        trailingIcon = trailingIcon,
     )
 }
 

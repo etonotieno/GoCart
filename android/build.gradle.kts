@@ -75,6 +75,7 @@ dependencies {
     implementation(projects.feature.product.categories)
     implementation(projects.feature.product.category)
     implementation(projects.feature.product.details)
+    implementation(projects.feature.product.filter)
     implementation(projects.feature.cart)
 
     implementation(libs.androidx.core.splashscreen)
