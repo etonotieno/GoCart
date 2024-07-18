@@ -30,12 +30,6 @@
                 "maven"
             ],
             "allowedVersions": "!/SNAPSHOT$/"
-        },
-        {
-            "matchDepNames": [
-                "androidx.lifecycle:lifecycle-runtime-compose"
-            ],
-            "allowedVersions": "<=2.7.0"
         }
     ]
 }
