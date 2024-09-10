@@ -1,6 +1,6 @@
 [versions]
 activityCompose = "1.9.2"
-androidxComposeBom = "2024.09.00"
+androidxComposeBom = "2024.09.01"
 androidxDataStore = "1.1.1"
 agp = "8.6.0"
 composeMultiplatform = "1.6.11"
