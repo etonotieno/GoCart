@@ -71,24 +71,22 @@ fun GoCartApp(
         //  Disable gestures on non DestinationRoutes
         ModalNavigationDrawer(
             drawerContent = {
-                if (appState.currentDestinationRoute != null) {
-                    ModalDrawerSheet {
-                        GoCartNavDrawerContent(
-                            isLoggedIn = isLoggedIn,
-                            onClickHeader = { },
-                            onSignUp = {
-                                appState.scope.launch { drawerState.close() }
-                                appState.navController.popBackStack()
-                                appState.navController.navigateToAuth()
-                            },
-                            items = NavDrawerItem.entries,
-                            onClick = {
-                                if (it == NavDrawerItem.LOGOUT) onLogout()
-                                appState.scope.launch { drawerState.close() }
-                                appState.navigateToRoute(it)
-                            },
-                        )
-                    }
+                ModalDrawerSheet {
+                    GoCartNavDrawerContent(
+                        isLoggedIn = isLoggedIn,
+                        onClickHeader = { },
+                        onSignUp = {
+                            appState.scope.launch { drawerState.close() }
+                            appState.navController.popBackStack()
+                            appState.navController.navigateToAuth()
+                        },
+                        items = NavDrawerItem.entries,
+                        onClick = {
+                            if (it == NavDrawerItem.LOGOUT) onLogout()
+                            appState.scope.launch { drawerState.close() }
+                            appState.navigateToRoute(it)
+                        },
+                    )
                 }
             },
             drawerState = drawerState,
