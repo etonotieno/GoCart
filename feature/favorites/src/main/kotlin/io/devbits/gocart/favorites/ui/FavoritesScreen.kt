@@ -28,6 +28,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -68,11 +69,21 @@ fun FavoritesScreen(
     viewModel: FavoritesViewModel = hiltViewModel(),
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
-    FavoritesScreen(modifier = modifier, state = state)
+    FavoritesScreen(
+        modifier = modifier,
+        state = state,
+        onClearAll = {},
+        onClearProduct = {},
+    )
 }
 
 @Composable
-fun FavoritesScreen(state: FavoritesUiState, modifier: Modifier = Modifier) {
+fun FavoritesScreen(
+    state: FavoritesUiState,
+    onClearAll: () -> Unit,
+    onClearProduct: (productId: Int) -> Unit,
+    modifier: Modifier = Modifier,
+) {
     GoCartSurface(modifier = modifier.fillMaxSize()) {
         when (state) {
             Empty -> {
@@ -86,7 +97,11 @@ fun FavoritesScreen(state: FavoritesUiState, modifier: Modifier = Modifier) {
             }
 
             is Success -> {
-                FavoritesUiScreen(state.products)
+                FavoritesUiScreen(
+                    products = state.products,
+                    onClearAll = onClearAll,
+                    onClearProduct = onClearProduct,
+                )
             }
         }
     }
@@ -95,6 +110,8 @@ fun FavoritesScreen(state: FavoritesUiState, modifier: Modifier = Modifier) {
 @Composable
 fun FavoritesUiScreen(
     products: List<Product>,
+    onClearAll: () -> Unit,
+    onClearProduct: (productId: Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyVerticalGrid(
@@ -119,14 +136,14 @@ fun FavoritesUiScreen(
                     leadingIcon = {
                         Icon(imageVector = Icons.Default.Close, contentDescription = null)
                     },
-                    onClick = { },
+                    onClick = { onClearAll() },
                 )
             }
         }
 
-        items(products.size) { index: Int ->
+        items(products) { product ->
             ProductCard(
-                product = products[index],
+                product = product,
                 onAddToCart = {},
                 onClick = {},
                 showDelete = true,
@@ -138,7 +155,7 @@ fun FavoritesUiScreen(
                             .size(32.dp)
                             .clip(CircleShape)
                             .align(Alignment.TopEnd)
-                            .clickable {},
+                            .clickable(onClick = { onClearProduct(product.id) }),
                     ) {
                         Icon(
                             imageVector = Icons.Outlined.Delete,
@@ -199,7 +216,11 @@ fun EmptyFavoritesScreen(modifier: Modifier = Modifier) {
 @Composable
 private fun FavoritesScreenPreview() {
     GoCartTheme {
-        FavoritesScreen(state = Success(sampleProducts))
+        FavoritesScreen(
+            state = Success(sampleProducts),
+            onClearAll = {},
+            onClearProduct = {},
+        )
     }
 }
 
@@ -207,7 +228,11 @@ private fun FavoritesScreenPreview() {
 @Composable
 private fun FavoritesScreenEmptyPreview() {
     GoCartTheme {
-        FavoritesScreen(state = Empty)
+        FavoritesScreen(
+            state = Empty,
+            onClearAll = {},
+            onClearProduct = {},
+        )
     }
 }
 
@@ -215,6 +240,10 @@ private fun FavoritesScreenEmptyPreview() {
 @Composable
 private fun FavoritesScreenLoadingPreview() {
     GoCartTheme {
-        FavoritesScreen(state = Loading)
+        FavoritesScreen(
+            state = Loading,
+            onClearAll = {},
+            onClearProduct = {},
+        )
     }
 }
