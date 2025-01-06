@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.devbits.gocart.designsystem.component.sampleProducts
+import io.devbits.gocart.favorites.ui.state.Empty
 import io.devbits.gocart.favorites.ui.state.FavoritesUiState
 import io.devbits.gocart.favorites.ui.state.Loading
 import io.devbits.gocart.favorites.ui.state.Success
@@ -41,6 +42,10 @@ class FavoritesViewModel @Inject constructor() : ViewModel() {
             delay(4.seconds)
             _uiState.value = Success(sampleProducts.shuffled().take(PRODUCT_SIZE))
         }
+    }
+
+    fun onClearFavorites() {
+        _uiState.value = Empty
     }
 
     companion object {

@@ -72,7 +72,7 @@ fun FavoritesScreen(
     FavoritesScreen(
         modifier = modifier,
         state = state,
-        onClearAll = {},
+        onClearAll = viewModel::onClearFavorites,
         onClearProduct = {},
     )
 }

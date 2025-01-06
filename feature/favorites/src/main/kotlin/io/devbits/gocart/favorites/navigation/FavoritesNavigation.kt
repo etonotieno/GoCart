@@ -15,7 +15,6 @@
  */
 package io.devbits.gocart.favorites.navigation
 
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -30,6 +29,6 @@ fun NavController.navigateToFavorites(navOptions: NavOptions? = null) {
 
 fun NavGraphBuilder.favoritesScreen() {
     composable(route = favoritesRoute) {
-        FavoritesScreen(modifier = Modifier)
+        FavoritesScreen()
     }
 }
