@@ -213,7 +213,7 @@ private fun NavHeader(
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun NavDrawerAuthenticatedPreview() {
     GoCartTheme {
@@ -227,7 +227,7 @@ private fun NavDrawerAuthenticatedPreview() {
     }
 }
 
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun NavDrawerGuestPreview() {
     GoCartTheme {
