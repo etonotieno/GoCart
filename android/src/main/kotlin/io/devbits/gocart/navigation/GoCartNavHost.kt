@@ -50,6 +50,8 @@ import io.devbits.gocart.product.categories.navigation.navigateToProductCategori
 import io.devbits.gocart.product.categories.navigation.productCategoriesScreen
 import io.devbits.gocart.product.details.navigation.navigateToProductDetails
 import io.devbits.gocart.product.details.navigation.productDetailsScreen
+import io.devbits.gocart.services.navigation.chatScreen
+import io.devbits.gocart.services.navigation.navigateToChat
 import io.devbits.gocart.services.navigation.servicesScreen
 import io.devbits.gocart.settings.navigation.settingsScreen
 import io.devbits.gocart.ui.GoCartAppState
@@ -165,7 +167,9 @@ fun GoCartNavHost(
             },
         )
 
-        servicesScreen()
+        servicesScreen(navigateToChat = navController::navigateToChat)
+
+        chatScreen(onBack = navController::popBackStack)
 
         ordersScreen(navigateToPlaceOrder = {})
 

@@ -38,12 +38,12 @@ import io.devbits.gocart.designsystem.theme.GoCartTheme
 import io.devbits.gocart.resources.R as resourcesR
 
 @Composable
-fun ServicesRoute(modifier: Modifier = Modifier) {
-    ServicesScreen(modifier = modifier)
+fun ServicesRoute(onChatClick: () -> Unit, modifier: Modifier = Modifier) {
+    ServicesScreen(onChatClick = onChatClick, modifier = modifier)
 }
 
 @Composable
-fun ServicesScreen(modifier: Modifier = Modifier) {
+fun ServicesScreen(onChatClick: () -> Unit, modifier: Modifier = Modifier) {
     Surface(modifier = modifier, color = MaterialTheme.colorScheme.surfaceVariant) {
         Column(
             modifier = Modifier
@@ -52,7 +52,7 @@ fun ServicesScreen(modifier: Modifier = Modifier) {
         ) {
             SectionHeader()
 
-            SupportOptions()
+            SupportOptions(onChatClick = onChatClick)
         }
     }
 }
@@ -70,14 +70,14 @@ private fun SectionHeader(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun SupportOptions(modifier: Modifier = Modifier) {
+fun SupportOptions(onChatClick: () -> Unit, modifier: Modifier = Modifier) {
     Card(modifier = modifier.padding(horizontal = 16.dp), shape = RoundedCornerShape(8.dp)) {
         SupportServicesItem(
             headline = "Live Chat",
             supporting = "Sun-Fri 8:00am-5:00pm",
             leadingIcon = resourcesR.drawable.ic_outlined_chat,
             trailingIcon = resourcesR.drawable.ic_outlined_chevronright,
-            onClick = {},
+            onClick = { onChatClick() },
         )
 
         HorizontalDivider()
@@ -140,6 +140,6 @@ private fun SupportServicesItem(
 @Composable
 private fun ServicesScreenPreview() {
     GoCartTheme {
-        ServicesScreen()
+        ServicesScreen(onChatClick = {})
     }
 }

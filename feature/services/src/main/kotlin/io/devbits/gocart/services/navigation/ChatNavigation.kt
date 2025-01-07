@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Eton Otieno
+ * Copyright 2025 Eton Otieno
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,16 +19,16 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import io.devbits.gocart.services.ui.ServicesRoute
+import io.devbits.gocart.services.ui.chat.ChatRoute
 
-const val servicesRoute = "services"
+const val chatRoute = "chat"
 
-fun NavController.navigateToServices(navOptions: NavOptions? = null) {
-    this.navigate(servicesRoute, navOptions)
+fun NavController.navigateToChat(navOptions: NavOptions? = null) {
+    this.navigate(chatRoute, navOptions)
 }
 
-fun NavGraphBuilder.servicesScreen(navigateToChat: () -> Unit) {
-    composable(route = servicesRoute) {
-        ServicesRoute(onChatClick = navigateToChat)
+fun NavGraphBuilder.chatScreen(onBack: () -> Unit) {
+    composable(route = chatRoute) {
+        ChatRoute(onBack = onBack)
     }
 }
