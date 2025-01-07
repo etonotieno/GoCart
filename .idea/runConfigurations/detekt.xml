@@ -15,7 +15,7 @@
      limitations under the License.
 -->
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="detekt" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="detekt" type="GradleRunConfiguration" factoryName="Gradle" activateToolWindowBeforeRun="false">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -34,6 +34,7 @@
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
     <DebugAllEnabled>false</DebugAllEnabled>
+    <RunAsTest>false</RunAsTest>
     <method v="2" />
   </configuration>
 </component>
