@@ -1,0 +1,51 @@
+name: Create a GitHub Release
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }} - ${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  android-release:
+    if: github.repository == 'etonotieno/GoCart'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build app
+        run: ./gradlew :android:assembleRelease
+
+      - name: Archive Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-app
+          if-no-files-found: ignore
+          path: android/build/outputs/apk/release/*.apk
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            android/build/outputs/apk/release/*.apk
+          generate_release_notes: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+
