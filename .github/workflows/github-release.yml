@@ -48,6 +48,7 @@ jobs:
         with:
           files: |
             android/build/outputs/apk/release/*.apk
+          tag_name: android-release
           generate_release_notes: true
           token: ${{ secrets.GITHUB_TOKEN }}
 
