@@ -21,7 +21,7 @@ import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureAndroid() {
     android {
-        compileSdkVersion(34)
+        compileSdkVersion(35)
 
         defaultConfig {
             minSdk = 21
