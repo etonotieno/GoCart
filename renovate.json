@@ -29,12 +29,6 @@
                 "maven"
             ],
             "allowedVersions": "!/SNAPSHOT$/"
-        },
-        {
-            "matchPackageNames": [
-                "gradle"
-            ],
-            "allowedVersions": "<8.10"
         }
     ]
 }
