@@ -8,6 +8,21 @@ GoCart is an online grocery shopping app built
 with [Jetpack Compose](https://developer.android.com/jetpack/compose).
 The goal of this project is to showcase Modern Android Development best practices.
 
+<a href="https://studio.firebase.google.com/import?url=https%3A%2F%2Fgithub.com%2Fetonotieno%2Fgocart">
+  <picture>
+    <source
+      media="(prefers-color-scheme: dark)"
+      srcset="https://cdn.firebasestudio.dev/btn/open_light_32.svg">
+    <source
+      media="(prefers-color-scheme: light)"
+      srcset="https://cdn.firebasestudio.dev/btn/open_dark_32.svg">
+    <img
+      height="32"
+      alt="Open in Firebase Studio"
+      src="https://cdn.firebasestudio.dev/btn/open_blue_32.svg">
+  </picture>
+</a>
+
 ## Screenshots
 
 <img src="docs/images/Splash_Screen.png"  width="250"/> <img src="docs/images/AuthScreen.png"  width="250"/>
