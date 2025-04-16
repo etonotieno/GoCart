@@ -1,5 +1,3 @@
-![GoCart](docs/images/banner_image.png "GoCart Shopping App")
-
 # GoCart
 
 > This project is currently a 🚧 **work in progress**.
