@@ -22,7 +22,7 @@ lifecycleRuntimeCompose = "2.9.3"
 navigationCompose = "2.9.3"
 spotless = "7.2.1"
 uiautomator = "2.3.0"
-benchmarkMacroJunit4 = "1.4.0"
+benchmarkMacroJunit4 = "1.4.1"
 baselineprofile = "1.4.0"
 profileinstaller = "1.4.1"
 
