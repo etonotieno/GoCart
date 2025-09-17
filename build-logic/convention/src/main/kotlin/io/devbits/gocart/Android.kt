@@ -21,11 +21,11 @@ import org.gradle.kotlin.dsl.configure
 
 internal fun Project.configureAndroid() {
     android {
-        compileSdkVersion(35)
+        compileSdkVersion(36)
 
         defaultConfig {
-            minSdk = 21
-            targetSdk = 34
+            minSdk = 23
+            targetSdk = 36
             testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
     }
