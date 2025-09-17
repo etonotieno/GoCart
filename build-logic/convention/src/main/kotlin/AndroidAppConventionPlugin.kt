@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 import io.devbits.gocart.configureAndroid
-import io.devbits.gocart.configureLauncherTasks
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -26,7 +25,6 @@ class AndroidAppConventionPlugin : Plugin<Project> {
             }
 
             configureAndroid()
-            configureLauncherTasks()
         }
     }
 }
