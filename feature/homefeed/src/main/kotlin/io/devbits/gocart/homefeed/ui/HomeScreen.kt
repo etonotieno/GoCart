@@ -194,7 +194,7 @@ private fun ProductCategories(
 }
 
 @Composable
-private fun TopSellingProducts(modifier: Modifier = Modifier, onSort: () -> Unit) {
+private fun TopSellingProducts(onSort: () -> Unit, modifier: Modifier = Modifier) {
     Row(
         modifier = modifier
             .fillMaxWidth()
