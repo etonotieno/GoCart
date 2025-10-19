@@ -17,6 +17,7 @@ package io.devbits.gocart.designsystem.component
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -38,6 +39,7 @@ import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
@@ -64,6 +66,21 @@ fun GoCartNavDrawerContent(
 ) {
     // No item is selected by default (the initial value is -1)
     var selectedItem by remember { mutableIntStateOf(-1) }
+    val itemsSelect by remember {
+        derivedStateOf {
+            items
+                .asSequence()
+                .sortedBy(NavDrawerItem::section)
+                .filter { item ->
+                    if (!isLoggedIn) {
+                        // When the user is not logged in, don't display the LOGOUT item
+                        item != NavDrawerItem.LOGOUT
+                    } else {
+                        true
+                    }
+                }
+        }
+    }
 
     Column(modifier = modifier.fillMaxSize()) {
         Spacer(Modifier.windowInsetsTopHeight(WindowInsets.statusBars))
@@ -75,67 +92,55 @@ fun GoCartNavDrawerContent(
             modifier = Modifier.padding(horizontal = 12.dp),
         )
 
-        items
-            // Move logic to a ViewModel
-            .asSequence()
-            .sortedBy(NavDrawerItem::section)
-            .filter { item ->
-                if (!isLoggedIn) {
-                    // When the user is not logged in, don't display the LOGOUT item
-                    item != NavDrawerItem.LOGOUT
-                } else {
-                    true
-                }
-            }
-            .forEachIndexed { index, item ->
-                val selected = index == selectedItem
+        itemsSelect.forEachIndexed { index, item ->
+            val selected = index == selectedItem
 
-                if (index == 0) {
-                    Spacer(modifier = Modifier.height(16.dp))
+            if (index == 0) {
+                Spacer(modifier = Modifier.height(16.dp))
 
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .padding(horizontal = 12.dp)
-                            .padding(horizontal = 16.dp),
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
-
-                NavigationDrawerItem(
-                    label = { Text(item.titleText) },
-                    selected = selected,
-                    onClick = {
-                        selectedItem = index
-                        onClick(item)
-                    },
-                    modifier = Modifier.padding(horizontal = 12.dp),
-                    icon = {
-                        Icon(
-                            imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
-                            contentDescription = null,
-                        )
-                    },
-                    colors = NavigationDrawerItemDefaults.colors(
-                        selectedContainerColor = MaterialTheme.colorScheme.primary,
-                        selectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                        unselectedIconColor = MaterialTheme.colorScheme.primary,
-                        selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-                    ),
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(horizontal = 12.dp)
+                        .padding(horizontal = 16.dp),
                 )
 
-                if (index == 2) {
-                    Spacer(modifier = Modifier.height(16.dp))
-
-                    HorizontalDivider(
-                        modifier = Modifier
-                            .padding(horizontal = 12.dp)
-                            .padding(horizontal = 16.dp),
-                    )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-                }
+                Spacer(modifier = Modifier.height(16.dp))
             }
+
+            NavigationDrawerItem(
+                label = { Text(item.titleText) },
+                selected = selected,
+                onClick = {
+                    selectedItem = index
+                    onClick(item)
+                },
+                modifier = Modifier.padding(horizontal = 12.dp),
+                icon = {
+                    Icon(
+                        imageVector = if (selected) item.selectedIcon else item.unselectedIcon,
+                        contentDescription = null,
+                    )
+                },
+                colors = NavigationDrawerItemDefaults.colors(
+                    selectedContainerColor = MaterialTheme.colorScheme.primary,
+                    selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                    unselectedIconColor = MaterialTheme.colorScheme.primary,
+                    selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                ),
+            )
+
+            if (index == 2) {
+                Spacer(modifier = Modifier.height(16.dp))
+
+                HorizontalDivider(
+                    modifier = Modifier
+                        .padding(horizontal = 12.dp)
+                        .padding(horizontal = 16.dp),
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+            }
+        }
     }
 }
 
@@ -150,66 +155,69 @@ private fun NavHeader(
     onClickHeader: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    if (isLoggedIn) {
-        Column(
-            modifier = modifier
-                .clip(RoundedCornerShape(16.dp))
-                .clickable(onClick = onClickHeader),
-        ) {
-            Spacer(modifier = Modifier.height(40.dp))
-
-            Image(
-                painter = painterResource(id = resourcesR.drawable.ic_avatar_olivia),
-                contentDescription = null,
+    Box(modifier = modifier) {
+        if (isLoggedIn) {
+            Column(
                 modifier = Modifier
-                    .padding(start = 16.dp)
-                    .size(64.dp)
-                    .clip(CircleShape),
-                contentScale = ContentScale.Crop,
-            )
+                    .clip(RoundedCornerShape(16.dp))
+                    .clickable(onClick = onClickHeader),
+            ) {
+                Spacer(modifier = Modifier.height(40.dp))
 
-            Spacer(modifier = Modifier.height(10.dp))
-
-            ListItem(
-                headlineContent = {
-                    Text(text = "Kevin Kaur", fontWeight = FontWeight.Bold)
-                },
-                supportingContent = {
-                    Text(text = "kevinkaur@gmail.com")
-                },
-                trailingContent = {
-                    Text(
-                        text = "edit",
-                        color = MaterialTheme.colorScheme.primary,
-                        style = MaterialTheme.typography.bodyMedium,
-                    )
-                },
-            )
-        }
-    } else {
-        Spacer(modifier = Modifier.height(52.dp))
-
-        NavigationDrawerItem(
-            label = {
-                Text(text = "Sign Up", fontWeight = FontWeight.Bold)
-            },
-            selected = false,
-            onClick = onSignUp,
-            modifier = modifier,
-            icon = {
-                Icon(
-                    imageVector = Icons.Outlined.PersonOutline,
+                Image(
+                    painter = painterResource(id = resourcesR.drawable.ic_avatar_olivia),
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primary,
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                        .size(64.dp)
+                        .clip(CircleShape),
+                    contentScale = ContentScale.Crop,
                 )
-            },
-            colors = NavigationDrawerItemDefaults.colors(
-                selectedContainerColor = MaterialTheme.colorScheme.primary,
-                selectedIconColor = MaterialTheme.colorScheme.onPrimary,
-                unselectedIconColor = MaterialTheme.colorScheme.primary,
-                selectedTextColor = MaterialTheme.colorScheme.onPrimary,
-            ),
-        )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                ListItem(
+                    headlineContent = {
+                        Text(text = "Kevin Kaur", fontWeight = FontWeight.Bold)
+                    },
+                    supportingContent = {
+                        Text(text = "kevinkaur@gmail.com")
+                    },
+                    trailingContent = {
+                        Text(
+                            text = "edit",
+                            color = MaterialTheme.colorScheme.primary,
+                            style = MaterialTheme.typography.bodyMedium,
+                        )
+                    },
+                )
+            }
+        } else {
+            Column {
+                Spacer(modifier = Modifier.height(52.dp))
+
+                NavigationDrawerItem(
+                    label = {
+                        Text(text = "Sign Up", fontWeight = FontWeight.Bold)
+                    },
+                    selected = false,
+                    onClick = onSignUp,
+                    icon = {
+                        Icon(
+                            imageVector = Icons.Outlined.PersonOutline,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                        )
+                    },
+                    colors = NavigationDrawerItemDefaults.colors(
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
+                        selectedIconColor = MaterialTheme.colorScheme.onPrimary,
+                        unselectedIconColor = MaterialTheme.colorScheme.primary,
+                        selectedTextColor = MaterialTheme.colorScheme.onPrimary,
+                    ),
+                )
+            }
+        }
     }
 }
 

@@ -41,11 +41,11 @@ import io.devbits.gocart.resources.R as resourcesR
 @Composable
 fun AuthButton(
     text: String,
+    onClick: () -> Unit,
     modifier: Modifier = Modifier,
     @DrawableRes icon: Int? = null,
     containerColor: Color? = null,
     contentColor: Color? = null,
-    onClick: () -> Unit,
 ) {
     val colors = ButtonDefaults.buttonColors(
         containerColor = containerColor ?: MaterialTheme.colorScheme.primary,
@@ -74,7 +74,7 @@ fun AuthButton(
 }
 
 @Composable
-fun GoogleSignupButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun GoogleSignupButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     AuthButton(
         text = "SIGN UP WITH GOOGLE",
         icon = resourcesR.drawable.ic_google_white,
@@ -86,7 +86,7 @@ fun GoogleSignupButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
 }
 
 @Composable
-fun FacebookSignupButton(modifier: Modifier = Modifier, onClick: () -> Unit) {
+fun FacebookSignupButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
     AuthButton(
         text = "SIGN UP WITH FACEBOOK",
         icon = resourcesR.drawable.ic_outline_facebook,
