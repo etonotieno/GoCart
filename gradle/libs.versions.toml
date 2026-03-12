@@ -2,7 +2,7 @@
 activityCompose = "1.13.0"
 androidxComposeBom = "2026.03.00"
 androidxDataStore = "1.2.1"
-agp = "8.13.2"
+agp = "9.1.0"
 composeMultiplatform = "1.10.2"
 coilCompose = "2.7.0"
 coreKtx = "1.18.0"
