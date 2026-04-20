@@ -30,7 +30,7 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("com.gradle.develocity") version "4.4.0"
+    id("com.gradle.develocity") version "4.4.1"
 }
 
 val isCi = providers.environmentVariable("CI").isPresent
